@@ -1,0 +1,151 @@
+\documentclass[a4paper, 12pt]{report}
+
+\usepackage[dvipsnames]{xcolor}
+
+%%%%%%%%%%%%%%%%
+% Set Variables %
+%%%%%%%%%%%%%%%%
+
+\def\useItalian{0}  % 1 = Italian, 0 = English
+
+\def\courseName{Mathematical Logic for Computer Science}
+
+\def\coursePrerequisites{TODO}
+
+\def\book{TODO}
+
+% \def\authorName{Simone Bianco}
+% \def\email{bianco.simone@outlook.it}
+% \def\github{https://github.com/Exyss/university-notes}
+% \def\linkedin{https://www.linkedin.com/in/simone-bianco}
+
+\def\authorName{Alessio Bandiera}
+\def\email{alessio.bandiera02@gmail.com}
+\def\github{https://github.com/aflaag-notes}
+\def\linkedin{https://www.linkedin.com/in/alessio-bandiera-a53767223}
+
+%%%%%%%%%%%%
+% Packages %
+%%%%%%%%%%%%
+
+\usepackage{../../packages/Nyx/nyx-packages}
+\usepackage{../../packages/Nyx/nyx-styles}
+\usepackage{../../packages/Nyx/nyx-frames}
+\usepackage{../../packages/Nyx/nyx-macros}
+\usepackage{../../packages/Nyx/nyx-title}
+\usepackage{../../packages/Nyx/nyx-intro}
+
+%%%%%%%%%%%%%%
+% Title-page %
+%%%%%%%%%%%%%%
+
+\logo{../../packages/Nyx/logo.png}
+
+\if\useItalian1
+    \institute{\curlyquotes{\hspace{0.25mm}Sapienza} Università di Roma}
+    \faculty{Ingegneria dell'Informazione,\\Informatica e Statistica}
+    \department{Dipartimento di Informatica}
+    \ifdefined\book
+        \subtitle{Appunti integrati con il libro \book}
+    \fi
+    \author{\textit{Autore}\\\authorName}
+\else
+    \institute{\curlyquotes{\hspace{0.25mm}Sapienza} University of Rome}
+    \faculty{Faculty of Information Engineering,\\Informatics and Statistics}
+    \department{Department of Computer Science}
+    \ifdefined\book
+        \subtitle{Lecture notes integrated with the book \book}
+    \fi
+    \author{\textit{Author}\\\authorName}
+\fi
+
+
+\title{\courseName}
+\date{\today}
+
+% \supervisor{Linus \textsc{Torvalds}}
+% \context{Well, I was bored\ldots}
+
+\addbibresource{./references.bib}
+
+%%%%%%%%%%%%
+% Document %
+%%%%%%%%%%%%
+
+\begin{document}
+    \maketitle
+
+    % The following style changes are valid only inside this scope 
+    {
+        \hypersetup{allcolors=black}
+        \fancypagestyle{plain}{%
+        \fancyhead{}        % clear all header fields
+        \fancyfoot{}        % clear all header fields
+        \fancyfoot[C]{\thepage}
+        \renewcommand{\headrulewidth}{0pt}
+        \renewcommand{\footrulewidth}{0pt}}
+
+        \romantableofcontents
+    }
+
+    \introduction
+
+    %%%%%%%%%%%%%%%%%%%%%
+
+    \chapter{TODO}
+
+    \section{TODO}
+
+    placeholder \todo{missing introduction}
+    
+    \begin{frameddefn}{Theory}
+        A \tbf{theory} is a --- possibly infinite --- set of propositions (or hypothesis).
+    \end{frameddefn}
+
+    As a natural extension of the \tit{satisfiability} property discussed above, a theory $T$ will be said to be \tbf{satisfiable} --- written as $T \in \SAT$ if and only if $$\exists \alpha \quad \alpha(T) = 1$$ which is equivalent of saying that $$\exists \alpha \quad \forall F \in T \quad \alpha (F) = 1$$ (note that the assignment $\alpha$ must be the same for all the propositions $F$ of $T$).
+
+    Additionally, for infinite theories we can define another property.
+
+    \begin{frameddefn}{Finite satisfiability}
+        An infinite theory $T$ is said to be \tbf{finitely satisfiable} if and only if $$\forall T' \subset T \ \mathrm{finite} \quad T' \in \SAT$$ We will denote with $\FINSAT$ the set of all finitely satisfiable theories.
+    \end{frameddefn}
+    
+    However, the following theorem will prove that \tit{satisfiability} and \tit{finite satisfiability} are actually \tbf{equivalent}.
+
+    \begin{framedthm}{Compactness theorem}
+        Given an infinite theory $T$, it holds that $$T \in \SAT \iff T \in \FINSAT$$
+    \end{framedthm}
+
+    \begin{proof}
+        In this proof we will assume that the propositions of the infinite theory $T$ are \tit{countably infinite}, however in its general form this theorem can be proved even without this assumption.
+
+        Since the direct implication of this statement is trivially true by definition, we just need to prove the converse implication.
+
+        \claim{
+            Given a theory $T \in \FINSAT$, and a proposition $A$, it must hold that $T \cup \{A\} \in \FINSAT$ or $T \cup \{\lnot A \} \in \FINSAT$.
+        }{
+            By way of contradiction, assume that $T \cup \{A\}, T \cup \{\lnot A\} \notin \FINSAT$.
+
+            By definition of finite satisfiability, if $T \cup \{A\} \notin \FINSAT$, then there must exist a \tit{finite} sub-theory $T_0 \subset T \cup \{A\}$ such that $T_0 \in \UNSAT$. Note that $T \in \FINSAT$, therefore if $T \cup \{A\} \notin \FINSAT$ then it must be that $A \in T_0$. Let $\widehat{T_0}$ be the theory such that $T_0 := \widehat{T_0} \cup \{A\}$; then $$T_0 := \widehat{T_0} \cup \{A\} \in \UNSAT \iff \forall \alpha  \quad \alpha(T_0) = 0$$ which implies that $$\forall \alpha \quad \alpha(\widehat{T_0}) = 1 \implies \alpha(A) = 0$$
+
+            Analogously, we can apply the same reasoning for $T \cup \{\lnot A\}$, and we get that there must exist a \tit{finite} sub-theory $T_1 \subset T \cup \{\lnot A\}$ such that $T_1 := \widehat{T_1} \cup \{\lnot A\} \in \UNSAT$, which implies that $$\forall \alpha \quad \alpha (\widehat{T_1}) = 1 \implies \alpha(\lnot A) = 0$$
+
+            Lastly, since $\widehat{T_0} \cup \widehat{T_1} \subset T \in \FINSAT$, by finite satisfiability of $T$ there must exist an assignment $\alpha$ such that $\alpha(\widehat{T_0} \cup \widehat{T_1}) = 1$, and therefore $\alpha(\widehat{T_0}) = \alpha(\widehat{T_1}) = 1$. However, for previous observations this implies that $\alpha(A) = \alpha(\lnot A) = 0 \ \lightning$.
+        }
+
+        TODO todo{da finire}
+    \end{proof}
+
+    The statement of this theorem is equivalent of the following.
+
+    \begin{framedcor}{}
+        Given an infinite theory $T$, and a proposition $A$, it holds that $$T \models A \iff \exists T' \subset T \ \mathrm{finite} \quad T' \models A$$
+    \end{framedcor}
+
+    \begin{proof}
+        placeholder \todo{prove their equivalence}
+    \end{proof}
+   
+    \printbibliography % UNCOMMENT FOR BIBLIOGRAPHY
+
+\end{document}
