@@ -94,15 +94,55 @@
 
     \chapter{TODO}
 
-    \section{TODO}
+    \section{Introduction}
 
     placeholder \todo{missing introduction}
+
+    \begin{frameddefn}{Assignment}
+        Given a proposition $A$, an \tbf{assignment} $\alpha$ is a function that assigns either 0 or 1 to all $A$'s propositional variables.
+    \end{frameddefn}
+
+    This definition can be inductively extended to \tbf{propositions} themselves; for instance if $A$ and $B$ are two propositions, then $$\alpha(A \land B) = \soe{ll}{1 & \alpha(A) = \alpha(B) = 1 \\ 0 & \alpha(A) = 0 \lor \alpha(B) = 0}$$ and so on for all the other Boolean connectives. Two propositions $A$ and $B$ are said to be \tbf{equivalent} --- written as $A \equiv B$ --- if and only if $\forall \alpha \quad \alpha(A) = \alpha(B)$.
+
+    \begin{frameddefn}{Satisfiability}
+        A proposition $A$ is said to be \tbf{satisfiable} if there exists an assignment $\alpha$ of its propositional variables such that $\alpha(A) = 1$. If there is no assignment that satisfies $A$, $A$ is said to be \tbf{unsatisfiable}, and if $A$ is satisfied for any assignment $\alpha$, then $A$ is said to be a \tbf{tautology}.
+
+        We will denote with \SAT, \UNSAT and \TAUT respectively the sets of all satisfiable propositions, all unsatisfiable propositions and all tautologies.
+    \end{frameddefn}
+
+    Using symbols, we have that
+
+    \begin{itemize}
+        \item $A \in \SAT \iff \exists \alpha \quad \alpha (A) = 1$
+        \item $A \in \UNSAT \iff \nexists \alpha \quad \alpha (A) = 1 \iff \forall \alpha \quad \alpha (A) = 0$
+        \item $A \in \TAUT \iff \forall \alpha \quad \alpha(A) = 1 \iff \nexists \alpha \quad \alpha (A) = 0$
+    \end{itemize}
     
+    The concept of satisfiability is strictly related to the concept of \tbf{logical consequence}, which is defined as follows.
+
+    \begin{frameddefn}{Logical consequence}
+        Given the propositions $A_1, \ldots, A_n, A$, we say that $A$ is a \tbf{logical consequence} of $A_1, \ldots, A_n$ if whenever $A_1, \ldots, A_n$ are true, $A$ is also true. We will indicate this concept as follows: $$A_1, \ldots, A_n \models A$$
+    \end{frameddefn}
+
+    From its definition, the concept of logical consequence can be alternatively be expressed in terms of \tit{unsatisfiability} and \tit{tautology}.
+
+    \begin{framedthm}{}
+        Given the formulas $A_1, \ldots, A_n, A$, the following statements are equivalent:
+
+        \begin{itemize}
+            \item $A_1, \ldots, A_n \models A$
+            \item $(A_1 \land \ldots \land A_n \rightarrow A) \in \TAUT$
+            \item $(A_1 \land \ldots \land A_n \land A) \in \UNSAT$
+        \end{itemize}
+    \end{framedthm}
+
+    \subsection{Theories}
+
     \begin{frameddefn}{Theory}
         A \tbf{theory} is a --- possibly infinite --- set of propositions (or hypothesis).
     \end{frameddefn}
 
-    As a natural extension of the \tit{satisfiability} property discussed above, a theory $T$ will be said to be \tbf{satisfiable} --- written as $T \in \SAT$ if and only if $$\exists \alpha \quad \alpha(T) = 1$$ which is equivalent of saying that $$\exists \alpha \quad \forall F \in T \quad \alpha (F) = 1$$ (note that the assignment $\alpha$ must be the same for all the propositions $F$ of $T$).
+    As a natural extension of the \tit{satisfiability} property previously discussed, a theory $T$ will be said to be \tbf{satisfiable} --- written as $T \in \SAT$ if and only if $$\exists \alpha \quad \alpha(T) = 1$$ which is equivalent of saying that $$\exists \alpha \quad \forall F \in T \quad \alpha (F) = 1$$ note that the assignment $\alpha$ must be the same for all the propositions $F$ of $T$.
 
     Additionally, for infinite theories we can define another property.
 
@@ -130,13 +170,30 @@
 
             Analogously, we can apply the same reasoning for $T \cup \{\lnot A\}$, and we get that there must exist a \tit{finite} sub-theory $T_1 \subset T \cup \{\lnot A\}$ such that $T_1 := \widehat{T_1} \cup \{\lnot A\} \in \UNSAT$, which implies that $$\forall \alpha \quad \alpha (\widehat{T_1}) = 1 \implies \alpha(\lnot A) = 0$$
 
-            Lastly, since $\widehat{T_0} \cup \widehat{T_1} \subset T \in \FINSAT$, by finite satisfiability of $T$ there must exist an assignment $\alpha$ such that $\alpha(\widehat{T_0} \cup \widehat{T_1}) = 1$, and therefore $\alpha(\widehat{T_0}) = \alpha(\widehat{T_1}) = 1$. However, for previous observations this implies that $\alpha(A) = \alpha(\lnot A) = 0 \ \lightning$.
+            Lastly, since $\widehat{T_0} \cup \widehat{T_1} \subset T \in \FINSAT$, by finite satisfiability of $T$ there must exist an assignment $\alpha$ such that $\alpha(\widehat{T_0} \cup \widehat{T_1}) = 1$, and therefore $\alpha(\widehat{T_0}) = \alpha(\widehat{T_1}) = 1$. However, for the previous observations this implies that $\alpha(A) = \alpha(\lnot A) = 0 \ \lightning$.
         }
 
-        TODO todo{da finire}
+        Since we are assuming that the propositions of $T$ are \tit{countably infinite}, and the number of variables of each prooposition of $T$ is finite, we can fix an enumeration $p_1, p_2, p_3, \ldots$ on the --- possibly infinite --- propositional variables of $T$. Given this enumeration, define the following \tit{chain} of sub-theories:
+        
+        \begin{itemize}
+            \item $T_0 := T$
+            \item $T_{i + 1} := \soe{ll}{T_i \cup \{p_i \} & T_i \cup \{p_i\} \in \FINSAT \\ T_i \cup \{\lnot p_i\} & T_i \cup \{\lnot p_i\} \in \FINSAT}$
+        \end{itemize}
+
+        and note that, by definition, clearly $$T =: T_0 \subseteq T_1 \subseteq T_2 \subseteq \ldots$$ Moreover, let $$T^* := \bigcup_{i \in \N}{T_i}$$ and note that since $\forall i \quad T_i \in \FINSAT$ by definition, then it must be that $T^* \in \FINSAT$ as well, as $T^*$ is a chain defined \tit{only} by inclusions of \FINSAT theories.
+
+        Now, consider the following assignment: $$\funcmap{\alpha^*}{\{p_1, p_2, \ldots\}}{\{0,1\}}{p_i}{\soe{ll}{1 & p_i \in T^* \\ 0 & \lnot p_i \in T^*}}$$ Note that this assignment is well defined, because by construction of $T^*$ only one between $p_i \in T^*$ and $\lnot p_i \in T^*$ can hold.
+
+        \claim{
+            $\alpha^*(T) = 1$.
+        }{
+            Let $A \in T$, and let $p_{i_1}, \ldots, p_{i_k}$ the be the propositional variables that appear in $A$. \todo{props finitely many vars?} Then, for each $j \in [k]$ let $$p_{i_j}^* := \soe{ll}{p_{i_j} & p_{i_j} \in T^* \\ \lnot p_{i_j} & \lnot p_{i_j} \in T^*}$$ and consider the set $\cbk{A, p_{i_1}^*, \ldots, p_{i_k}^*}$. Clearly, this is a finite subset of $T^*$ \todo{non sono d'accordo}, hence $T^* \in \FINSAT$ implies that there must exist an assignment $\beta_A$ that satisfies this set, i.e. $$\beta_A(A) = \beta_A \rbk{p_{i_1}^*} = \ldots = \beta_A \rbk{p_{i_k}^*} = 1$$ Note that, for each $j \in [k]$, it holds that $$p_{i_j} \in T^* \implies p_{i_j}^* = p_{i_j} \land \alpha^*\rbk{p_{i_j}} = 1$$ and $1 = \beta_A (p_{i_j}^*) = \beta_A \rbk{p_{i_j}}$; analogously, it holds that $$p_{i_j } \notin T^* \implies p_{i_j}^*= \lnot p_{i_j} \land \alpha^ *\rbk{p_{i_j}} = 0$$ and $1 = \beta_A (p_{i_j}^*) = \beta_A \rbk{\lnot p_{i_j}} = \lnot \beta_A \rbk{p_{i_j}} \implies \beta_A \rbk{p_{i_j}} = 0$. This proves that $\alpha^* \equiv \beta_A$ for all of $A$'s variables, therefore it must also be true that $\alpha^*(A) = \beta_A(A)$. \todo{not enough for whole T? missing last part}
+        }
+
+        This claim proves that there exists an assignment $\alpha ^*$ that satisfies $T$, hence $T \in \SAT$, concluding the proof.
     \end{proof}
 
-    The statement of this theorem is equivalent of the following.
+    The statement of this theorem is equivalent to the following one.
 
     \begin{framedcor}{}
         Given an infinite theory $T$, and a proposition $A$, it holds that $$T \models A \iff \exists T' \subset T \ \mathrm{finite} \quad T' \models A$$
@@ -146,6 +203,12 @@
         placeholder \todo{prove their equivalence}
     \end{proof}
    
+    The compactness theorem can be proven to be equivalent to a special case of \href{https://en.wikipedia.org/wiki/K%C5%91nig%27s_lemma}{Kőnig's lemma} \cite{koenig}, which states the following.
+
+    \begin{framedlem}{Kőnig's lemma (special case)}
+        Every infinite tree contains either a vertex of infinite degree, or an infinite path.
+    \end{framedlem}
+
     \printbibliography % UNCOMMENT FOR BIBLIOGRAPHY
 
 \end{document}
