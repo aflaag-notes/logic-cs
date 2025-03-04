@@ -98,11 +98,39 @@
 
     placeholder \todo{missing introduction}
 
-    \begin{frameddefn}{Assignment}
-        Given a proposition $A$, an \tbf{assignment} $\alpha$ is a function that assigns either 0 or 1 to all $A$'s propositional variables.
+    \begin{frameddefn}{Languages and propositions}
+        A \tbf{propositional language} is a --- possibly infinite --- set $\mathcal L = \{p_1, \ldots, p_n\}$, where each $p_i$ is called \tbf{propositional variable}. Given a propositional language $\mathcal L$, the set of \tbf{propositions} over $\mathcal L$, denoted with $\textsf{PROP}_{\mathcal L}$ is inductively defined as follows:
+
+        \begin{itemize}
+            \item each propositional variable in $\mathcal L$ is a proposition, i.e. $\mathcal L \subseteq \textsf{PROP}_{\mathcal L}$
+            \item if $A \in \textsf{PROP}_{\mathcal L}$, then $\lnot A \in \textsf{PROP}_{\mathcal L}$
+            \item if $A, B \in \textsf{PROP}_{\mathcal L}$, then $(A \land B), (A \lor B), (A \rightarrow B), (A \leftrightarrow B) \in \textsf{PROP}_{\mathcal L}$
+        \end{itemize}
     \end{frameddefn}
 
-    This definition can be inductively extended to \tbf{propositions} themselves; for instance if $A$ and $B$ are two propositions, then $$\alpha(A \land B) = \soe{ll}{1 & \alpha(A) = \alpha(B) = 1 \\ 0 & \alpha(A) = 0 \lor \alpha(B) = 0}$$ and so on for all the other Boolean connectives. Two propositions $A$ and $B$ are said to be \tbf{equivalent} --- written as $A \equiv B$ --- if and only if $\forall \alpha \quad \alpha(A) = \alpha(B)$.
+    In other words, the set of propositions over a language is the set of \tit{formulas} that can be constructed from the initial variables of $\mathcal L$, by using the Boolean connectives. Note that a propositional language may have an infinite number of propositional variables, even \tit{uncountably infinite}. For instance, the following is a valid propositional language $$\mathcal L := \{p_r \mid r \in \R\}$$ However, since propositions are inductively constructed starting from variables, each proposition of any language $\mathcal L$ will still be defined over a \tit{finite} number of propositional variables of $\mathcal L$.
+
+    Now that we provided a formal definition for languages and propositions, we are ready to discuss \tbf{assignments}.
+
+    \begin{frameddefn}{Assignment}
+        Given a propositional language $\mathcal L$, an \tbf{assignment} $\alpha$ is a function $\func{\alpha}{\mathcal L}{\{0, 1\}}$ that assigns either 0 or 1 to all of $\mathcal L$'s propositional variable.
+    \end{frameddefn}
+
+    This definition can be inductively extended to \tbf{propositions} themselves: if $A$ and $B$ are two propositions, let $\func{\widehat \alpha}{\textsf{PROP}_{\mathcal L}}{\{0, 1\}}$ be a function such that
+
+    $$A \in \mathcal L \implies \widehat \alpha (A) = \alpha(A)$$
+    
+    $$\widehat \alpha(\lnot A) = \soe{ll}{1 & \widehat \alpha(A) = 0 \\ 0 & \mathrm{otherwise}}$$
+
+    $$\widehat \alpha(A \land B) = \soe{ll}{1 & \widehat \alpha(A) = \widehat \alpha(B) = 1 \\ 0 & \mathrm{otherwise}}$$
+
+    $$\widehat \alpha(A \lor B) = \soe{ll}{1 & \widehat \alpha(A) = 1 \lor \widehat \alpha(B) = 1 \\ 0 & \mathrm{otherwise}}$$
+
+    $$\widehat \alpha(A \rightarrow B) = \soe{ll}{0 & \widehat \alpha(A) = 1 \land \widehat \alpha(B) = 0 \\ 0 & \mathrm{otherwise}}$$
+
+    $$\widehat \alpha(A \leftrightarrow B) = \soe{ll}{1 & \widehat \alpha(A) = \widehat \alpha (B) \\ 0 & \mathrm{otherwise}}$$
+
+    Since it can be proven that the extension $\widehat \alpha$ of $\alpha$ is unique, we will refer to $\widehat \alpha$ as $\alpha$ directly. Two propositions $A$ and $B$ are said to be \tbf{equivalent} --- written as $A \equiv B$ --- if and only if $\forall \alpha \quad \alpha(A) = \alpha(B)$.
 
     \begin{frameddefn}{Satisfiability}
         A proposition $A$ is said to be \tbf{satisfiable} if there exists an assignment $\alpha$ of its propositional variables such that $\alpha(A) = 1$. If there is no assignment that satisfies $A$, $A$ is said to be \tbf{unsatisfiable}, and if $A$ is satisfied for any assignment $\alpha$, then $A$ is said to be a \tbf{tautology}.
