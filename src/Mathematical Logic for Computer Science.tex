@@ -167,7 +167,7 @@
     \subsection{Theories}
 
     \begin{frameddefn}{Theory}
-        A \tbf{theory} is a --- possibly infinite --- set of propositions (or hypothesis).
+        Given a language $\mathcal L$, a \tbf{theory} $T$ over $\mathcal L$ is a --- finite or infinite --- set of propositions defined on $\mathcal L$, i.e. $T \subseteq \textsf{PROP}_{\mathcal L}$.
     \end{frameddefn}
 
     As a natural extension of the \tit{satisfiability} property previously discussed, a theory $T$ will be said to be \tbf{satisfiable} --- written as $T \in \SAT$ if and only if $$\exists \alpha \quad \alpha(T) = 1$$ which is equivalent of saying that $$\exists \alpha \quad \forall F \in T \quad \alpha (F) = 1$$ note that the assignment $\alpha$ must be the same for all the propositions $F$ of $T$.
@@ -180,7 +180,7 @@
     
     However, the following theorem will prove that \tit{satisfiability} and \tit{finite satisfiability} are actually \tbf{equivalent}.
 
-    \begin{framedthm}{Compactness theorem}
+    \begin{framedthm}{Compactness theorem (1st version)}
         Given an infinite theory $T$, it holds that $$T \in \SAT \iff T \in \FINSAT$$
     \end{framedthm}
 
@@ -215,7 +215,9 @@
         \claim{
             $\alpha^*(T) = 1$.
         }{
-            Let $A \in T$, and let $p_{i_1}, \ldots, p_{i_k}$ the be the propositional variables that appear in $A$. Then, for each $j \in [k]$ let $$p_{i_j}^* := \soe{ll}{p_{i_j} & p_{i_j} \in T^* \\ \lnot p_{i_j} & \lnot p_{i_j} \in T^*}$$ and consider the set $\cbk{A, p_{i_1}^*, \ldots, p_{i_k}^*}$. Clearly, this is a finite subset of $T^*$ \todo{non sono d'accordo}, hence $T^* \in \FINSAT$ implies that there must exist an assignment $\beta_A$ that satisfies this set, i.e. $$\beta_A(A) = \beta_A \rbk{p_{i_1}^*} = \ldots = \beta_A \rbk{p_{i_k}^*} = 1$$ Note that, for each $j \in [k]$, it holds that $$p_{i_j} \in T^* \implies p_{i_j}^* = p_{i_j} \land \alpha^*\rbk{p_{i_j}} = 1$$ and $1 = \beta_A (p_{i_j}^*) = \beta_A \rbk{p_{i_j}}$; analogously, it holds that $$p_{i_j } \notin T^* \implies p_{i_j}^*= \lnot p_{i_j} \land \alpha^ *\rbk{p_{i_j}} = 0$$ and $1 = \beta_A (p_{i_j}^*) = \beta_A \rbk{\lnot p_{i_j}} = \lnot \beta_A \rbk{p_{i_j}} \implies \beta_A \rbk{p_{i_j}} = 0$. This proves that $\alpha^* \equiv \beta_A$ for all of $A$'s variables, therefore it must also be true that $\alpha^*(A) = \beta_A(A)$. \todo{not enough for whole T? missing last part}
+            Let $A \in T$, and let $p_{i_1}, \ldots, p_{i_k}$ the be the propositional variables that appear in $A$. Then, for each $j \in [k]$ let $$p_{i_j}^* := \soe{ll}{p_{i_j} & p_{i_j} \in T^* \\ \lnot p_{i_j} & \lnot p_{i_j} \in T^*}$$ and consider the set $\cbk{A, p_{i_1}^*, \ldots, p_{i_k}^*}$. Clearly, this is a finite subset of $T^*$ --- by definition of the various $T_0, T_1, T_2, \ldots$ that define $T^*$ --- hence $T^* \in \FINSAT$ implies that there must exist an assignment $\beta_A$ that satisfies this set, i.e. $$\beta_A(A) = \beta_A \rbk{p_{i_1}^*} = \ldots = \beta_A \rbk{p_{i_k}^*} = 1$$ Note that, for each $j \in [k]$, it holds that $$p_{i_j} \in T^* \implies p_{i_j}^* = p_{i_j} \land \alpha^*\rbk{p_{i_j}} = 1$$ and $1 = \beta_A (p_{i_j}^*) = \beta_A \rbk{p_{i_j}}$; analogously, it holds that $$\lnot p_{i_j} \in T^* \implies p_{i_j}^*= \lnot p_{i_j} \land \alpha^ *\rbk{p_{i_j}} = 0$$ and $1 = \beta_A (p_{i_j}^*) = \beta_A \rbk{\lnot p_{i_j}} = \lnot \beta_A \rbk{p_{i_j}} \implies \beta_A \rbk{p_{i_j}} = 0$. This proves that $\alpha^* \equiv \beta_A$ for all of $A$'s variables, therefore it must also be true that $\alpha^*(A) = \beta_A(A)$.
+
+            Hence, this shows that for any proposition $A \in T$ there is an assignment $\beta_A$, which satisfies $A$, that sets $A$'s variables as $\alpha^*$ does. Therefore, since this will be true for any of the $T$'s propositions, $\alpha^*$ satisfies $T$.
         }
 
         This claim proves that there exists an assignment $\alpha ^*$ that satisfies $T$, hence $T \in \SAT$, concluding the proof.
@@ -223,13 +225,17 @@
 
     The statement of this theorem is equivalent to the following one.
 
-    \begin{framedcor}{}
+    \begin{framedthm}{Compactness theorem (2nd version)}
         Given an infinite theory $T$, and a proposition $A$, it holds that $$T \models A \iff \exists T' \subset T \ \mathrm{finite} \quad T' \models A$$
-    \end{framedcor}
+    \end{framedthm}
+    
+    \proofiff{
+        We will prove their equivalence by first assuming that the first version implies the second version of the theorem, and vice versa. First, notice that if there exist a $T' \subset T$ finite sub-theory of $T$ such that $T' \models A$ for some proposition $A$, then it is trivially true that $T \models A$ by definition of logical consequence. Hence, we just need to prove the direct implication of the second version of the theorem.
 
-    \begin{proof}
-        placeholder \todo{prove their equivalence}
-    \end{proof}
+        By way of contradiction, assume that $T \models A$ and for each $T' \subset T$ finite sub-theory of $T$, $T' \not\models A$. By definition of logical consequence, this implies that $$\forall T' \subset T \ \mathrm{finite} \quad \exists \alpha \quad \alpha(T') = 1 \land \alpha(A) = 0$$ or, equivalently, $\alpha(\lnot A) = 1$. This implies that $$\forall T' \subset T \ \mathrm{finite} \quad \exists \alpha \quad \alpha(T' \cup \{\lnot A\}) = 1$$ which means that any finite subset of $T \cup \{\lnot A\}$ is \SAT (recall that $T' \subset T$). Hence, by definition $T \cup \{\lnot A\} \in \FINSAT$, and since we are assuming the first version of the theorem, we have that $$T \cup \{\lnot A \} \in \FINSAT \iff T \cup \{\lnot A\} \in \SAT$$ which implies that $T \not\models A$ by definition of logical consequence.
+    }{
+        placeholder \todo{da fare}
+    }
    
     The compactness theorem can be proven to be equivalent to a special case of \href{https://en.wikipedia.org/wiki/K%C5%91nig%27s_lemma}{Kőnig's lemma} \cite{koenig}, which states the following.
 

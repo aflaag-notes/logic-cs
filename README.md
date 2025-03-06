@@ -3,4 +3,6 @@
 ## TODO list
 
 - [ ] introduction
-- [ ] fill holes in compactness theorem
+- [ ] second implication second version compactness theorem
+- [ ] semi-decidability (?)
+- [ ] koenig's lemma (?)
