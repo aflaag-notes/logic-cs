@@ -230,7 +230,7 @@
     \end{framedthm}
     
     \proofiff{
-        We will prove their equivalence by first assuming that the first version implies the second version of the theorem, and vice versa. First, notice that if there exist a $T' \subset T$ finite sub-theory of $T$ such that $T' \models A$ for some proposition $A$, then it is trivially true that $T \models A$ by definition of logical consequence. Hence, we just need to prove the direct implication of the second version of the theorem.
+        We will prove the equivalence of the two formulations by assuming that the first version implies the second version of the theorem, and vice versa. First, notice that if there exist a $T' \subset T$ finite sub-theory of $T$ such that $T' \models A$ for some proposition $A$, then it is trivially true that $T \models A$ by definition of logical consequence. Hence, we just need to prove the direct implication of the second version of the theorem.
 
         By way of contradiction, assume that $T \models A$ and for each $T' \subset T$ finite sub-theory of $T$, $T' \not\models A$. By definition of logical consequence, this implies that $$\forall T' \subset T \ \mathrm{finite} \quad \exists \alpha \quad \alpha(T') = 1 \land \alpha(A) = 0$$ or, equivalently, $\alpha(\lnot A) = 1$. This implies that $$\forall T' \subset T \ \mathrm{finite} \quad \exists \alpha \quad \alpha(T' \cup \{\lnot A\}) = 1$$ which means that any finite subset of $T \cup \{\lnot A\}$ is \SAT (recall that $T' \subset T$). Hence, by definition $T \cup \{\lnot A\} \in \FINSAT$, and since we are assuming the first version of the theorem, we have that $$T \cup \{\lnot A \} \in \FINSAT \iff T \cup \{\lnot A\} \in \SAT$$ which implies that $T \not\models A$ by definition of logical consequence.
     }{
