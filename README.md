@@ -5,6 +5,5 @@ These are my [notes](<https://raw.githubusercontent.com/aflaag-notes/logic-cs/ma
 ## TODO list
 
 - [ ] introduction
-- [ ] second implication second version compactness theorem
 - [ ] semi-decidability (?)
 - [ ] koenig's lemma (?)

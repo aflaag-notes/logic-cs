@@ -230,11 +230,11 @@
     \end{framedthm}
     
     \proofiff{
-        We will prove the equivalence of the two formulations by assuming that the first version implies the second version of the theorem, and vice versa. First, notice that if there exist a $T' \subset T$ finite sub-theory of $T$ such that $T' \models A$ for some proposition $A$, then it is trivially true that $T \models A$ by definition of logical consequence. Hence, we just need to prove the direct implication of the second version of the theorem.
+        We will prove the equivalence of the two formulations by assuming that the first version implies the second version of the theorem, and vice versa. First, notice that if there exist a $T' \subset T$ finite sub-theory of $T$ such that $T' \models A$ for some proposition $A$, then it is trivially true that $T \models A$ by definition of logical consequence. Hence, we just need to prove the direct implication of the second version of the theorem, assuming that the first version it true.
 
         By way of contradiction, assume that $T \models A$ and for each $T' \subset T$ finite sub-theory of $T$, $T' \not\models A$. By definition of logical consequence, this implies that $$\forall T' \subset T \ \mathrm{finite} \quad \exists \alpha \quad \alpha(T') = 1 \land \alpha(A) = 0$$ or, equivalently, $\alpha(\lnot A) = 1$. This implies that $$\forall T' \subset T \ \mathrm{finite} \quad \exists \alpha \quad \alpha(T' \cup \{\lnot A\}) = 1$$ which means that any finite subset of $T \cup \{\lnot A\}$ is \SAT (recall that $T' \subset T$). Hence, by definition $T \cup \{\lnot A\} \in \FINSAT$, and since we are assuming the first version of the theorem, we have that $$T \cup \{\lnot A \} \in \FINSAT \iff T \cup \{\lnot A\} \in \SAT$$ which implies that $T \not\models A$ by definition of logical consequence.
     }{
-        placeholder \todo{da fare}
+        Consider a theory $T$ and a proposition $A$; by the second version of the theorem we know that $T \models A$ if and only if there is a finite sub-theory $T' \subset T$ such that $T' \models A$. Now, suppose that $T \in \UNSAT$; therefore, by definition we have that $T \models 0$, which implies that $$T \models 0 \iff \exists T' \subset' T \ \mathrm{finite} \quad T' \models 0$$ but again, $T' \models 0$ means that $T' \in \UNSAT$. Hence, we proved that $$T \in \UNSAT \iff \exists T' \subset T \ \mathrm{finite} \quad T' \in \UNSAT \iff T \notin \FINSAT$$ which is the contrapositive of the first version of the theorem.
     }
    
     The compactness theorem can be proven to be equivalent to a special case of \href{https://en.wikipedia.org/wiki/K%C5%91nig%27s_lemma}{Kőnig's lemma} \cite{koenig}, which states the following.
