@@ -1,4 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2024/Arch Linux)
+This is BibTeX, Version 0.99d (TeX Live 2026/dev/Arch Linux)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: Mathematical Logic for Computer Science.aux
 The style file: biblatex.bst
@@ -19,47 +19,47 @@ Reallocated singl_function (elt_size=8) to 100 items from 50.
 Reallocated singl_function (elt_size=8) to 100 items from 50.
 Database file #1: Mathematical_Logic_for_Computer_Science-blx.bib
 Database file #2: ./references.bib
-Biblatex version: 3.19
+Biblatex version: 3.20
 Reallocated wiz_functions (elt_size=8) to 9000 items from 6000.
 Reallocated singl_function (elt_size=8) to 100 items from 50.
 You've used 2 entries,
-            6399 wiz_defined-function locations,
-            1210 strings with 9202 characters,
-and the built_in function-call counts, 5996 in all, are:
-= -- 357
-> -- 151
-< -- 26
+            6402 wiz_defined-function locations,
+            1210 strings with 9209 characters,
+and the built_in function-call counts, 6389 in all, are:
+= -- 383
+> -- 155
+< -- 32
 + -- 143
-- -- 55
-* -- 341
-:= -- 788
+- -- 56
+* -- 383
+:= -- 825
 add.period$ -- 0
 call.type$ -- 2
-change.case$ -- 10
+change.case$ -- 14
 chr.to.int$ -- 44
 cite$ -- 2
-duplicate$ -- 518
-empty$ -- 547
-format.name$ -- 47
-if$ -- 1262
+duplicate$ -- 548
+empty$ -- 590
+format.name$ -- 51
+if$ -- 1353
 int.to.chr$ -- 0
 int.to.str$ -- 2
 missing$ -- 0
-newline$ -- 43
-num.names$ -- 41
-pop$ -- 379
+newline$ -- 44
+num.names$ -- 45
+pop$ -- 380
 preamble$ -- 1
-purify$ -- 12
+purify$ -- 16
 quote$ -- 0
-skip$ -- 234
+skip$ -- 245
 stack$ -- 0
-substring$ -- 597
-swap$ -- 131
-text.length$ -- 44
-text.prefix$ -- 1
+substring$ -- 660
+swap$ -- 140
+text.length$ -- 49
+text.prefix$ -- 2
 top$ -- 1
 type$ -- 56
 warning$ -- 0
-while$ -- 119
+while$ -- 124
 width$ -- 0
-write$ -- 42
+write$ -- 43

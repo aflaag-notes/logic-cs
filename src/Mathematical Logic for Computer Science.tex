@@ -243,6 +243,40 @@
         Every infinite tree contains either a vertex of infinite degree, or an infinite path.
     \end{framedlem}
 
+    \newpage
+
+    \begin{framedprob}{}
+        Let $\mathcal L = \{E(x, y)\}$ be the language of graphs.
+
+        \begin{enumerate}
+            \item For each fixed $n \in \N$, write a sentence $C_n$ such that for any graph $\mathcal G$, $\mathcal G \models C_n$ if and only if $\mathcal G$ contains a cycle of length $n$
+            \item Prove using Compactness that the property of being \tit{a cycle} is not expressible by a theory in $\mathcal L$ over the class of graphs.
+        \end{enumerate}
+    \end{framedprob}
+
+    \solution{
+        Let $\mathcal L = \{E(x, y)\}$ be the language of graphs.
+
+        \begin{enumerate}
+            \item The property \curlyquotes{$\mathcal G$ contains a cycle of length $n$} can be written as follows $$C_n := \exists x_1, \ldots, x_n \quad \rbk{\bigwedge_{1 \le i, j \le n}{\lnot(x_i = x_j)}} \land \rbk{\bigwedge_{1 \le i, j \le n - 1}{E(x_i, x_{i + 1})} \land E(x_n, x_1)}$$ In fact, the first conjunction implies that $x_1, \ldots, x_n$ are \tit{distinct}, and the second conjunction describes the \tit{cycle} itself (of length $n$).
+            \item Consider the property $P_n$ := \curlyquotes{$\mathcal G$ is \tit{a cycle} of length $n$}. This property can be expressed by \tit{extending} $C_n$: in particular, $P(\mathcal G)$ holds if $\mathcal G$ is a cycle and has $n$ vertices, therefore we just need to add to $C_n$ the following \centeredeq{0.9}{$\displaystyle C'_n := \exists x_1, \ldots, x_n \quad \rbk{\bigwedge_{1 \le i, j \le n}{\lnot(x_i = x_j)}} \land \rbk{\bigwedge_{1 \le i, j \le n - 1}{E(x_i, x_{i + 1})} \land E(x_n, x_1)} \land \rbk{\forall y \rbk{\bigvee_{1 \le j \le p}{y = x_j}}}$} where the last conjunction forces $\mathcal G$ to have \tit{exacty} $n$ vertices.
+
+                Now, consider the property $P$ := \curlyquotes{$\mathcal G$ is \tit{a cycle}}, and in particular $\lnot P$ := \curlyquotes{$\mathcal G$ is not \tit{a cycle}}. We observe that we can build the following infinte theory $$T^{\lnot P} := \{\lnot C_n' \mid n \in \N \}$$ for which it is easy to see that $$\mathcal G \models \lnot P \iff \lnot P(\mathcal G) \ \mathrm{holds}$$ meaning that $\lnot P$ is expressible through $T^{\lnot P}$.
+
+                \claim{
+                    $T^{\lnot P} \in \FINSAT$.
+                }{
+                    Fix $T_0 \underset{fin}{\subseteq} T^{\lnot P}$. We observe that $T_0 := \{\lnot C_{i_1}, \ldots, \lnot C_{i_k}\}$ for some $i_1, \ldots, i_k \in \N$. Now, if we consider $\displaystyle i^* := \max_{j \in [k]}{i_j}$, then the cycle graph that has $i^* + 1$ vertices is clearly a structure that satisfies $T_0$.
+                }
+
+                \claim{
+                    $P$ is not expressible by a theory in $\mathcal L$ over the class of graphs.
+                }{
+                    By way of contradiction, suppose that $P$ is expressible, i.e. there is a theory $T^P$ for which $P$ can be expressed. Then, consider the theory $T := T^P \cup T^{\lnot P}$. By the previous claim, we have that $T \in \FINSAT$, and by Compactness this is true if and only if $T \in \SAT$. However, this is a contradiction, because a graph cannot be and not be a cycle at the same time.
+                }
+        \end{enumerate}
+    }
+
     \printbibliography % UNCOMMENT FOR BIBLIOGRAPHY
 
 \end{document}
