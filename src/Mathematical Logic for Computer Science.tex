@@ -354,18 +354,6 @@
             \item \curlyquotes{$\mathcal G$ contains a cycle of length 4}, which is represented by the following sentence $$\exists x_1 \exists x_2 \exists x_3 \exists x_4 \quad \rbk{\bigwedge_{1 \le i, j \le 4}{\lnot(x_i = x_j)}} \land \rbk{\bigwedge_{1 \le i \le 3}{E(x_i, x_{i + 1})} \land E(x_4, x_1)}$$
             \item \curlyquotes{$\mathcal G$ contains a vertex of degree 3}, which is represented by the following sentence \centeredeq{0.9}{$\displaystyle \exists x_1 \exists x_2 \exists x_3 \exists x_4 \quad \rbk{\bigwedge_{1 \le i, j \le 4}{\lnot(x_i = x_j)}} \land \rbk{\bigwedge_{2 \le i \le 4}{E(x_1, x_i)}} \land \rbk{\forall y \rbk{\lnot E(x, y) \lor \bigvee_{2 \le j \le 4}{(y = x_j)}}}$}
         \end{enumerate}
-
-        In particular, we observe that both of these sentences have rank 4, and this s not a conicidence. In fact we can show that the Duplicator can win the 4-rounds game, and by the Ehrenfeucht's theorem this directly implies that $\mathcal G_1 \cong_4 \mathcal G_2$.
-
-        \begin{enumerate}
-            \item On the first round, suppose that the Spoiler chooses the vertex 1; then, the Duplicator may answer with the vertex $a$
-            \item On the second round, suppose that the Spoiler chooses the vertex 3; then, the Duplicator may answer with the vertex $c$
-            \item On the third round, suppose that the Spoiler chooses the vertex 5; then, the Duplicator may answer with the vertex $d$, preserving the distances
-            \item On the fourth round, suppose that the Spoiler chooses the vertex 4; then, the Duplicator must answer with the vertex $e$, to preserve the distances
-            \item Finally, when the Spoiler chooses vertex 2, and the Duplicator is forced to answer with $b$, which cannot preserve the partial isomorphism --- for instance, $b$ is not adjacent with $e$ in $\mathcal G_2$, even though 2 and 4 are adjacent in $\mathcal G_1$
-        \end{enumerate}
-        
-        Therefore, the duplicator wins the 4-round game, and the Spoiler wins the 5-round game.
     }
 
     \printbibliography % UNCOMMENT FOR BIBLIOGRAPHY
