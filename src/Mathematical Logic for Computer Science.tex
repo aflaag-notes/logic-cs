@@ -260,7 +260,7 @@
         Let $\mathcal L = \{E(x, y)\}$ be the language of graphs.
 
         \begin{enumerate}
-            \item For each fixed $n \in \N$, write a sentence $C_n$ such that for any graph $\mathcal G$, $\mathcal G \models C_n$ if and only if $\mathcal G$ contains a cycle of length $n$
+            \item For each fixed $n \in \N$, write a sentence $C_n$ such that for any graph $\mathcal G$, $\mathcal G \models C_n$ if and only if $\mathcal G$ contains a cycle of length $n$.
             \item Prove using Compactness that the property of being \tit{a cycle} is not expressible by a theory in $\mathcal L$ over the class of graphs.
         \end{enumerate}
     \end{framedprob}
@@ -269,20 +269,20 @@
         Let $\mathcal L = \{E(x, y)\}$ be the language of graphs.
 
         \begin{enumerate}
-            \item The property \curlyquotes{$\mathcal G$ contains a cycle of length $n$} can be written as follows $$C_n := \exists x_1, \ldots, \exists x_n \quad \rbk{\bigwedge_{1 \le i, j \le n}{\lnot(x_i = x_j)}} \land \rbk{\bigwedge_{1 \le i \le n - 1}{E(x_i, x_{i + 1})} \land E(x_n, x_1)}$$ In fact, the first conjunction implies that $x_1, \ldots, x_n$ are \tit{distinct}, and the second conjunction describes the \tit{cycle} itself (of length $n$).
-            \item Consider the property $P_n$ := \curlyquotes{$\mathcal G$ is \tit{a cycle} of length $n$}. This property can be expressed by \tit{extending} $C_n$: in particular, $P(\mathcal G)$ holds if $\mathcal G$ is a cycle and has $n$ vertices, therefore we need to add to $C_n$ the following
+            \item The property \curlyquotes{$\mathcal G$ contains a cycle of length $n$} can be written as follows $$C_n := \exists x_1 \ldots \exists x_n \quad \rbk{\bigwedge_{\substack{1 \le i, j \le n \\ i \neq j}}{\lnot(x_i = x_j)}} \land \rbk{\bigwedge_{1 \le i \le n - 1}{E(x_i, x_{i + 1})} \land E(x_n, x_1)}$$ In fact, the first conjunction implies that $x_1, \ldots, x_n$ are \tit{distinct}, and the second conjunction describes the existence of the $n$-long \tit{cycle} itself.
+            \item Consider the property $P_n$ := \curlyquotes{$\mathcal G$ is \tit{a cycle} of length $n$}. This property can be expressed by \tit{extending} $C_n$ as follows:
                 \begin{equation*}
                     \begin{split}
-                        V_n &:= \rbk{\forall y \rbk{\bigvee_{1 \le j \le p}{(y = x_j)}}} \\
-                        E^{C_n}_n &:= \displaystyle \bigwedge_{1 \le i \le n}{\bigwedge_{\substack{1 \le j \le n : \\ j \neq n + 1}}{\lnot E(x_i, x_j)}} \\
-                        C'_n &:= \exists x_1, \ldots \exists x_n \quad C_n \land V_n \land E^{C_n}_n$
+                        V_n &:= \forall y \quad \bigvee_{1 \le j \le p}{(y = x_j)} \\
+                        E_n &:= \displaystyle \bigwedge_{1 \le i \le n}{\bigwedge_{\substack{1 \le j \le n : \\ j \neq i + 1}}{\lnot E(x_i, x_j)}} \\
+                        C'_n &:= \exists x_1 \ldots  \exists x_n \quad C_n \land V_n \land E_n$
                     \end{split}
                 \end{equation*}
                 where we have that
 
                 \begin{itemize}
-                    \item $V_n$ forces that $\mathcal G$ has \tit{exactly} $n$ vertices
-                    \item $E^{C_n}_n$ forces that the only edges present in $\mathcal G$ are the ones that describe the cycle graph of $n$ vertices
+                    \item $V_n$ ensures that $\mathcal G$ has \tit{exactly} $n$ vertices
+                    \item $E_n$ ensures that the only edges present in $\mathcal G$ are the ones that describe the cycle graph of $n$ vertices
                     \item $C'_n$ describes our property $P_n$
                 \end{itemize}
 
@@ -365,15 +365,23 @@
         Two properties that can distinguish these two structures are the following:
 
         \begin{enumerate}
-            \item \curlyquotes{$\mathcal G$ contains a cycle of length 4}, which is represented by the following sentence $$\exists x_1 \exists x_2 \exists x_3 \exists x_4 \quad \rbk{\bigwedge_{1 \le i, j \le 4}{\lnot(x_i = x_j)}} \land \rbk{\bigwedge_{1 \le i \le 3}{E(x_i, x_{i + 1})} \land E(x_4, x_1)}$$
-            \item \curlyquotes{$\mathcal G$ contains a vertex of degree 3}, which is represented by the following sentence \centeredeq{0.9}{$\displaystyle \exists x_1 \exists x_2 \exists x_3 \exists x_4 \quad \rbk{\bigwedge_{1 \le i, j \le 4}{\lnot(x_i = x_j)}} \land \rbk{\bigwedge_{2 \le i \le 4}{E(x_1, x_i)}} \land \rbk{\forall y \rbk{\lnot E(x, y) \lor \bigvee_{2 \le j \le 4}{(y = x_j)}}}$}
-            \item descrizione di G1 (e il contrario non va bene)
-            \item esistenza di C5
-            \item esistenza di K4
-            \item esistono due vertici per cui per ogni terzo faccio K3
+            \item \curlyquotes{$\mathcal G$ contains a vertex of degree 3}, which is represented by the following sentence of rank 5 \centeredeq{0.9}{$\displaystyle \exists x_1 \exists x_2 \exists x_3 \exists x_4 \quad \rbk{\bigwedge_{\substack{1 \le i, j \le 4 \\ i \neq j}}{\lnot(x_i = x_j)}} \land \rbk{\bigwedge_{2 \le i \le 4}{E(x_1, x_i)}} \land \rbk{\forall y \quad \lnot E(x, y) \lor \bigvee_{2 \le j \le 4}{(y = x_j)}}$}
+            \item \curlyquotes{$\mathcal G$ contains edges as $\mathcal G_1$}, which is represented by the following sentence of rank 5
+                \begin{equation*}
+                    \begin{split}
+                        \exists x_1 \exists x_2 \exists x_3 \exists x_4 \exists x_5 \quad &E(x_1, x_2) \land E(x_1, x_3) \land \\
+                                                                                          &E(x_2, x_3) \land E(x_2, x_4) \land E(x_2, x_5) \land \\
+                                                                                          &E(x_3, x_4) \land E(x_4, x_5) \land \\
+                                                                                          &E(x_4, x_5)
+                    \end{split}
+                \end{equation*}
+                we observe that the edges of $\mathcal G_2$ are not sufficient to distinguish the two sentences, because $\mathcal G_2$ is a subgraph of $\mathcal G_1$
+            \item \curlyquotes{$\mathcal G$ contains a cycle of length 5}, which is represented by $C_5$ of the previous exercise, and has rank 5
+            \item \curlyquotes{$\mathcal G$ contains a cycle of length 4}, which is represented by $C_4$ of the previous exercise, and has rank 4
+            \item \curlyquotes{$\mathcal G$ contains $K_4$ as subgraph}, which is represented by the following sentence of rank 4 $$\exists x_1 \exists x_2 \exists x_3 \exists x_4 \quad \rbk{\bigwedge_{\substack{1 \le i, j \le 4 \\ i \neq j}}{\lnot (x_i = x_j)}} \land \rbk{\bigwedge_{\substack{1 \le i, j \le 4 \\ i \neq j}}{E(x_i, x_j)}}$$
         \end{enumerate}
 
-        These sentences \tit{may} seem to suggest that the two structures are 3-equivalent, meaning that there is no sentence of rank 3 that can distinguish $\mathcal G_1$ and $\mathcal G_2$. For now, let's focus on proving that they are \tit{at least} 2-equivalent.
+        These sentences \tit{may seem} to suggest that the two structures are 3-equivalent, meaning that there is no sentence of rank 3 that can distinguish $\mathcal G_1$ from $\mathcal G_2$. For now, let's focus on proving that they are \tit{at least} 2-equivalent.
 
         \claim{
             The Duplicator wins $G_2(\mathcal G_1, \mathcal G_2)$.
@@ -381,11 +389,11 @@
             Let $s_i$ and $d_i$ be the $i$-th nodes chosen by the Spoiler and the Duplicator, respectively. Then, we can define the following strategy for the Duplicator:
 
             \begin{itemize}
-                \item if $s_1 \in \{1, 4, 5\}$, then the Duplicator chooses $d_1 \in \{a, b, c, d\}$, otherwise if $s_1 \in \{2, 3\}$ then $d_1 = c$
-                \item if $s_1 \in \{a, b, c, d\}$, then the Duplicator chooses $d_1 \in \{1, 4, 5\}$, otherwise if $s_1 = c$ then $d_1 \in \{2, 3\}$
+                \item if $s_1 \in \{1, 4, 5\}$, then the Duplicator chooses $d_1 \in \{a, b, d, e\}$, otherwise if $s_1 \in \{2, 3\}$ then $d_1 = c$
+                \item similarly, if $s_1 \in \{a, b, d, e\}$, then the Duplicator chooses $d_1 \in \{1, 4, 5\}$, otherwise if $s_1 = c$ then $d_1 \in \{2, 3\}$
             \end{itemize}
 
-            Then, no matter the choice of $s_2$, the Duplicator can always answer with a node $d_2$ that preserves the partial isomorphism:
+            Then, no matter the choice of $s_2$, the Duplicator can always answer with a node $d_2$ that preserves the partial isomorphism, in fact:
 
             \begin{itemize}
                 \item if $s_2 \sim s_1$, it is guaranteed that there is a vertex $d_2$ in the other structure such that $d_2 \sim d_1$ because $\delta_{\mathcal G_1} = \delta_{\mathcal G_2} = 2$ --- and the same argument applies if $s_2 \sim d_1$ for finding a vertex $d_2 \sim s_1$
@@ -395,10 +403,10 @@
             Thus, the Duplicator has a strategy to always win at least 2 rounds, therefore the Duplicator wins $G_2(\mathcal G_1, \mathcal G_2)$.
         }
 
-        Now, is it true that we are 3-equivalent? Unfortunately, this is not true, as we are going to show in the following claim.
+        Now that we proved that $\mathcal G_1 \equiv_2 \mathcal G_2$, is it true that they are also 3-equivalent? Unfortunately, the following claim proves that this is indeed false.
 
         \claim{
-            The Spoiler wins $G_3(\mathcal G_1, G_2)$.
+            The Spoiler wins $G_3(\mathcal G_1, \mathcal G_2)$.
         }{
             The following is a strategy that guarantees the Spoiler to win in 3 rounds:
 
@@ -415,14 +423,14 @@
             \end{itemize}
         }
 
-        In fact, we can actually find a property that distinguishes $\mathcal G_1$ and $\mathcal G_2$, which can be written through a sentence of 3 quantifiers: \curlyquotes{there are two vertices $x_1$ and $x_2$ of $\mathcal G$ such that for each third vertex $x_3$ there is a $K_3$ as subgraph of $\mathcal G$ such that $V(K_3) = \{x_1, x_2, x_3\}$} $$\exists x_1 \exists x_2 \forall x_3 \quad \rbk{\bigwedge_{1 \le i, j \le 3}{\lnot (x_i = x_j)}} \land E(x_1, x_2) \land E(x_2, x_3) \land E(x_3, x_1)$$ Let $x_1$, $x_2$ and $x_3$ be the three choosen vertices --- and we may assume that $x_1 \sim x_2$ otherwise the sentence is trivially not satisfied; then, we observe that
+        In fact, we can actually find a property that distinguishes $\mathcal G_1$ from $\mathcal G_2$ which can be written through a sentence of 3 quantifiers: \curlyquotes{there are two vertices $x_1$ and $x_2$ of $\mathcal G$ such that for each third vertex $x_3$ there is a $K_3$ as subgraph of $\mathcal G$ such that $V(K_3) = \{x_1, x_2, x_3\}$} $$\exists x_1 \exists x_2 \forall x_3 \quad \rbk{\bigwedge_{\substack{1 \le i, j \le 3 \\ i \neq j}}{\lnot (x_i = x_j)}} \land E(x_1, x_2) \land E(x_2, x_3) \land E(x_3, x_1)$$ Let $x_1$, $x_2$ and $x_3$ be the three choosen vertices --- and we may assume that $x_1 \sim x_2$ otherwise the sentence is trivially unsatisfied. Then, we observe that
 
         \begin{itemize}
-            \item in $\mathcal G_1$ if $x_1, x_2 \in \{2, 3\}$, then for any other vertex $x_3 \in \{1, 4, 5\}$ we can always find a $K_3$ having $x_1$, $x_2$ and $x_3$ as nodes
+            \item in $\mathcal G_1$ if $\{x_1, x_2\} = \{2, 3\}$, then for any other vertex $x_3 \in \{1, 4, 5\}$ we can always find a $K_3$ having $x_1$, $x_2$ and $x_3$ as its vertices
             \item in $\mathcal G_2$ we have two cases
                 \begin{itemize}
-                    \item if $\{x_1, x_2\} = \{a, b, c\}$, the property is unsatisfied for $x_3 \in \{d, e\}$
-                    \item if $\{x_1, x_2\} = \{c, d, e\}$, the property is unsatisfied for $x_3 \in \{a, b\}$
+                    \item if $\{x_1, x_2\} \subseteq \{a, b, c\}$, the property is unsatisfied for $x_3 \in \{d, e\}$
+                    \item if $\{x_1, x_2\} \subseteq \{c, d, e\}$, the property is unsatisfied for $x_3 \in \{a, b\}$
                 \end{itemize}
         \end{itemize}
 
