@@ -92,9 +92,9 @@
 
     %%%%%%%%%%%%%%%%%%%%%
 
-    \chapter{TODO}
+    \chapter{Exercises}
 
-    \section{Introduction}
+    \section{Homework 1}
 
     placeholder \todo{missing introduction}
 
@@ -245,27 +245,14 @@
 
     \newpage
 
-    \begin{framedprob}{}
-    \end{framedprob}
+    \tbf{Exercise 1.4} Let $\mathcal L = \{E(x, y)\}$ be the language of graphs.
 
-    \begin{framedprob}{}
-    \end{framedprob}
+    \begin{enumerate}
+        \item For each fixed $n \in \N$, write a sentence $C_n$ such that for any graph $\mathcal G$, $\mathcal G \models C_n$ if and only if $\mathcal G$ contains a cycle of length $n$.
+        \item Prove using Compactness that the property of being \tit{a cycle} is not expressible by a theory in $\mathcal L$ over the class of graphs.
+    \end{enumerate}
 
-    \begin{framedprob}{}
-    \end{framedprob}
-
-    \newpage
-
-    \begin{framedprob}{}
-        Let $\mathcal L = \{E(x, y)\}$ be the language of graphs.
-
-        \begin{enumerate}
-            \item For each fixed $n \in \N$, write a sentence $C_n$ such that for any graph $\mathcal G$, $\mathcal G \models C_n$ if and only if $\mathcal G$ contains a cycle of length $n$.
-            \item Prove using Compactness that the property of being \tit{a cycle} is not expressible by a theory in $\mathcal L$ over the class of graphs.
-        \end{enumerate}
-    \end{framedprob}
-
-    \solution{
+    \begin{proof}[Solution]
         Let $\mathcal L = \{E(x, y)\}$ be the language of graphs.
 
         \begin{enumerate}
@@ -275,7 +262,7 @@
                     \begin{split}
                         V_n &:= \forall y \quad \bigvee_{1 \le j \le p}{(y = x_j)} \\
                         E_n &:= \displaystyle \bigwedge_{1 \le i \le n}{\bigwedge_{\substack{1 \le j \le n : \\ j \neq i + 1}}{\lnot E(x_i, x_j)}} \\
-                        C'_n &:= \exists x_1 \ldots  \exists x_n \quad C_n \land V_n \land E_n$
+                        C'_n &:= \exists x_1 \ldots  \exists x_n \quad C_n \land V_n \land E_n
                     \end{split}
                 \end{equation*}
                 where we have that
@@ -300,68 +287,62 @@
                     By way of contradiction, suppose that $P$ is expressible, i.e. there is a theory $T^P$ for which $P$ can be expressed. Then, consider the theory $T := T^P \cup T^{\lnot P}$. By the previous claim, we have that $T \in \FINSAT$, and by Compactness this is true if and only if $T \in \SAT$. However, this is a contradiction, because a graph cannot be and not be a cycle at the same time.
                 }
         \end{enumerate}
-    }
 
-    \newpage
+        Finally, this last claim concludes the proof.
+    \end{proof}
     
-    \chapter{placeholder}
-    
-    \newpage
+    \tbf{Exercise 2.1} Consider the following two structures $\mathcal G_1$ and $\mathcal G_2$ for the languages of graphs:
 
-    \begin{framedprob}{}
-        Consider the following two structures $\mathcal G_1$ and $\mathcal G_2$ for the languages of graphs:
+    \begin{figure}[H]
+        \centering
 
-        \begin{figure}[H]
-            \centering
+        \begin{tabular}{ccc}
+            \begin{tikzpicture}[-,>=stealth,shorten >=1pt,auto,node distance=1.5cm, thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
 
-            \begin{tabular}{ccc}
-                \begin{tikzpicture}[-,>=stealth,shorten >=1pt,auto,node distance=1.5cm, thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
+                \node[circle, draw]  (1) []{1};
+                \node[circle, draw]  (2) [below left of = 1]{2};
+                \node[circle, draw]  (3) [below right of = 1]{3};
+                \node[circle, draw]  (4) [below of = 2]{4};
+                \node[circle, draw]  (5) [below of = 3]{5};
 
-                    \node[circle, draw]  (1) []{1};
-                    \node[circle, draw]  (2) [below left of = 1]{2};
-                    \node[circle, draw]  (3) [below right of = 1]{3};
-                    \node[circle, draw]  (4) [below of = 2]{4};
-                    \node[circle, draw]  (5) [below of = 3]{5};
+                \draw[-] (1) to (2);
+                \draw[-] (1) to (3);
+                \draw[-] (2) to (3);
+                \draw[-] (2) to (4);
+                \draw[-] (2) to (5);
+                \draw[-] (3) to (4);
+                \draw[-] (3) to (5);
+                \draw[-] (4) to (5);
 
-                    \draw[-] (1) to (2);
-                    \draw[-] (1) to (3);
-                    \draw[-] (2) to (3);
-                    \draw[-] (2) to (4);
-                    \draw[-] (2) to (5);
-                    \draw[-] (3) to (4);
-                    \draw[-] (3) to (5);
-                    \draw[-] (4) to (5);
+                ;
+            \end{tikzpicture}
 
-                    ;
-                \end{tikzpicture}
+            &\qquad\qquad&
 
-                &\qquad\qquad&
+            \begin{tikzpicture}[-,>=stealth,shorten >=1pt,auto,node distance=1.5cm, thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
 
-                \begin{tikzpicture}[-,>=stealth,shorten >=1pt,auto,node distance=1.5cm, thick,main node/.style={scale=0.9,circle,draw,font=\sffamily\normalsize}]
+                \node[circle, draw]  (1) []{$c$};
+                \node[circle, draw]  (2) [above left of = 1]{$a$};
+                \node[circle, draw]  (3) [above right of = 1]{$b$};
+                \node[circle, draw]  (4) [below left of = 1]{$d$};
+                \node[circle, draw]  (5) [below right of = 1]{$e$};
 
-                    \node[circle, draw]  (1) []{$c$};
-                    \node[circle, draw]  (2) [above left of = 1]{$a$};
-                    \node[circle, draw]  (3) [above right of = 1]{$b$};
-                    \node[circle, draw]  (4) [below left of = 1]{$d$};
-                    \node[circle, draw]  (5) [below right of = 1]{$e$};
+                \draw[-] (1) to (2);
+                \draw[-] (1) to (3);
+                \draw[-] (2) to (3);
+                \draw[-] (1) to (4);
+                \draw[-] (1) to (5);
+                \draw[-] (4) to (5);
 
-                    \draw[-] (1) to (2);
-                    \draw[-] (1) to (3);
-                    \draw[-] (2) to (3);
-                    \draw[-] (1) to (4);
-                    \draw[-] (1) to (5);
-                    \draw[-] (4) to (5);
+                ;
+            \end{tikzpicture}
+        \end{tabular}
+        % \caption{On the left: a simple graph. On the right: a simple digraph.}
+    \end{figure}
 
-                    ;
-                \end{tikzpicture}
-            \end{tabular}
-            % \caption{On the left: a simple graph. On the right: a simple digraph.}
-        \end{figure}
+    Write at least two sentences distinguishing the two structures. Discuss the EF-game played on these structures: for what $k$ can the Duplicator win the $k$-rounds game? For what $k$ can the Spoiler win?
 
-        Write at least two sentences distinguishing the two structures. Discuss the EF-game played on these structures: for what $k$ can the Duplicator win the $k$-rounds game? For what $k$ can the Spoiler win?
-    \end{framedprob}
-
-    \solution{
+    \begin{proof}[Solution]
         Two properties that can distinguish these two structures are the following:
 
         \begin{enumerate}
@@ -435,8 +416,8 @@
         \end{itemize}
 
         In conclusion, we have that $\mathcal G_1 \equiv_2 \mathcal G_2$, and that $\mathcal G_1 \not\equiv_3 \mathcal G_2$.
-    }
+    \end{proof}
 
-    \printbibliography % UNCOMMENT FOR BIBLIOGRAPHY
+    % \printbibliography % UNCOMMENT FOR BIBLIOGRAPHY
 
 \end{document}

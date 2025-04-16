@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.4.8)  16 APR 2025 22:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.4.8)  16 APR 2025 22:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1609,7 +1609,7 @@ Package hyperref Info: Link coloring ON on input line 75.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<../../packages/Nyx/logo.png, id=27, 803.0pt x 301.125pt>
+<../../packages/Nyx/logo.png, id=23, 803.0pt x 301.125pt>
 File: ../../packages/Nyx/logo.png Graphic file (type png)
 <use ../../packages/Nyx/logo.png>
 Package pdftex.def Info: ../../packages/Nyx/logo.png  used on input line 76.
@@ -1683,7 +1683,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has b
 <to be read again> 
                    \relax 
 l.95     \chapter
-                 {TODO} [1
+                 {Exercises} [1
 
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
 Chapter 1.
@@ -1778,8 +1778,18 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 Package cleveref Info: loaded `english' language definitions on input line 246.
 [8]
+Underfull \hbox (badness 10000) in paragraph at lines 282--282
 
-Package cleveref Info: loaded `english' language definitions on input line 257.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 288--288
+
+ []
+
+
+
+Package cleveref Info: loaded `english' language definitions on input line 288.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1787,72 +1797,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `english' language definitions on input line 257.
+Package cleveref Info: loaded `english' language definitions on input line 288.
 [9]
-./Mathematical Logic for Computer Science.tex:303: Missing } inserted.
-<inserted text> 
-                }
-l.303     }
-           
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-./Mathematical Logic for Computer Science.tex:303: Missing { inserted.
-<inserted text> 
-                {
-l.303     }
-           
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-./Mathematical Logic for Computer Science.tex:303: Missing $ inserted.
-<inserted text> 
-                $
-l.303     }
-           
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./Mathematical Logic for Computer Science.tex:303: Missing } inserted.
-<inserted text> 
-                }
-l.303     }
-           
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-./Mathematical Logic for Computer Science.tex:303: Missing { inserted.
-<inserted text> 
-                {
-l.303     }
-           
-I've put in what seems to be necessary to fix
-the current column of the current alignment.
-Try to go on, since this might almost work.
-
-./Mathematical Logic for Computer Science.tex:303: Missing $ inserted.
-<inserted text> 
-                $
-l.303     }
-           
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
+Missing character: There is no ; in font nullfont!
+Missing character: There is no ; in font nullfont!
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 303--303
-
- []
-
-
-
-Package cleveref Info: loaded `english' language definitions on input line 303.
+Package cleveref Info: loaded `english' language definitions on input line 362.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1860,15 +1811,20 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `english' language definitions on input line 303.
+Package cleveref Info: loaded `english' language definitions on input line 362.
 [10]
-Underfull \hbox (badness 10000) in paragraph at lines 303--303
+Underfull \hbox (badness 10000) in paragraph at lines 385--385
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 405--405
 
  []
 
 
 
-Package cleveref Info: loaded `english' language definitions on input line 305.
+Package cleveref Info: loaded `english' language definitions on input line 405.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1876,19 +1832,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `english' language definitions on input line 305.
+Package cleveref Info: loaded `english' language definitions on input line 405.
 [11]
-Chapter 2.
 
-
-Package cleveref Info: loaded `english' language definitions on input line 309.
-[12
-
-]
-Missing character: There is no ; in font nullfont!
-Missing character: There is no ; in font nullfont!
-
-
+Package cleveref Info: loaded `english' language definitions on input line 423.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1896,43 +1843,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-Package cleveref Info: loaded `english' language definitions on input line 438.
-[13]
-Underfull \hbox (badness 10000) in paragraph at lines 438--438
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 438--438
-
- []
-
-
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-Package cleveref Info: loaded `english' language definitions on input line 438.
-[14]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-Package cleveref Info: loaded `english' language definitions on input line 440.
-[15]
-
-Package cleveref Info: loaded `english' language definitions on input line 442.
-[16
-
-] (./Mathematical Logic for Computer Science.aux
+Package cleveref Info: loaded `english' language definitions on input line 423.
+[12] (./Mathematical Logic for Computer Science.aux
 Package cleveref Info: loaded `english' language definitions on input line 12.
 )
  ***********
@@ -1944,24 +1856,27 @@ L3 programming layer <2025-01-18>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `"Mathematical Logic for Computer Science".out' has not changed.
-(rerunfilecheck)             Checksum: 7CCAA70725A993A710BCA50B7C99351F;546.
+(rerunfilecheck)             Checksum: 1AC153AE079EA30D20AA27D62936F339;466.
 Package logreq Info: Writing requests to '"Mathematical Logic for Computer Science".run.xml'.
 \openout1 = `"Mathematical Logic for Computer Science.run.xml"'.
 
  ) 
 Here is how much of TeX's memory you used:
- 76187 strings out of 475119
- 1860053 string characters out of 5765717
- 3062290 words of memory out of 5000000
- 98154 multiletter control sequences out of 15000+600000
+ 76155 strings out of 475119
+ 1859459 string characters out of 5765717
+ 3062253 words of memory out of 5000000
+ 98133 multiletter control sequences out of 15000+600000
  588137 words of font info for 98 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  119i,21n,123p,1930b,2247s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+pdfTeX warning (dest): name{cite.0@koenig} has been referenced but does not exist, replaced by a fixed one
+
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc2074.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1440.pfb></usr/share/texmf-dist/fonts/type1/public/stmaryrd/stmary10.pfb>
-Output written on "Mathematical Logic for Computer Science.pdf" (18 pages, 419554 bytes).
+Output written on "Mathematical Logic for Computer Science.pdf" (14 pages, 404897 bytes).
 PDF statistics:
- 306 PDF objects out of 1000 (max. 8388607)
- 229 compressed objects within 3 object streams
- 55 named destinations out of 1000 (max. 500000)
- 64 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 276 PDF objects out of 1000 (max. 8388607)
+ 203 compressed objects within 3 object streams
+ 44 named destinations out of 1000 (max. 500000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
