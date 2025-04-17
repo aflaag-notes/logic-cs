@@ -260,8 +260,8 @@
             \item Consider the property $P_n$ := \curlyquotes{$\mathcal G$ is \tit{a cycle} of length $n$}. This property can be expressed by \tit{extending} $C_n$ as follows:
                 \begin{equation*}
                     \begin{split}
-                        V_n &:= \forall y \quad \bigvee_{1 \le j \le p}{(y = x_j)} \\
-                        E_n &:= \displaystyle \bigwedge_{1 \le i \le n}{\bigwedge_{\substack{1 \le j \le n : \\ j \neq i + 1}}{\lnot E(x_i, x_j)}} \\
+                        V_n &:= \forall y \quad \bigvee_{1 \le j \le n}{(y = x_j)} \\
+                        E_n &:= \displaystyle \bigwedge_{1 \le i \le n - 1}{\bigwedge_{\substack{1 \le j \le n : \\ j \neq i + 1}}{\lnot E(x_i, x_j)}} \land \bigwedge_{2 \le j \le n}{\lnot E(x_n, x_j)} \\
                         C'_n &:= \exists x_1 \ldots  \exists x_n \quad C_n \land V_n \land E_n
                     \end{split}
                 \end{equation*}
@@ -273,7 +273,7 @@
                     \item $C'_n$ describes our property $P_n$
                 \end{itemize}
 
-                Now, consider the property $P$ := \curlyquotes{$\mathcal G$ is \tit{a cycle}}, and in particular $\lnot P$ := \curlyquotes{$\mathcal G$ is not \tit{a cycle}}. We observe that we can build the following infinte theory $$T^{\lnot P} := \{\lnot C_n' \mid n \in \N \}$$ for which it is easy to see that $$\mathcal G \models \lnot P \iff \lnot P(\mathcal G) \ \mathrm{holds}$$ meaning that $\lnot P$ is expressible through $T^{\lnot P}$.
+                Now, consider the property $P$ := \curlyquotes{$\mathcal G$ is \tit{a cycle}}, and in particular $\lnot P$ := \curlyquotes{$\mathcal G$ is not \tit{a cycle}}. We observe that we can build the following infinte theory $$T^{\lnot P} := \{\lnot C_n' \mid n \in \N_{\ge 3} \}$$ for which it is easy to see that $$\mathcal G \models \lnot P \iff \lnot P(\mathcal G) \ \mathrm{holds}$$ meaning that $\lnot P$ is expressible through $T^{\lnot P}$.
 
                 \claim{
                     $T^{\lnot P} \in \FINSAT$.
@@ -377,11 +377,11 @@
             Then, no matter the choice of $s_2$, the Duplicator can always answer with a node $d_2$ that preserves the partial isomorphism, in fact:
 
             \begin{itemize}
-                \item if $s_2 \sim s_1$, it is guaranteed that there is a vertex $d_2$ in the other structure such that $d_2 \sim d_1$ because $\delta_{\mathcal G_1} = \delta_{\mathcal G_2} = 2$ --- and the same argument applies if $s_2 \sim d_1$ for finding a vertex $d_2 \sim s_1$
+                \item if $s_2 \sim s_1$, it is guaranteed that there is a vertex $d_2$ in the other structure such that $d_2 \sim d_1$ because $\delta(\mathcal G_1) = \delta(\mathcal G_2) = 2$ --- and the same argument applies if $s_2 \sim d_1$ for finding a vertex $d_2 \sim s_1$
                 \item if $s_2 \nsim s_1$, the strategy that we provided for the Duplicator guarantees that there exists at least one vertex $d_2$ in the other structure such that $d_2 \nsim d_1$ --- and the same argument applies if $s_2 \nsim d_1$ for finding a vertex $d_2 \nsim s_1$
             \end{itemize}
 
-            Thus, the Duplicator has a strategy to always win at least 2 rounds, therefore the Duplicator wins $G_2(\mathcal G_1, \mathcal G_2)$.
+            Thus, the Duplicator has a strategy to always win at least 2 rounds, therefore the Duplicator wins $G_2(\mathcal G_1, \mathcal G_2)$ by the Ehrenfeucht theorem.
         }
 
         Now that we proved that $\mathcal G_1 \equiv_2 \mathcal G_2$, is it true that they are also 3-equivalent? Unfortunately, the following claim proves that this is indeed false.
