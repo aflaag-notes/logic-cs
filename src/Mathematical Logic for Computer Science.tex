@@ -418,6 +418,89 @@
         In conclusion, we have that $\mathcal G_1 \equiv_2 \mathcal G_2$, and that $\mathcal G_1 \not\equiv_3 \mathcal G_2$.
     \end{proof}
 
+    \newpage
+
+    \tbf{Exercise 1.1} Let $(W, R)$ be a \tit{quasi-order}; that is, assume that $R$ is transitive and reflexive. Define the binary relation $\sim$ on $W$ by putting $s \sim t \iff R(s, t) \land R(t, s)$.
+
+    \begin{enumerate}[label=(\alph*)]
+        \item Show that $\sim$ is an equivalence relation.
+    \end{enumerate}
+
+    Let $[s]$ denote the equivalence class of $s$ under this relation, and define the following relation on the collection of equivalence classes: $[s] \le [t] \iff R(s, t)$.
+
+    \begin{enumerate}[label=(\alph*)]
+        \setcounter{enumi}{1}
+        \item Show that this relation is well-defined.
+        \item Show that $\le$ is a partial order.
+    \end{enumerate}
+
+    \solution{
+        We prove the statements as follows.
+
+        \begin{enumerate}[label=(\alph*)]
+            \item To prove that $\sim$ is an equivalence relation, it suffices to show that $\sim$ has the following properties:
+                \begin{itemize}
+                    \item \tit{reflexivity}: $\forall s \in W \quad R(s, s)$ by reflexivity or $R$, therefore $s \sim s$
+                    \item \tit{symmetry}: $\forall s, t \in W \quad s \sim t \iff R(s, t) \land R(t, s) \iff t \sim s$
+                    \item \tit{transitivity}: $\forall s, t, u \in W \quad \soe{l}{s \sim t \iff R(s, t) \land R(t, s) \\ t \sim u \iff R(t, u) \land R(u, t)}$ and by transitivity of $R$ we have that
+                        \begin{itemize}
+                            \item $R(s, t) \land R(t, u) \implies R(s, u)$
+                            \item $R(u, t) \land R(t, s) \implies R(u, s)$
+                        \end{itemize}
+
+                        and by definition $R(s, u) \land R(u, s) \iff s \sim u$
+                \end{itemize}
+
+            \item To prove that $\le$ is well-defined, we need to show that $$\forall s, t, s', t' \quad s \sim s' \land t \sim t' \implies ([s] \le [t] \iff [s'] \le [t'])$$ We observe that
+
+                \begin{itemize}
+                    \item $s \sim s' \iff R(s, s') \land R(s', s)$
+                    \item $t \sim t' \iff R(t, t') \land R(t', t)$
+                \end{itemize}
+
+                therefore, we have that
+                
+                \begin{itemize}
+                    \item $[s] \le [t] \iff R(s, t)$, and by transitivity of $R$ it holds that $R(s', s) \land R(s, t) \implies R(s', t)$; therefore, by transitivity of $R$ again we have that $R(s', t) \land R(t, t') \implies R(s', t') \iff [s'] \le [t']$
+                    \item $[s'] \le [t'] \iff R(s', t')$, and by transitivity of $R$ it holds that $R(s', t') \land R(t', t) \implies R(s', t)$; therefore, by transitivity of $R$ again we have that $R(s, s') \land R(s', t) \implies R(s, t) \iff [s] \le [t]$
+                \end{itemize}
+            \item To prove that $\le$ is a partial order, it suffices to show that $\le$ has the following properties:
+
+                \begin{itemize}
+                    \item \tit{reflexivity}: $\forall s \in W \quad R(s, s)$ by reflexivity of $R$, and $R(s, s) \iff [s] \le [s]$
+                    \item \tit{antisymmetry}: $\forall s, t \in W \quad \soe{l}{[s] \le [t] \iff R(s, t) \\ \left[t\right] \le [s] \iff R(t, s)} \implies R(s, t) \land R(t, s) \iff s \sim t \iff [s] = [t]$
+                    \item \tit{transitivity}: $\forall s, t, u \in W \quad \soe{l}{[s] \le [t] \iff R(s, t) \\  \left[t\right] \le [u] \iff R(t, u)} \implies R(s, t) \land R(t, u)\implies R(s, u)$ by transitivity of $R$, and $R(s, u) \iff [s] \le [u]$
+                \end{itemize}
+        \end{enumerate}
+    }
+
+    \tbf{Exercise 2.2} Let $\mathcal N = (\N, S_1, S_2)$ and $\mathcal B = (\mathbb B, R_1, R_2)$ be the following frames for a modal similarity type with two diamonds $\lozenge_1$, $\lozenge_2$. Here, $\N$ is the set of natural numbers and $\mathbb B$ is the set of strings of 0's and 1's, and the relations are defined by $$\soe{ll}{S_1(m, n) \iff n = m + 1 \\ S_2(m, n) \iff m > n \\ R_1(s, t) \iff t = s0 \lor t = s1 \\ R_2(s, t) \iff t \sqsubset s}$$ where $t \sqsubset s$ if and only if $t$ is a \tit{proper prefix} of $s$ --- i.e. $t$ is a prefix of $s$ different from both $\varepsilon$ and $s$ itself. Which of the following formulas are valid on $\mathcal N$ and $\mathcal B$, respectively?
+
+    \solution{
+        For all the subsequent propositions, we will assume that $\mathfrak M = (\N, \mathcal N, V)$ and $\mathfrak M' = (\mathbb B, \mathcal B, V)$ are two models.
+ 
+        \begin{enumerate}[label=(\alph*)]
+            \item 
+            \item
+            \item 
+            \item $p \rightarrow \lozenge_1 \Box_2 p$
+
+                \begin{itemize}
+                    \item By definition, for any $m \in \N$ it holds that
+                        \begin{equation*}
+                            \begin{split}
+                                \mathfrak M, m \models \lozenge_1 \Box_2 p &\iff \exists n \in \N \quad S_1(m, n) \land \mathfrak M, n \models \Box_2 p \\
+                                                                           &\iff \exists n \in \N \quad n = m + 1 \land (\forall k \in \N \quad S_2(n, k) \implies \mathfrak M, k \models p) \\
+                                                                           &\iff \exists n \in \N \quad n = m + 1 \land (\forall k \in \N \quad n > k \implies k \in V(p)) \\
+                                                                           &\iff \forall k \in \N \quad m + 1 > k \implies k \in V(p) \\
+                                                                           &\iff V(p) = \{k \in \N \mid m + 1 > k\}
+                            \end{split}
+                        \end{equation*}
+                        Now take $m = 1$, and suppose $V(p) = \{m\} = \{1\}$; then $m \in V(p) \iff \mathfrak M, m \models p$, however for instance $k = 0 \in \N$ is such that $m + 1 = 1 + 1 = 2 > 0 = k$ even though $0 \notin V(p)$, meaning that $\exists k \in \N \quad m + 1 > k \land k \notin V(p) \implies V(p) \neq \{k \in \N \mid m + 1 > k\} \iff \mathfrak M, m \not\models \lozenge_1 \Box_2 p$.
+                \end{itemize}
+        \end{enumerate}
+    }
+
     % \printbibliography % UNCOMMENT FOR BIBLIOGRAPHY
 
 \end{document}
