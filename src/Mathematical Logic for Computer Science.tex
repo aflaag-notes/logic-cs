@@ -496,7 +496,83 @@
                                                                            &\iff V(p) = \{k \in \N \mid m + 1 > k\}
                             \end{split}
                         \end{equation*}
-                        Now take $m = 1$, and suppose $V(p) = \{m\} = \{1\}$; then $m \in V(p) \iff \mathfrak M, m \models p$, however for instance $k = 0 \in \N$ is such that $m + 1 = 1 + 1 = 2 > 0 = k$ even though $0 \notin V(p)$, meaning that $\exists k \in \N \quad m + 1 > k \land k \notin V(p) \implies V(p) \neq \{k \in \N \mid m + 1 > k\} \iff \mathfrak M, m \not\models \lozenge_1 \Box_2 p$.
+                        Now take $m = 1 \in \N$, and suppose $V(p) = \{m\} = \{1\}$; then $m \in V(p) \iff \mathfrak M, m \models p$, however for instance $k = 0 \in \N$ is such that $m + 1 = 1 + 1 = 2 > 0 = k$ even though $k = 0 \notin V(p)$, therefore $\exists k \in \N \quad m + 1 > k \land k \notin V(p) \implies V(p) \neq \{k \in \N \mid m + 1 > k\} \iff \mathfrak M, m \not\models \lozenge_1 \Box_2 p$ which implies that the formula is not valid on $\mathcal N$
+                    \item By definition, for any $s \in \mathbb B$ it holds that
+                        \begin{equation*}
+                            \begin{split}
+                                \mathfrak M', s \models \lozenge_1 \Box_2 p &\iff \exists t \in \mathbb B \quad R_1(s, t) \land \mathfrak M', t \models \Box_2 p \\
+                                                                           &\iff \exists t \in \mathbb B \quad (t = s0 \lor t = s1) \land (\forall u \in \mathbb B \quad R_2(t, u) \implies \mathfrak M', u \models p) \\
+                                                                           &\iff \exists t \in \mathbb B \quad (t = s0 \lor t = s1) \land (\forall u \in \mathbb B \quad u \sqsubset t \implies u \in V(p))
+                            \end{split}
+                        \end{equation*}
+                        Now take $s = 00 \in \mathbb B$, and suppose $V(p) = \{s\} = \{00\}$; then $s \in V(p) \iff \mathfrak M', s \models p$, however if $t = s0$ or $t = s1$, there still is $u = 0$ such that $u = 0\sqsubset 00 = t$ even though $u = 0 \notin V(p)$, therefore $(t = s0 \lor t = s1) \implies (\exists u \in \mathbb B \quad u \sqsubset t \land u \notin V(p)) \iff \mathfrak M', s \not\models \lozenge_1 \Box_2 p$ which implies that the formula is not valid on $\mathcal B$.
+                \end{itemize}
+            \item $p \rightarrow \lozenge_2 \Box_1 p$
+                \begin{itemize}
+                    \item By definition, for any $m \in \N$ it holds that
+                        \begin{equation*}
+                            \begin{split}
+                                \mathfrak M, m \models \lozenge_2 \Box_1 p &\iff \exists n \in \N \quad S_2(m, n) \land \mathfrak M, n \models \Box_1 p \\
+                                                                           &\iff \exists n \in \N \quad m > n \land (\forall k \in \N \quad S_1(n, k) \implies \mathfrak M, k \models p) \\
+                                                                           &\iff \exists n \in \N \quad m > n \land (\forall k \in \N \quad k = n + 1 \implies k \in V(p)) \\
+                                                                           &\iff \exists n \in \N \quad m > n \land n + 1 \in V(p)
+                            \end{split}
+                        \end{equation*}
+                        Now take $m = 0 \in \N$, and suppose $V(p) = \{m\} = \{0\}$; then $m \in V(p) \iff \mathfrak M, m \models p$, however there is no $n \in \N$ such that $m = 0 > n$, therefore $\nexists n \in \N \quad m > n \land n + 1 \in V(p) \iff \mathfrak M, m \not\models \lozenge_2 \Box_1 p$ which implies that the formula is not valid on $\mathcal N$.
+                    \item By definition, for any $s \in \mathbb B$ it holds that
+                        \begin{equation*}
+                            \begin{split}
+                                \mathfrak M', s \models \lozenge_2 \Box_1 p &\iff \exists t \in \mathbb B \quad R_2(s, t) \land \mathfrak M', t \models \Box_1 p \\
+                                                                            &\iff \exists t \in \mathbb B \quad t \sqsubset s \land (\forall u \in \mathbb B \quad R_1(t, u) \implies \mathfrak M', u \models p) \\
+                                                                            &\iff \exists t \in \mathbb B \quad t \sqsubset s \land (\forall u \in \mathbb B \quad (u = t0 \lor u = t1) \implies u \in V(p)) \\
+                                                                            &\iff \exists t \in \mathbb B \quad t \sqsubset s \land (t0 \in V(p) \lor t1 \in V(p))
+                            \end{split}
+                        \end{equation*}
+                        Now take $s = \varepsilon \in \mathbb B$, and suppose $V(p) = \{s\} = \{\varepsilon\}$; then $s \in V(p) \iff \mathfrak M', s \models p$, however there is no $t \in \mathbb B$ such that $t \sqsubset s$, therefore $\nexists t \in \mathbb B \quad t \sqsubset s \land (t0 \in V(p) \lor t1 \in V(p)) \iff \mathfrak M', s \not\models \lozenge_2 \Box_1 p$ which implies that the formula is not valid on $\mathcal B$.
+                \end{itemize}
+            \item $p \rightarrow \Box_1 \lozenge_2 p$
+                \begin{itemize}
+                    \item By definition, for any $m \in \N$ it holds that
+                        \begin{equation*}
+                            \begin{split}
+                                \mathfrak M, m \models \Box_1 \lozenge_2 p &\iff \forall n \in \N \quad S_1(m, n) \implies \mathfrak M, n \models \lozenge_2 p \\
+                                                                         &\iff \forall n \in \N \quad n = m + 1 \implies (\exists k \in \N \quad S_2(n, k) \land \mathfrak M, k \models p) \\
+                                                                         &\iff \forall n \in \N \quad n = m + 1 \implies (\exists k \in \N \quad n > k \land k \in V(p)) \\
+                                                                         &\iff \exists k \in \N \quad m + 1 > k \land k \in V(p)
+                            \end{split}
+                        \end{equation*}
+                        Now suppose $m \in V(p) \iff \mathfrak M, m \models p$; we observe that for every $m \in \N$ it holds that $m + 1 > m$, therefore $m + 1 > m \land m \in V(p) \iff \exists k \in \N \quad m + 1 > k \land k \in V(p) \iff \mathfrak M, m \models \Box_1 \lozenge_2 p$ which implies that the formula is valid on $\mathcal N$.
+                    \item By definition, for any $s \in \mathbb B$ it holds that
+                        \begin{equation*}
+                            \begin{split}
+                                \mathfrak M', s \models \Box_1 \lozenge_2 p &\iff \forall t \in \mathbb B \quad R_1(s, t) \implies \mathfrak M' t \models \lozenge_2 p \\
+                                                                            &\iff \forall t \in \mathbb B \quad (t = s0 \lor t = s1) \implies (\exists u \in \mathbb B \quad R_2(t, u) \land \mathfrak M', u \models p) \\
+                                                                            &\iff \forall t \in \mathbb B \quad (t = s0 \lor t = s1) \implies (\exists u \in \mathbb B \quad u \sqsubset t \land u \in V(p))
+                            \end{split}
+                        \end{equation*}
+                        Now take $s = \varepsilon$, and suppose $V(p) = \{s\} = \{\varepsilon\}$; then $s \in V(p) \iff \mathfrak M, s \models p$, however if $t = s0 = 0$ or $t = s1 = 1$ there is no $u \in \mathbb B$ such that $u \sqsubset t$, therefore $(t = s0 \lor t = s1) \implies \nexists u \in \mathbb B \quad u \sqsubset t \land u \in V(p) \iff \mathfrak M', s \not\models \Box_1 \lozenge_2 p$, which implies that the formula is not valid on $\mathcal B$.
+                \end{itemize}
+            \item $p \rightarrow \Box_2 \lozenge_1 p$
+                \begin{itemize}
+                    \item By definition, for any $m \in \N$ it holds that
+                        \begin{equation*}
+                            \begin{split}
+                                \mathfrak M , m \models \Box_2 \lozenge_1 p &\iff \forall n \in \N \quad S_2(m, n) \implies \mathfrak M, n \models \lozenge_2 p \\
+                                                                            &\iff \forall n \in \N \quad m > n \implies (\exists k \in \N \quad S_1(n, k) \land \mathfrak M, k \models p) \\
+                                                                            &\iff \forall n \in \N \quad m > n \implies (\exists k \in \N \quad k = n + 1 \land k \in V(p)) \\
+                                                                            &\iff \forall n \in \N \quad m > n \implies n + 1 \in V(p)
+                            \end{split}
+                        \end{equation*}
+                        Now take $m = 2 \in \N$, and suppose $V(p) = \{m\} = \{2\}$; then $m \in V(p) \iff \mathfrak M, m \models p$, however for instance $n = 0 \in \N$ is such that $m = 2 > 0 = n$ and $n + 1 = 0 + 1 = 1 \notin V(p)$, therefore $\exists n \in \N \quad m > n \land n + 1 \notin V(p) \iff \mathfrak M , m \not\models \Box_2 \lozenge_1 p$, which implies that the formula is not valid on $\mathcal N$.
+                    \item By definition, for any $s \in \mathbb B$ it holds that
+                        \begin{equation*}
+                            \begin{split}
+                                \mathfrak M', s \models \Box_2 \lozenge_1 p &\iff \forall t \in \mathbb B \quad R_2(s, t) \implies \mathfrak M', t \models \lozenge_2 p \\
+                                                                            &\iff \forall s \in \mathbb B \quad t \sqsubset s \implies (\exists u \in \mathbb B \quad R_1(t, u) \land \mathfrak M', u \models p) \\
+                                                                            &\iff \forall s \in \mathbb B \quad t \sqsubset s \implies (\exists u \in \mathbb B \quad (u = t0 \lor u = t1) \implies u \in V(p))
+                            \end{split}
+                        \end{equation*}
+                        Now take $s = 000 \in \mathbb B$, and suppose $V(p) = \{s\} = \{000\}$; then $s \in V(p) \iff \mathfrak M', s \models p$, however for instance $t = 0 \in \mathbb B$ is such that $t = 0 \sqsubset 000 = s$ even though there is no $u = t0 = 00$ or $u = t1 = 01$ such that $u \in V(p)$, therefore $\exists t \in \mathbb B \quad t \sqsubset u \land (\nexists u \in \mathbb \quad (u = t0 \lor u = t1) \land u \in V(p)) \iff \mathfrak M', s \not\models \Box_2 \lozenge_1 p$ which implies that the formula is not valid on $\mathcal B$.
                 \end{itemize}
         \end{enumerate}
     }
