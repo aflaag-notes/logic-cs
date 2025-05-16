@@ -477,10 +477,50 @@
     \tbf{Exercise 2.2} Let $\mathcal N = (\N, S_1, S_2)$ and $\mathcal B = (\mathbb B, R_1, R_2)$ be the following frames for a modal similarity type with two diamonds $\lozenge_1$, $\lozenge_2$. Here, $\N$ is the set of natural numbers and $\mathbb B$ is the set of strings of 0's and 1's, and the relations are defined by $$\soe{ll}{S_1(m, n) \iff n = m + 1 \\ S_2(m, n) \iff m > n \\ R_1(s, t) \iff t = s0 \lor t = s1 \\ R_2(s, t) \iff t \sqsubset s}$$ where $t \sqsubset s$ if and only if $t$ is a \tit{proper prefix} of $s$ --- i.e. $t$ is a prefix of $s$ different from both $\varepsilon$ and $s$ itself. Which of the following formulas are valid on $\mathcal N$ and $\mathcal B$, respectively?
 
     \solution{
-        For all the subsequent propositions, we will assume that $\mathfrak M = (\N, \mathcal N, V)$ and $\mathfrak M' = (\mathbb B, \mathcal B, V)$ are two models.
+        First, consider the following extension to the $\land$ operator on the inductive definition of satisfiability of formulas.
+
+        \claim{
+            Given a model $\mathfrak M = (W, R, V)$, and a state $w \in W$, it holds that $\mathfrak M, w \models \phi \land \psi \iff \mathfrak M , w \models \phi \land \mathfrak M, w \models \psi$.
+        }{
+            By using De Morgan's law, we have that
+            \begin{equation*}
+                \begin{split}
+                    \mathfrak M, w \models \phi \land \psi = \lnot (\lnot \phi \lor \lnot \psi) &\iff \lnot \mathfrak M, w \models \lnot \phi \lor \lnot \psi \\
+                                                                                                &\iff \lnot (\mathfrak M , w \models \lnot \phi \lor \mathfrak M, w \models \lnot \psi) \\
+                                                                                                &\iff \lnot (\lnot \mathfrak M, w \models \phi \lor \lnot \mathfrak M, w \models \psi) \\
+                                                                                                &\iff \mathfrak M, w \models \phi \land \mathfrak M, w \models \psi
+                \end{split}
+            \end{equation*}
+        }
+
+        For all the following propositions, we will assume that $\mathfrak M = (\N, \mathcal N, V)$ and $\mathfrak M' = (\mathbb B, \mathcal B, V)$ are two models.
  
         \begin{enumerate}[label=(\alph*)]
-            \item 
+            \item $(\lozenge_1 p \land \lozenge_1 q) \rightarrow \lozenge_1 (p \land q)$
+
+                \begin{itemize}
+                    \item By the claim, for any $m \in \N$ it holds that
+                        \begin{equation*}
+                            \begin{split}
+                                \mathfrak M, m \models \lozenge_1 p \land \lozenge_1 q &\iff \mathfrak M, m \models \lozenge_1 p \land \mathfrak M, m \models \lozenge_1 q \\
+                                                                                       &\iff \soe{l}{\exists n_p \in \N \quad S_1(m, n_p) \land \mathfrak M, n_p \models p \\ \exists n_q \in \N \quad S_1(m, n_q) \land \mathfrak M, n_q \models q} \\
+                                                                                       &\iff \soe{l}{\exists n_p \in \N \quad n_p = m + 1 \land n_p \in V(p) \\ \exists n_q \in \N \quad n_q = m + 1 \land n_q \in V(p)} \\
+                                                                                       &\iff m + 1 \in V(p) \land m + 1 \in V(q) \\
+                                                                                       &\iff m + 1 \in V(p) \cap V(q)
+                            \end{split}
+                        \end{equation*}
+                        and again, by the claim we have that
+                        \begin{equation*}
+                            \begin{split}
+                                \mathfrak M, m \models \lozenge_1 ( p \land q) &\iff \exists n \in \N \quad S_1 (m , n) \land \mathfrak M, n \models p \land q \\
+                                                                               &\iff \exists n \in \N \quad n = m + 1 \land (\mathfrak M, n \models p \land \mathfrak M, n \models q) \\
+                                                                               &\iff \exists n \in \N \quad n = m + 1 \land (n \in V(p) \land n \in V(q)) \\
+                                                                               &\iff \exists n \in \N \quad n = m + 1 \land n \in V(p) \cap V(q) \\
+                                                                               &\iff m + 1 \in V(p) \cap V(q)
+                            \end{split}
+                        \end{equation*}
+                        from which we conclude that $$\mathfrak M, m \models \lozenge_1 p \land \lozenge_1 q \iff m + 1 \in V(p) \cap V(q) \iff \mathfrak M, m \models \lozenge_1(p \land q)$$ implying that the formula is valid on $\mathcal N$.
+                \end{itemize}
             \item
             \item 
             \item $p \rightarrow \lozenge_1 \Box_2 p$
