@@ -474,7 +474,7 @@
         \end{enumerate}
     }
 
-    \tbf{Exercise 2.2} Let $\mathcal N = (\N, S_1, S_2)$ and $\mathcal B = (\mathbb B, R_1, R_2)$ be the following frames for a modal similarity type with two diamonds $\lozenge_1$, $\lozenge_2$. Here, $\N$ is the set of natural numbers and $\mathbb B$ is the set of strings of 0's and 1's, and the relations are defined by $$\soe{ll}{S_1(m, n) \iff n = m + 1 \\ S_2(m, n) \iff m > n \\ R_1(s, t) \iff t = s0 \lor t = s1 \\ R_2(s, t) \iff t \sqsubset s}$$ where $t \sqsubset s$ if and only if $t$ is a \tit{proper prefix} of $s$ --- i.e. $t$ is a prefix of $s$ different from both $\varepsilon$ and $s$ itself. Which of the following formulas are valid on $\mathcal N$ and $\mathcal B$, respectively?
+    \tbf{Exercise 2.2} Let $\mathcal N = (\N, S_1, S_2)$ and $\mathcal B = (\mathbb B, R_1, R_2)$ be the following frames for a modal similarity type with two diamonds $\lozenge_1$, $\lozenge_2$. Here, $\N$ is the set of natural numbers and $\mathbb B$ is the set of strings of 0's and 1's, and the relations are defined by $$\soe{ll}{S_1(m, n) \iff n = m + 1 \\ S_2(m, n) \iff m > n \\ R_1(s, t) \iff t = s0 \lor t = s1 \\ R_2(s, t) \iff t \sqsubset s}$$ where $t \sqsubset s$ if and only if $t$ is a \tit{proper prefix} of $s$ --- i.e. $t$ is a prefix of $s$ \underline{different from both} \underline{$\varepsilon$ and $s$ itself}. Which of the following formulas are valid on $\mathcal N$ and $\mathcal B$, respectively?
 
     \begin{enumerate}[label=(\alph*)]
         \item $(\lozenge_1 p \land \lozenge_2 q) \rightarrow \lozenge_1 (p \land q)$
@@ -592,8 +592,82 @@
                         Now take $s = 000$, consider $t_p = 0$ and $t_q = 0$, and suppose that $V(p) = \{t_p\} = \{0\}$ and $V(q) = \{t_q\} = \{00\}$; we observe that $t_p = 0 \sqsubset 000 = s$ and $t_q = 00 \sqsubset 000 = s$, therefore $\soe{l}{\exists t_p \in \mathbb B \quad t_p \sqsubset s \land t_p \in V(p) \\ \exists t_q \in \mathbb B \quad t_q \sqsubset s \land t_q \in V(q)} \iff \mathfrak M', s \models \lozenge_2 p \land \lozenge_2 q$ although $V(p) \cap V(q) = \{t_p\} \cap \{t_q\} = \{0\} \cap \{00\} = \varnothing \implies \nexists t \in \mathbb B \quad t \sqsubset s \land t \in V(p) \cap V(q) \iff \mathfrak M', s \not\models \lozenge_2 (p \land q)$, implying that the formula is not valid on $\mathcal B$.
                 \end{itemize}
             \item $(\lozenge_1 p \land \lozenge_1 q \land \lozenge_1 r) \rightarrow (\lozenge_1 (p \land q) \lor \lozenge_1 (p \land r) \lor \lozenge_1 (q \land r))$
+                \begin{itemize}
+                    \item By the claim, for any $m \in \N$ it holds that
+                        \begin{equation*}
+                            \begin{split}
+                                \mathfrak M, m \models \lozenge_1 p \land \lozenge_1 q \land \lozenge_1 r &\iff \mathfrak M, m \models \lozenge_1 p \land \mathfrak M, m \models \lozenge_1 q \land \mathfrak M, m \models \lozenge_1 r \\
+                                                                                                          &\iff \soe{l}{\exists n_p \in \N \quad S_1(m, n_p) \land \mathfrak M, n_p \models \lozenge_1 p \\ \exists n_q \in \N \quad S_1(m, n_q) \land \mathfrak M, n_q \models \lozenge_1 q \\ \exists n_r \in \N \quad S_1(m, n_r) \land \mathfrak M, n_r \models \lozenge_1 r} \\
+                                                                                                          &\iff \soe{l}{\exists n_p \in \N \quad n_p = m + 1 \land n_p \in V(p) \\ \exists n_q \in \N \quad n_q = m + 1 \land n_q \in V(q) \\ \exists n_r \in \N \quad n_r = m + 1 \land n_r \in V(r)} \\
+                                                                                                          &\iff \soe{l}{m + 1 \in V(p) \\ m + 1 \in V(q) \\ m + 1 \in V(r)} \\
+                                                                                                          &\iff m + 1 \in V(p) \cap V(q) \cap V(r)
+                            \end{split}
+                        \end{equation*}
+                        and again, by the claim we have that
+                        % \begin{equation*}
+                        \centeredeq{1}{$
+                            \begin{alignedat}{2}
+                                \mathfrak M , m \models \lozenge_1 (p \land q) \lor \lozenge_1 (p \land r) \lor \lozenge_1 (q \land r) &\iff &&(\mathfrak M, m \models \lozenge_1 (p \land q)) \\
+                                                                                                                                       &     &&\lor (\mathfrak M, m \models \lozenge_1 (p \land r)) \\
+                                                                                                                                       &     &&\lor (\mathfrak M, m \models \lozenge_1 (q \land r)) \\
+                                                                                                                                       &\iff &&(\exists n_1 \in \N \quad S_1(m, n_1) \land \mathfrak M, n_1 \models p \land q) \\
+                                                                                                                                       &     &&\lor (\exists n_2 \in \N \quad S_1(m, n_2) \land \mathfrak M, n_2 \models p \land r) \\
+                                                                                                                                       &     &&\lor (\exists n_3 \in \N \quad S_1(m, n_3) \land \mathfrak M, n_3 \models q \land r) \\
+                                                                                                                                       &\iff &&(\exists n_1 \in \N \quad n_1 = m + 1 \land n_1 \in V(p) \cap V(q)) \\
+                                                                                                                                       &     &&\lor (\exists n_2 \in \N \quad n_2 = m + 1 \land n_2 \in V(p) \cap V(r)) \\
+                                                                                                                                       &     &&\lor (\exists n_3 \in \N \quad n_3 = m + 1 \land n_3 \in V(q) \cap V(r)) \\
+                                                                                                                                       &\iff &&(m + 1 \in V(p) \cap V(q)) \\
+                                                                                                                                       &     &&\lor (m + 1 \in V(p) \cap V(r)) \\
+                                                                                                                                       &     &&\lor (m + 1 \in V(q) \cap V(r))
+                            \end{alignedat}
+                        $}
+                        % \end{equation*}
+                        Hence, we see that
+                        \begin{equation*}
+                            \begin{split}
+                                \mathfrak M, m \models \lozenge_1 p \land \lozenge_1 q \land \lozenge_1 r &\iff m + 1 \in V(p) \cap V(q) \cap V(r) \\
+                                                                                                          &\implies \soe{l}{m + 1 \in V(p) \cap V(q) \\ m + 1 \in V(p) \cap V(r) \\ m + 1 \in V(q) \cap V(r)} \\
+                                                                                                          &\iff \mathfrak M, m \models \lozenge_1(p \land q) \lor \lozenge_1 (p \land r) \lor \lozenge_1 (q \land r)
+                            \end{split}
+                        \end{equation*}
+                        implying that the formula is valid in $\mathcal N$.
+                    \item By the claim, for any $s \in \mathbb B$ it holds that
+                        \begin{equation*}
+                            \begin{split}
+                                \mathfrak M', s \models \lozenge_1 p \land \lozenge_1 q \land \lozenge_1 r &\iff \mathfrak M', s \models \lozenge_1 p \land \mathfrak M', s \models \lozenge_1 q \land \mathfrak M', s \models \lozenge_1 r \\
+                                                                                                           &\iff \soe{l}{\exists t_p \in \mathbb B \quad R_1(s, t_p) \land \mathfrak M', t_p \models p \\ \exists t_q \in \mathbb B \quad R_1(s, t_q) \land \mathfrak M', t_q \models q \\ \exists t_r \in \mathbb B \quad R_1(s, t_r) \land \mathfrak M', t_r \models r} \\
+                                                                                                           &\iff \soe{l}{\exists t_p \in \mathbb B \quad (t_p = s0 \lor t_p = s1) \land t_p \in V(p) \\ \exists t_p \in \mathbb B \quad (t_q = s0 \lor t_q = s1) \land t_q \in V(q) \\ \exists t_r \in \mathbb B \quad (t_r = s0 \lor t_r = s1) \land t_r \in V(r)} \\
+                                                                                                           &\iff \soe{l}{\{s0, s1\} \cap V(p) \neq \varnothing \\ \{s0, s1\} \cap V(q) \neq \varnothing \\ \{s0, s1\} \cap V(r) \neq \varnothing}
+                            \end{split}
+                        \end{equation*}
+                        and again, by the claim we have that
+                        \centeredeq{1}{$
+                            \begin{alignedat}{2}
+                                \mathfrak M', s \models \lozenge_1 (p \land q) \lor \lozenge_1 (p \land r) \lor \lozenge_1 (q \land r) &\iff &&(\mathfrak M', s \models \lozenge_1(p \land q)) \\
+                                                                                                                                       &     &&\lor (\mathfrak M', s \models \lozenge_1 (p \land r)) \\
+                                                                                                                                       &     &&\lor (\mathfrak M', s \models \lozenge_1 (q \land r)) \\
+                                                                                                                                       &\iff &&(\exists t_1 \in \mathbb B \quad R_1(s, t_1) \land \mathfrak M', t_1 \models p \land q) \\
+                                                                                                                                       &     &&\lor (\exists t_2 \in \mathbb B \quad R_1(s, t_2) \land \mathfrak M', t_2 \models p \land r) \\
+                                                                                                                                       &     &&\lor (\exists t_3 \in \mathbb B \quad R_1(s, t_3) \land \mathfrak M', t_3 \models q \land r) \\
+                                                                                                                                       &\iff &&(\exists t_1 \in \mathbb B \quad (t_1 = s0 \lor t_1 = s1) \land t_1 \in V(p) \cap V(q)) \\
+                                                                                                                                       &     &&\lor (\exists t_2 \in \mathbb B \quad (t_2 = s0 \lor t_2 = s1) \land t_2 \in V(p) \cap V(r)) \\
+                                                                                                                                       &     &&\lor (\exists t_3 \in \mathbb B \quad (t_3 = s0 \lor t_3 = s1) \land t_3 \in V(q) \cap V(r)) \\
+                                                                                                                                       &\iff &&\{s0, s1\} \cap V(p) \cap V(q) \neq \varnothing \\
+                                                                                                                                       &     &&\lor \{s0, s1\} \cap V(p) \cap V(q) \neq \varnothing \\
+                                                                                                                                       &     &&\lor \{s0, s1\} \cap V(q) \cap V(r) \neq \varnothing
+                            \end{alignedat}
+                        $}
+                        Now suppose that $\mathfrak M', s \models \lozenge_1 p \land \lozenge_1 q \land \lozenge_1 r$, which happens if and only if $\soe{l}{\{s0, s1\} \cap V(p) \neq \varnothing \\ \{s0, s1\} \cap V(q) \neq \varnothing \\ \{s0, s1\} \cap V(r) \neq \varnothing}$ as proved previously; by the pigeonhole principle, since there are 2 strings in $\{s0, s1\}$ and we have 3 sets $V(p)$, $V(q)$ and $V(r)$, there must be at least one string $x \in \{s0, s1\}$ such that $x \in V(a) \cap V(b)$, where $a, b \in \{p, q, r\}$ distinct. Without loss of generality, suppose that $x = s0$ and $a = p$ and $b = q$; then we have that
+                        \begin{equation*}
+                            \begin{split}
+                                x = s0 \in V(p) \cap V(q) &\implies x \in \{s0, s1\} \cap V(p) \cap V(q) \\
+                                                          &\implies \{s0, s1\} \cap V(p) \cap V(q) \neq \varnothing \\
+                                                          &\implies \mathfrak M', s \models \lozenge_1 (p \land q) \lor \lozenge_1 (p \land r) \lor \lozenge_1(q \land r)
+                            \end{split}
+                        \end{equation*}
+                        implying that the formula is valid on $\mathcal B$.
+                \end{itemize}
             \item $p \rightarrow \lozenge_1 \Box_2 p$
-
                 \begin{itemize}
                     \item By definition, for any $m \in \N$ it holds that
                         \begin{equation*}
