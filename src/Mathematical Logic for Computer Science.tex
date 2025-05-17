@@ -476,6 +476,16 @@
 
     \tbf{Exercise 2.2} Let $\mathcal N = (\N, S_1, S_2)$ and $\mathcal B = (\mathbb B, R_1, R_2)$ be the following frames for a modal similarity type with two diamonds $\lozenge_1$, $\lozenge_2$. Here, $\N$ is the set of natural numbers and $\mathbb B$ is the set of strings of 0's and 1's, and the relations are defined by $$\soe{ll}{S_1(m, n) \iff n = m + 1 \\ S_2(m, n) \iff m > n \\ R_1(s, t) \iff t = s0 \lor t = s1 \\ R_2(s, t) \iff t \sqsubset s}$$ where $t \sqsubset s$ if and only if $t$ is a \tit{proper prefix} of $s$ --- i.e. $t$ is a prefix of $s$ different from both $\varepsilon$ and $s$ itself. Which of the following formulas are valid on $\mathcal N$ and $\mathcal B$, respectively?
 
+    \begin{enumerate}[label=(\alph*)]
+        \item $(\lozenge_1 p \land \lozenge_2 q) \rightarrow \lozenge_1 (p \land q)$
+        \item $(\lozenge_2 p \land \lozenge_2 q) \rightarrow \lozenge_2 (p \land q)$
+        \item $(\lozenge_1 p \land \lozenge_1 q \land \lozenge_1 r) \rightarrow (\lozenge_1 (p \land q) \lor \lozenge_1(p \land r) \lor \lozenge_1 (q \land r))$
+        \item $p \rightarrow \lozenge_1 \Box_1 p$
+        \item $p \rightarrow \lozenge_2 \Box_1 p$
+        \item $p \rightarrow \Box_1 \lozenge_2 p$
+        \item $p \rightarrow \Box_2 \lozenge_1 p$
+    \end{enumerate}
+
     \solution{
         First, consider the following extension to the $\land$ operator on the inductive definition of satisfiability of formulas.
 
@@ -520,9 +530,68 @@
                             \end{split}
                         \end{equation*}
                         from which we conclude that $$\mathfrak M, m \models \lozenge_1 p \land \lozenge_1 q \iff m + 1 \in V(p) \cap V(q) \iff \mathfrak M, m \models \lozenge_1(p \land q)$$ implying that the formula is valid on $\mathcal N$.
+                    \item By the claim, for any $s \in \mathbb B$ it holds that
+                        \begin{equation*}
+                            \begin{split}
+                                \mathfrak M', s \models \lozenge_1 p \land \lozenge_1 q &\iff \mathfrak M', s \models \lozenge_1 p \land \mathfrak M', s \models \lozenge_1 q \\
+                                                                                        &\iff \soe{l}{\exists t_p \in \mathbb B \quad R_1(s, t_p) \land \mathfrak M', t_p \models p \\ \exists t_q \in \mathbb B \quad R_1(s, t_q) \land \mathfrak M', t_q \models q} \\
+                                                                                        &\iff \soe{l}{\exists t_p \in \mathbb B \quad (t_p = s0 \lor t_p = s1) \land t_p \in V(p) \\ \exists t_q \in \mathbb B \quad (t_q = s0 \lor t_q = s1) \land t_q \in V(q)} \\
+                                                                                        &\iff \soe{l}{s0 \in V(p) \lor s1 \in V(p) \\ s0 \in V(q) \lor s1 \in V(q)} \\
+                                                                                        &\iff \{s0, s1\} \cap V(p) \neq \varnothing \land \{s0, s1\} \cap V(q) \neq \varnothing
+                            \end{split}
+                        \end{equation*}
+                        and again, by the claim we have that
+                        \begin{equation*}
+                            \begin{split}
+                                \mathfrak M', s \models \lozenge_1(p \land q) \models &\iff \exists t \in \mathbb B \quad R_1(s, t) \land \mathfrak M', t \models p \land q \\
+                                                                                      &\iff \exists t \in \mathbb B \quad (t = s0 \lor t = s1) \land (\mathfrak M', t \models p \land \mathfrak M', t \models q) \\
+                                                                                      &\iff \exists t \in \mathbb B \quad (t = s0 \lor t = s1) \land (t \in V(p) \land t \in V(q)) \\
+                                                                                      &\iff \exists t \in \mathbb B \quad (t = s0 \lor t = s1) \land t \in V(p) \cap V(q) \\
+                                                                                      &\iff s0 \in V(p) \cap V(q) \lor s1 \in V(p) \cap V(q) \\
+                                                                                      &\iff \{s0, s1\} \cap V(p) \cap V(q) \neq \varnothing
+                            \end{split}
+                        \end{equation*}
+                        Now suppose $V(p) = \{s0\}$ and $V(q) = \{s1\}$; then we have that $\{s0, s1\} \cap V(p) = \{s0\} \neq \varnothing \land \{s0, s1\} \cap V(q) = \{s1\} \neq \varnothing \iff \mathfrak M', s \models \lozenge_1 p \land \lozenge_1 q$ although $\{s0, s1\} \cap V(p) \cap V(q) = \{s0, s1\} \cap \varnothing = \varnothing \iff \mathfrak M', s \not\models \lozenge_1(p \land q)$, implying that the formula is not valid on $\mathcal B$.
                 \end{itemize}
-            \item
-            \item 
+            \item $(\lozenge_2 p \land \lozenge_2 q) \rightarrow \lozenge_2 (p \land q)$
+                \begin{itemize}
+                    \item By definition, for any $m \in \N$ it holds that
+                        \begin{equation*}
+                            \begin{split}
+                                \mathfrak M, m \models \lozenge_2 p \land \lozenge_2 q &\iff \mathfrak M, m \models \lozenge_2 p \land \mathfrak M, m \models \lozenge_2 q \\
+                                                                                       &\iff \soe{l}{\exists n_p \in \N \quad S_2(m, n_p) \land \mathfrak M, n_p \models p \\ \exists n_q \in \N \quad S_2(m, n_q) \land \mathfrak M, n_q \models q} \\
+                                                                                       &\iff \soe{l}{\exists n_p \in \N \quad m > n_p \land n_p \in V(p) \\ \exists n_q \in \N \quad m > n_q \land n_q \in V(q)}
+                            \end{split}
+                        \end{equation*}
+                        and again, by the claim we have that
+                        \begin{equation*}
+                            \begin{split}
+                                \mathfrak M, m \models \lozenge_2 (p \land q) &\iff \exists n \in \N \quad S_2(m, n) \land \mathfrak M, n \models p \land q \\
+                                                                             &\iff \exists n \in \N \quad m > n \land (\mathfrak M, n \models P \land \mathfrak M , n \models q) \\
+                                                                             &\iff \exists n \in \N \quad m > n \land (n \in V(p) \land n \in V(q)) \\
+                                                                             &\iff \exists n \in \N \quad m > n \land n \in V(p) \cap n \in V(q)
+                            \end{split}
+                        \end{equation*}
+                        Now take an $n \ge 2$, and consider $n_p, n_q \in \N$ such that $n_p \neq n_q \land n > n_p, n_q$, and suppose that $V(p) = \{n_p\}$ and $V(q) = \{n_q\}$; then we have that $\soe{l}{\exists n_p \in \N \quad n > n_p \land n_p \in V(p) \\ \exists n_q \in \N \quad n > n_q \land n_q \in V(q)} \iff \mathfrak M, m \models \lozenge_2 p \land \lozenge_2 q$ although $n_p \neq n_q \implies V(p) \cap V(q) = \varnothing \implies \nexists n \in \N \quad m > n \land n \in V(p) \cap V(q) \iff \mathfrak M, m \not\models \lozenge_2(p \land q)$, implying that the formula is not valid on $\mathcal N$.
+                    \item By the claim, for any $s \in \mathbb B$ it holds that
+                        \begin{equation*}
+                            \begin{split}
+                                \mathfrak M', s \models \lozenge_2 p \land \lozenge_2 q &\iff \mathfrak M', s \models \lozenge_2 p \land \mathfrak M', s \models \lozenge_2 q \\
+                                                                                        &\iff \soe{l}{\exists t_p \in \mathbb B \quad R_2(s, t_p) \land \mathfrak M', t_p \models p \\ \exists t_q \in \mathbb B \quad R_2(s, t_q) \land \mathfrak M', t_q \models q} \\
+                                                                                        &\iff \soe{l}{\exists t_p \in \mathbb B \quad t_p \sqsubset s \land t_p \in V(p) \\ \exists t_q \in \mathbb B \quad t_q \sqsubset s \land t_q \in V(p)}
+                            \end{split}
+                        \end{equation*}
+                        and again, by the claim we have that
+                        \begin{equation*}
+                            \begin{split}
+                                \mathfrak M's \models \lozenge_2(p \land q) &\iff \exists t \in \mathbb B \quad t \sqsubset s \land (\mathfrak M', t \models p \land \mathfrak M', t \models q) \\
+                                                                            &\iff \exists t \in \mathbb B \quad t \sqsubset s \land (t \in V(p) \land t \in V(q)) \\
+                                                                            &\iff \exists t \in \mathbb B \quad t \sqsubset s \land t \in V(p) \cap V(q)
+                            \end{split}
+                        \end{equation*}
+                        Now take $s = 000$, consider $t_p = 0$ and $t_q = 0$, and suppose that $V(p) = \{t_p\} = \{0\}$ and $V(q) = \{t_q\} = \{00\}$; we observe that $t_p = 0 \sqsubset 000 = s$ and $t_q = 00 \sqsubset 000 = s$, therefore $\soe{l}{\exists t_p \in \mathbb B \quad t_p \sqsubset s \land t_p \in V(p) \\ \exists t_q \in \mathbb B \quad t_q \sqsubset s \land t_q \in V(q)} \iff \mathfrak M', s \models \lozenge_2 p \land \lozenge_2 q$ although $V(p) \cap V(q) = \{t_p\} \cap \{t_q\} = \{0\} \cap \{00\} = \varnothing \implies \nexists t \in \mathbb B \quad t \sqsubset s \land t \in V(p) \cap V(q) \iff \mathfrak M', s \not\models \lozenge_2 (p \land q)$, implying that the formula is not valid on $\mathcal B$.
+                \end{itemize}
+            \item $(\lozenge_1 p \land \lozenge_1 q \land \lozenge_1 r) \rightarrow (\lozenge_1 (p \land q) \lor \lozenge_1 (p \land r) \lor \lozenge_1 (q \land r))$
             \item $p \rightarrow \lozenge_1 \Box_2 p$
 
                 \begin{itemize}
@@ -536,7 +605,7 @@
                                                                            &\iff V(p) = \{k \in \N \mid m + 1 > k\}
                             \end{split}
                         \end{equation*}
-                        Now take $m = 1 \in \N$, and suppose $V(p) = \{m\} = \{1\}$; then $m \in V(p) \iff \mathfrak M, m \models p$, however for instance $k = 0 \in \N$ is such that $m + 1 = 1 + 1 = 2 > 0 = k$ even though $k = 0 \notin V(p)$, therefore $\exists k \in \N \quad m + 1 > k \land k \notin V(p) \implies V(p) \neq \{k \in \N \mid m + 1 > k\} \iff \mathfrak M, m \not\models \lozenge_1 \Box_2 p$ which implies that the formula is not valid on $\mathcal N$
+                        Now take $m = 1 \in \N$, and suppose $V(p) = \{m\} = \{1\}$; then $m \in V(p) \iff \mathfrak M, m \models p$, however for instance $k = 0 \in \N$ is such that $m + 1 = 1 + 1 = 2 > 0 = k$ although $k = 0 \notin V(p)$, therefore $\exists k \in \N \quad m + 1 > k \land k \notin V(p) \implies V(p) \neq \{k \in \N \mid m + 1 > k\} \iff \mathfrak M, m \not\models \lozenge_1 \Box_2 p$ which implies that the formula is not valid on $\mathcal N$.
                     \item By definition, for any $s \in \mathbb B$ it holds that
                         \begin{equation*}
                             \begin{split}
@@ -545,7 +614,7 @@
                                                                            &\iff \exists t \in \mathbb B \quad (t = s0 \lor t = s1) \land (\forall u \in \mathbb B \quad u \sqsubset t \implies u \in V(p))
                             \end{split}
                         \end{equation*}
-                        Now take $s = 00 \in \mathbb B$, and suppose $V(p) = \{s\} = \{00\}$; then $s \in V(p) \iff \mathfrak M', s \models p$, however if $t = s0$ or $t = s1$, there still is $u = 0$ such that $u = 0\sqsubset 00 = t$ even though $u = 0 \notin V(p)$, therefore $(t = s0 \lor t = s1) \implies (\exists u \in \mathbb B \quad u \sqsubset t \land u \notin V(p)) \iff \mathfrak M', s \not\models \lozenge_1 \Box_2 p$ which implies that the formula is not valid on $\mathcal B$.
+                        Now take $s = 00 \in \mathbb B$, and suppose $V(p) = \{s\} = \{00\}$; then $s \in V(p) \iff \mathfrak M', s \models p$, however if $t = s0$ or $t = s1$, there still is $u = 0$ such that $u = 0\sqsubset 00 = t$ although $u = 0 \notin V(p)$, therefore $(t = s0 \lor t = s1) \implies (\exists u \in \mathbb B \quad u \sqsubset t \land u \notin V(p)) \iff \mathfrak M', s \not\models \lozenge_1 \Box_2 p$ which implies that the formula is not valid on $\mathcal B$.
                 \end{itemize}
             \item $p \rightarrow \lozenge_2 \Box_1 p$
                 \begin{itemize}
@@ -612,7 +681,7 @@
                                                                             &\iff \forall s \in \mathbb B \quad t \sqsubset s \implies (\exists u \in \mathbb B \quad (u = t0 \lor u = t1) \implies u \in V(p))
                             \end{split}
                         \end{equation*}
-                        Now take $s = 000 \in \mathbb B$, and suppose $V(p) = \{s\} = \{000\}$; then $s \in V(p) \iff \mathfrak M', s \models p$, however for instance $t = 0 \in \mathbb B$ is such that $t = 0 \sqsubset 000 = s$ even though there is no $u = t0 = 00$ or $u = t1 = 01$ such that $u \in V(p)$, therefore $\exists t \in \mathbb B \quad t \sqsubset u \land (\nexists u \in \mathbb \quad (u = t0 \lor u = t1) \land u \in V(p)) \iff \mathfrak M', s \not\models \Box_2 \lozenge_1 p$ which implies that the formula is not valid on $\mathcal B$.
+                        Now take $s = 000 \in \mathbb B$, and suppose $V(p) = \{s\} = \{000\}$; then $s \in V(p) \iff \mathfrak M', s \models p$, however for instance $t = 0 \in \mathbb B$ is such that $t = 0 \sqsubset 000 = s$ although there is no $u = t0 = 00$ or $u = t1 = 01$ such that $u \in V(p)$, therefore $\exists t \in \mathbb B \quad t \sqsubset u \land (\nexists u \in \mathbb \quad (u = t0 \lor u = t1) \land u \in V(p)) \iff \mathfrak M', s \not\models \Box_2 \lozenge_1 p$ which implies that the formula is not valid on $\mathcal B$.
                 \end{itemize}
         \end{enumerate}
     }
