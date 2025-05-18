@@ -474,7 +474,16 @@
         \end{enumerate}
     }
 
-    \tbf{Exercise 2.2} Let $\mathcal N = (\N, S_1, S_2)$ and $\mathcal B = (\mathbb B, R_1, R_2)$ be the following frames for a modal similarity type with two diamonds $\lozenge_1$, $\lozenge_2$. Here, $\N$ is the set of natural numbers and $\mathbb B$ is the set of strings of 0's and 1's, and the relations are defined by $$\soe{ll}{S_1(m, n) \iff n = m + 1 \\ S_2(m, n) \iff m > n \\ R_1(s, t) \iff t = s0 \lor t = s1 \\ R_2(s, t) \iff t \sqsubset s}$$ where $t \sqsubset s$ if and only if $t$ is a \tit{proper prefix} of $s$ --- i.e. $t$ is a prefix of $s$ \underline{different from both} \underline{$\varepsilon$ and $s$ itself}. Which of the following formulas are valid on $\mathcal N$ and $\mathcal B$, respectively?
+    \tbf{Exercise 2.2} Let $\mathcal N = (\N, S_1, S_2)$ and $\mathcal B = (\mathbb B, R_1, R_2)$ be the following frames for a modal similarity type with two diamonds $\lozenge_1$, $\lozenge_2$. Here, $\N$ is the set of natural numbers and $\mathbb B$ is the set of strings of 0's and 1's, and the relations are defined by
+        \begin{equation*}
+            \begin{split}
+                S_1(m, n) &\iff n = m + 1 \\
+                S_2(m, n) &\iff m > n \\
+                R_1(s, t) &\iff t = s0 \lor t = s1 \\
+                R_2(s, t) &\iff t \sqsubset s
+            \end{split}
+        \end{equation*}
+        where $t \sqsubset s$ if and only if $t$ is a \tit{proper prefix} of $s$ --- i.e. $t$ is a prefix of $s$ such that $t \neq s$ (thus $t$ can be $\varepsilon$). Which of the following formulas are valid on $\mathcal N$ and $\mathcal B$, respectively?
 
     \begin{enumerate}[label=(\alph*)]
         \item $(\lozenge_1 p \land \lozenge_2 q) \rightarrow \lozenge_1 (p \land q)$
@@ -724,16 +733,16 @@
                                                                          &\iff \exists k \in \N \quad m + 1 > k \land k \in V(p)
                             \end{split}
                         \end{equation*}
-                        Now suppose $m \in V(p) \iff \mathfrak M, m \models p$; we observe that for every $m \in \N$ it holds that $m + 1 > m$, therefore $m + 1 > m \land m \in V(p) \iff \exists k \in \N \quad m + 1 > k \land k \in V(p) \iff \mathfrak M, m \models \Box_1 \lozenge_2 p$ which implies that the formula is valid on $\mathcal N$.
+                        Now suppose $m \in V(p) \iff \mathfrak M, m \models p$; we observe that for every $m \in \N$ it holds that $m + 1 > m$, therefore $m + 1 > m \land m \in V(p) \iff \exists k \in \N \quad m + 1 > k \land k \in V(p) \iff \mathfrak M, m \models \Box_1 \lozenge_2 p$, which implies that the formula is valid on $\mathcal N$.
                     \item By definition, for any $s \in \mathbb B$ it holds that
                         \begin{equation*}
                             \begin{split}
-                                \mathfrak M', s \models \Box_1 \lozenge_2 p &\iff \forall t \in \mathbb B \quad R_1(s, t) \implies \mathfrak M' t \models \lozenge_2 p \\
+                                \mathfrak M', s \models \Box_1 \lozenge_2 p &\iff \forall t \in \mathbb B \quad R_1(s, t) \implies \mathfrak M', t \models \lozenge_2 p \\
                                                                             &\iff \forall t \in \mathbb B \quad (t = s0 \lor t = s1) \implies (\exists u \in \mathbb B \quad R_2(t, u) \land \mathfrak M', u \models p) \\
                                                                             &\iff \forall t \in \mathbb B \quad (t = s0 \lor t = s1) \implies (\exists u \in \mathbb B \quad u \sqsubset t \land u \in V(p))
                             \end{split}
                         \end{equation*}
-                        Now take $s = \varepsilon$, and suppose $V(p) = \{s\} = \{\varepsilon\}$; then $s \in V(p) \iff \mathfrak M, s \models p$, however if $t = s0 = 0$ or $t = s1 = 1$ there is no $u \in \mathbb B$ such that $u \sqsubset t$, therefore $(t = s0 \lor t = s1) \implies \nexists u \in \mathbb B \quad u \sqsubset t \land u \in V(p) \iff \mathfrak M', s \not\models \Box_1 \lozenge_2 p$, which implies that the formula is not valid on $\mathcal B$.
+                        Now suppose $s \in V(p) \iff \mathfrak M', s \models p$; we observe that for every $s \in \mathbb B$ it holds that $s \sqsubset s0, s1$, therefore $\exists u \in \mathbb B \quad (u \sqsubset s0 \lor u \sqsubset s1) \land u \in V(p) \iff \mathfrak M', s \models \Box_1 \lozenge_2 p$, which implies that the formula is valid on $\mathcal B$.
                 \end{itemize}
             \item $p \rightarrow \Box_2 \lozenge_1 p$
                 \begin{itemize}
