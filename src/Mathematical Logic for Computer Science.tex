@@ -769,6 +769,70 @@
         \end{enumerate}
     }
 
+    \tbf{Exercise 3.2} Consider the basic modal language, and the tuple $\mathfrak f = (\N, <, A)$ where $A$ is the collection of finite and co-finite subsets of $\N$. Show that $\mathfrak f$ is a general frame.
+
+    \solution{
+        First, consider the follwing two claims.
+
+        \claim{
+            If $X \subseteq \N$ is finite, and $Y \subseteq \N$ is co-finite, then $X \cup Y$ is co-finite.
+        }{
+            Since $X$ is finite, $\N - X$ is finite, and since $Y$ is co-finite, $\N - Y$ is finite; this implies that $$\N - (X \cup Y) = (\N - X) \cap (\N - Y)$$ is the intersection of a co-finite and a finite set. In particular, we observe that
+
+            \begin{itemize}
+                \item such intersection will be a subset of $\N - Y$ by definition of intersection
+                \item $\N - Y$ is finite
+                \item a subset of a finite set is always finite
+            \end{itemize}
+            
+            concluding that such intersection must be finite as well. Lastly, by definition we have that $\N - (X \cup Y)$ is finite if and only if $X \cup Y$ is co-finite.
+        }
+
+        \claim{
+            If $X, Y \subseteq \N$ are co-finite, then $X \cup Y$ is co-finite.
+        }{
+            By repeating the same argument of the previous claim, we have that $\N - (X \cup Y) = (\N - X) \cap (\N - Y)$ except that in this case both $\N - X$ and $\N - Y$ are finite, which implies that their intersection must be finite, hence $\N - (X \cup Y)$ is co-finite by definition.
+        }
+
+        To prove that $\mathfrak f$ is a general frame, it suffices to prove that the set $A$ is closed under the following
+
+        \begin{itemize}
+            \item \tit{union}: fix two sets $X, Y \in A$; then, by definition of $A$, we have that
+                \begin{itemize}
+                    \item if both $X$ and $Y$ are finite, then $X \cup Y$ is finite, hence $X \cup Y \in A$
+                    \item without loss of generality, if $X$ is finite and $Y$ is co-finite, by the first claim $X \cup Y$ is co-finite, therefore $X \cup Y \in A$
+                    \item if both $X$ and $Y$ are finite, then $X \cup Y$ is co-finite by the second claim, therefore $X \cup Y \in A$
+                \end{itemize}
+            \item \tit{relative complement}: fix a set $X \in A$; then, by definition of $A$ we trivially have that
+
+                \begin{itemize}
+                    \item if $X$ is finite, then $\N - X$ is co-finite, hence $\N - X \in A$
+                    \item if $X$ is co-finite, then $\N - X$ is finite, hence $\N - X \in A$
+                \end{itemize}
+            \item \tit{modal operations}: fix two sets $X, Y \in A$; by definition, we have that
+                \begin{equation*}
+                    \begin{split}
+                        m_<(X, Y) &= \{n \in \N \mid \exists x \in X, y \in Y \quad R_<(n, x, y)\} \\
+                                  &= \{n \in \N \mid \exists x \in X, y \in Y \quad n < x \land n < y\}
+                    \end{split}
+                \end{equation*}
+                Therefore, we have that
+
+                \begin{itemize}
+                    \item if both $X$ and $Y$ are finite, then
+                        \begin{equation*}
+                            \begin{split}
+                                m_<(X, Y) &= \{n \in \N \mid n < \max(X), \max(Y)\} \\
+                                          &= \{n \in \N \mid n < \min(\max(X), \max(Y))\}
+                            \end{split}
+                        \end{equation*}
+                        which implies that $m_<(X, Y)$ is an \curlyquotes{initial segment of $\N$}, thus it is finite, hence $m_<(X, Y) \in A$
+                    \item without loss of generality, if $X$ is finite and $Y$ is co-finite, then $\max(Y)$ is not defined, thus $$m_<(X, Y) = \{n \in \N \mid n < \max(X)\}$$ which implies that $m_<(X, Y)$ is still finite, hence $m_<(X, Y) \in A$
+                    \item if both $X$ and $Y$ are co-finite, then neither $\max(X)$ nor $\max(Y)$ are defined, therefore $$m_<(X, Y) = \N$$ which implies that $\N - m_<(X, Y) = \N - \N = \varnothing$ meaning that $m_<(X, Y)$ is co-finite, hence $m_<(X, Y) \in A$
+                \end{itemize}
+        \end{itemize}
+    }
+
     % \printbibliography % UNCOMMENT FOR BIBLIOGRAPHY
 
 \end{document}
