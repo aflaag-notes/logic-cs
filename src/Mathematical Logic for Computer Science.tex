@@ -809,26 +809,11 @@
                     \item if $X$ is finite, then $\N - X$ is co-finite, hence $\N - X \in A$
                     \item if $X$ is co-finite, then $\N - X$ is finite, hence $\N - X \in A$
                 \end{itemize}
-            \item \tit{modal operations}: fix two sets $X, Y \in A$; by definition, we have that
-                \begin{equation*}
-                    \begin{split}
-                        m_<(X, Y) &= \{n \in \N \mid \exists x \in X, y \in Y \quad R_<(n, x, y)\} \\
-                                  &= \{n \in \N \mid \exists x \in X, y \in Y \quad n < x \land n < y\}
-                    \end{split}
-                \end{equation*}
-                Therefore, we have that
+            \item \tit{modal operations}: assume that \curlyquotes{<} is the relation referring to a unary modal operator $\abk{<}$, and fix a set $X \in A$; by definition, we have that $$m_{\abk{<}}(X) = \{n \in \N \mid \exists x \in X \quad n < x\}$$ therefore, we have that
 
                 \begin{itemize}
-                    \item if both $X$ and $Y$ are finite, then
-                        \begin{equation*}
-                            \begin{split}
-                                m_<(X, Y) &= \{n \in \N \mid n < \max(X), \max(Y)\} \\
-                                          &= \{n \in \N \mid n < \min(\max(X), \max(Y))\}
-                            \end{split}
-                        \end{equation*}
-                        which implies that $m_<(X, Y)$ is an \curlyquotes{initial segment of $\N$}, thus it is finite, hence $m_<(X, Y) \in A$
-                    \item without loss of generality, if $X$ is finite and $Y$ is co-finite, then $\max(Y)$ is not defined, thus $$m_<(X, Y) = \{n \in \N \mid n < \max(X)\}$$ which implies that $m_<(X, Y)$ is still finite, hence $m_<(X, Y) \in A$
-                    \item if both $X$ and $Y$ are co-finite, then neither $\max(X)$ nor $\max(Y)$ are defined, therefore $$m_<(X, Y) = \N$$ which implies that $\N - m_<(X, Y) = \N - \N = \varnothing$ meaning that $m_<(X, Y)$ is co-finite, hence $m_<(X, Y) \in A$
+                    \item if $X$ is finite, then $$m_{\abk{<}}(X)= \{n \in \N \mid n < \max(X)\}$$ therefore $m_{\abk{<}}(X)$ is an \curlyquotes{initial segment of $\N$}, implying that is finite, hence $m_{\abk <}(X) \in A$
+                    \item if $X$ is co-finite, then $\N - X$ is finite, implying that $X$ is infinite; this implies that $\max (X)$ is not defined, therefore $$m_{\abk <}(X) = \N \implies \N - m_{\abk <}(X) = \N - \N = \varnothing$$ and since $\varnothing$ is finite, we conclude that $m_{\abk <}(X)$ is co-finite, thus $m_{\abk <}(X) \in A$
                 \end{itemize}
         \end{itemize}
     }
@@ -888,10 +873,30 @@
                 31. \vdash & \ \Box \lnot (p \land q) \to \Box (\lnot p \lor \lnot q) && \quad \quad (\mbox{MP(29, 30)}) \\
                 32. \vdash & \ (a \to b) \to (\lnot b \to \lnot a) && \quad \quad (\mbox{T}) \\
                 33. \vdash & \ (\Box \lnot (p \land q) \to \Box (\lnot p \lor \lnot q)) \to (\lnot \Box (\lnot p \lor \lnot q) \to \lnot \Box \lnot (p \land q)) && \quad \quad (\mbox{S(32)}) \\
-                34. \vdash & \lnot \Box(\lnot p \lor \lnot q) \to \lnot \Box \lnot (p \land q) && \quad \quad (\mbox{MP(31, 33)}) \\
+                34. \vdash & \ \lnot \Box(\lnot p \lor \lnot q) \to \lnot \Box \lnot (p \land q) && \quad \quad (\mbox{MP(31, 33)}) \\
                            & \ldots && \\
-                39. \vdash & (\Box p \land \lnot \Box \lnot q) \to \lnot \Box \lnot (p \land q) && \quad \quad (C(26, 34)) \\
-                40. \lozenge p \leftrightarrow \lnot \Box \lnot p && \quad \quad (\mbox{K}) \\
+                39. \vdash & \ (\Box p \land \lnot \Box \lnot q) \to \lnot \Box \lnot (p \land q) && \quad \quad (\mbox{C(26, 34)}) \\
+                40. \vdash & \ \lozenge p \leftrightarrow \lnot \Box \lnot p && \quad \quad (\mbox{K}) \\
+                41. \vdash & \ \lozenge(p \land q) \leftrightarrow \lnot \Box \lnot (p \land q) && \quad \quad (\mbox{S(40)}) \\
+                42. \vdash & \ (a \leftrightarrow b) \to (b \to a) && \quad \quad (\mbox{T}) \\
+                43. \vdash & \ (\lozenge (p \land q) \leftrightarrow \lnot \Box \lnot (p \land q)) \to (\lnot \Box \lnot (p \land q) \to \lozenge (p \land q)) && \quad \quad (\mbox{S(42)}) \\
+                44. \vdash & \ \lnot \Box \lnot (p \land q) \to \lozenge(p \land q) &&\quad \quad (\mbox{MP(41, 43)}) \\
+                           & \ldots && \\
+                48. \vdash & \ (\Box p \land \lnot \Box \lnot q) \to \lozenge(p \land q) && \quad \quad (\mbox{C(39, 44)}) \\
+            \end{alignedat}
+        \end{equation*}
+
+        \begin{equation*}
+            \begin{alignedat}{2}
+                49. \vdash & \ \lozenge q \leftrightarrow \lnot \Box \lnot q && \quad \quad (\mbox{S(40)}) \\
+                50. \vdash & \ (a \leftrightarrow b) \to (a \to b) && \quad \quad (\mbox{S(49)}) \\
+                51. \vdash & \ (\lozenge q \leftrightarrow \lnot \Box \lnot q) \to (\lozenge q \to \lnot \Box \lnot q) && \quad \quad (\mbox{S(50)}) \\
+                52. \vdash & \ \lozenge q \to \lnot \Box \lnot q && \quad \quad (\mbox{MP(49, 51)}) \\
+                53. \vdash & \ (b \to c) \to (a \land b \to a \land c) && \quad \quad (\mbox{T}) \\
+                54. \vdash & \ (\lozenge q \to \lnot \Box \lnot q) \to (\Box p \land \lozenge q \to \Box p \land \lnot \Box \lnot q) && \quad \quad (\mbox{S(53)}) \\
+                55. \vdash & \ \Box p \land \lozenge q \to \Box p \land \lnot \Box \lnot q && \quad \quad (\mbox{MP(52, 54)}) \\
+                           & \ldots && \\
+                56. \vdash & \ (\Box p \land \lozenge q) \to \lozenge (p \land q) && \quad \quad (\mbox{C(55, 48)}) \\
             \end{alignedat}
         \end{equation*}
     }
