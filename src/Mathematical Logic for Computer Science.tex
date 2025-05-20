@@ -92,156 +92,9 @@
 
     %%%%%%%%%%%%%%%%%%%%%
 
-    \chapter{Exercises}
+    \chapter{Homeworks}
 
     \section{Homework 1}
-
-    placeholder \todo{missing introduction}
-
-    \begin{frameddefn}{Languages and propositions}
-        A \tbf{propositional language} is a --- possibly infinite --- set $\mathcal L = \{p_1, \ldots, p_n\}$, where each $p_i$ is called \tbf{propositional variable}. Given a propositional language $\mathcal L$, the set of \tbf{propositions} over $\mathcal L$, denoted with $\textsf{PROP}_{\mathcal L}$ is inductively defined as follows:
-
-        \begin{itemize}
-            \item each propositional variable in $\mathcal L$ is a proposition, i.e. $\mathcal L \subseteq \textsf{PROP}_{\mathcal L}$
-            \item if $A \in \textsf{PROP}_{\mathcal L}$, then $\lnot A \in \textsf{PROP}_{\mathcal L}$
-            \item if $A, B \in \textsf{PROP}_{\mathcal L}$, then $(A \land B), (A \lor B), (A \rightarrow B), (A \leftrightarrow B) \in \textsf{PROP}_{\mathcal L}$
-        \end{itemize}
-    \end{frameddefn}
-
-    In other words, the set of propositions over a language is the set of \tit{formulas} that can be constructed from the initial variables of $\mathcal L$, by using the Boolean connectives. Note that a propositional language may have an infinite number of propositional variables, even \tit{uncountably infinite}. For instance, the following is a valid propositional language $$\mathcal L := \{p_r \mid r \in \R\}$$ However, since propositions are inductively constructed starting from variables, each proposition of any language $\mathcal L$ will still be defined over a \tit{finite} number of propositional variables of $\mathcal L$.
-
-    Now that we provided a formal definition for languages and propositions, we are ready to discuss \tbf{assignments}.
-
-    \begin{frameddefn}{Assignment}
-        Given a propositional language $\mathcal L$, an \tbf{assignment} $\alpha$ is a function $\func{\alpha}{\mathcal L}{\{0, 1\}}$ that assigns either 0 or 1 to all of $\mathcal L$'s propositional variable.
-    \end{frameddefn}
-
-    This definition can be inductively extended to \tbf{propositions} themselves: if $A$ and $B$ are two propositions, let $\func{\widehat \alpha}{\textsf{PROP}_{\mathcal L}}{\{0, 1\}}$ be a function such that
-
-    $$A \in \mathcal L \implies \widehat \alpha (A) = \alpha(A)$$
-    
-    $$\widehat \alpha(\lnot A) = \soe{ll}{1 & \widehat \alpha(A) = 0 \\ 0 & \mathrm{otherwise}}$$
-
-    $$\widehat \alpha(A \land B) = \soe{ll}{1 & \widehat \alpha(A) = \widehat \alpha(B) = 1 \\ 0 & \mathrm{otherwise}}$$
-
-    $$\widehat \alpha(A \lor B) = \soe{ll}{1 & \widehat \alpha(A) = 1 \lor \widehat \alpha(B) = 1 \\ 0 & \mathrm{otherwise}}$$
-
-    $$\widehat \alpha(A \rightarrow B) = \soe{ll}{0 & \widehat \alpha(A) = 1 \land \widehat \alpha(B) = 0 \\ 0 & \mathrm{otherwise}}$$
-
-    $$\widehat \alpha(A \leftrightarrow B) = \soe{ll}{1 & \widehat \alpha(A) = \widehat \alpha (B) \\ 0 & \mathrm{otherwise}}$$
-
-    Since it can be proven that the extension $\widehat \alpha$ of $\alpha$ is unique, we will refer to $\widehat \alpha$ as $\alpha$ directly. Two propositions $A$ and $B$ are said to be \tbf{equivalent} --- written as $A \equiv B$ --- if and only if $\forall \alpha \quad \alpha(A) = \alpha(B)$.
-
-    \begin{frameddefn}{Satisfiability}
-        A proposition $A$ is said to be \tbf{satisfiable} if there exists an assignment $\alpha$ of its propositional variables such that $\alpha(A) = 1$. If there is no assignment that satisfies $A$, $A$ is said to be \tbf{unsatisfiable}, and if $A$ is satisfied for any assignment $\alpha$, then $A$ is said to be a \tbf{tautology}.
-
-        We will denote with \SAT, \UNSAT and \TAUT respectively the sets of all satisfiable propositions, all unsatisfiable propositions and all tautologies.
-    \end{frameddefn}
-
-    Using symbols, we have that
-
-    \begin{itemize}
-        \item $A \in \SAT \iff \exists \alpha \quad \alpha (A) = 1$
-        \item $A \in \UNSAT \iff \nexists \alpha \quad \alpha (A) = 1 \iff \forall \alpha \quad \alpha (A) = 0$
-        \item $A \in \TAUT \iff \forall \alpha \quad \alpha(A) = 1 \iff \nexists \alpha \quad \alpha (A) = 0$
-    \end{itemize}
-    
-    The concept of satisfiability is strictly related to the concept of \tbf{logical consequence}, which is defined as follows.
-
-    \begin{frameddefn}{Logical consequence}
-        Given the propositions $A_1, \ldots, A_n, A$, we say that $A$ is a \tbf{logical consequence} of $A_1, \ldots, A_n$ if whenever $A_1, \ldots, A_n$ are true, $A$ is also true. We will indicate this concept as follows: $$A_1, \ldots, A_n \models A$$
-    \end{frameddefn}
-
-    From its definition, the concept of logical consequence can be alternatively be expressed in terms of \tit{unsatisfiability} and \tit{tautology}.
-
-    \begin{framedthm}{}
-        Given the formulas $A_1, \ldots, A_n, A$, the following statements are equivalent:
-
-        \begin{itemize}
-            \item $A_1, \ldots, A_n \models A$
-            \item $(A_1 \land \ldots \land A_n \rightarrow A) \in \TAUT$
-            \item $(A_1 \land \ldots \land A_n \land A) \in \UNSAT$
-        \end{itemize}
-    \end{framedthm}
-
-    \subsection{Theories}
-
-    \begin{frameddefn}{Theory}
-        Given a language $\mathcal L$, a \tbf{theory} $T$ over $\mathcal L$ is a --- finite or infinite --- set of propositions defined on $\mathcal L$, i.e. $T \subseteq \textsf{PROP}_{\mathcal L}$.
-    \end{frameddefn}
-
-    As a natural extension of the \tit{satisfiability} property previously discussed, a theory $T$ will be said to be \tbf{satisfiable} --- written as $T \in \SAT$ if and only if $$\exists \alpha \quad \alpha(T) = 1$$ which is equivalent of saying that $$\exists \alpha \quad \forall F \in T \quad \alpha (F) = 1$$ note that the assignment $\alpha$ must be the same for all the propositions $F$ of $T$.
-
-    Additionally, for infinite theories we can define another property.
-
-    \begin{frameddefn}{Finite satisfiability}
-        An infinite theory $T$ is said to be \tbf{finitely satisfiable} if and only if $$\forall T' \subset T \ \mathrm{finite} \quad T' \in \SAT$$ We will denote with $\FINSAT$ the set of all finitely satisfiable theories.
-    \end{frameddefn}
-    
-    However, the following theorem will prove that \tit{satisfiability} and \tit{finite satisfiability} are actually \tbf{equivalent}.
-
-    \begin{framedthm}{Compactness theorem (1st version)}
-        Given an infinite theory $T$, it holds that $$T \in \SAT \iff T \in \FINSAT$$
-    \end{framedthm}
-
-    \begin{proof}
-        In this proof we will assume that the propositions of the infinite theory $T$ are \tit{countably infinite}, however in its general form this theorem can be proved even without this assumption.
-
-        Since the direct implication of this statement is trivially true by definition, we just need to prove the converse implication.
-
-        \claim{
-            Given a theory $T \in \FINSAT$, and a proposition $A$, it must hold that $T \cup \{A\} \in \FINSAT$ or $T \cup \{\lnot A \} \in \FINSAT$.
-        }{
-            By way of contradiction, assume that $T \cup \{A\}, T \cup \{\lnot A\} \notin \FINSAT$.
-
-            By definition of finite satisfiability, if $T \cup \{A\} \notin \FINSAT$, then there must exist a \tit{finite} sub-theory $T_0 \subset T \cup \{A\}$ such that $T_0 \in \UNSAT$. Note that $T \in \FINSAT$, therefore if $T \cup \{A\} \notin \FINSAT$ then it must be that $A \in T_0$. Let $\widehat{T_0}$ be the theory such that $T_0 := \widehat{T_0} \cup \{A\}$; then $$T_0 := \widehat{T_0} \cup \{A\} \in \UNSAT \iff \forall \alpha  \quad \alpha(T_0) = 0$$ which implies that $$\forall \alpha \quad \alpha(\widehat{T_0}) = 1 \implies \alpha(A) = 0$$
-
-            Analogously, we can apply the same reasoning for $T \cup \{\lnot A\}$, and we get that there must exist a \tit{finite} sub-theory $T_1 \subset T \cup \{\lnot A\}$ such that $T_1 := \widehat{T_1} \cup \{\lnot A\} \in \UNSAT$, which implies that $$\forall \alpha \quad \alpha (\widehat{T_1}) = 1 \implies \alpha(\lnot A) = 0$$
-
-            Lastly, since $\widehat{T_0} \cup \widehat{T_1} \subset T \in \FINSAT$, by finite satisfiability of $T$ there must exist an assignment $\alpha$ such that $\alpha(\widehat{T_0} \cup \widehat{T_1}) = 1$, and therefore $\alpha(\widehat{T_0}) = \alpha(\widehat{T_1}) = 1$. However, for the previous observations this implies that $\alpha(A) = \alpha(\lnot A) = 0 \ \lightning$.
-        }
-
-        Since we are assuming that the propositions of $T$ are \tit{countably infinite}, and the number of variables in any proposition is finite by definition, we can fix an enumeration $p_1, p_2, p_3, \ldots$ on the --- possibly infinite --- propositional variables of $T$. Given this enumeration, define the following \tit{chain} of sub-theories:
-        
-        \begin{itemize}
-            \item $T_0 := T$
-            \item $T_{i + 1} := \soe{ll}{T_i \cup \{p_i \} & T_i \cup \{p_i\} \in \FINSAT \\ T_i \cup \{\lnot p_i\} & T_i \cup \{\lnot p_i\} \in \FINSAT}$
-        \end{itemize}
-
-        and note that, by definition, clearly $$T =: T_0 \subseteq T_1 \subseteq T_2 \subseteq \ldots$$ Moreover, let $$T^* := \bigcup_{i \in \N}{T_i}$$ and note that since $\forall i \quad T_i \in \FINSAT$ by definition, then it must be that $T^* \in \FINSAT$ as well, as $T^*$ is a chain defined \tit{only} by inclusions of \FINSAT theories.
-
-        Now, consider the following assignment: $$\funcmap{\alpha^*}{\{p_1, p_2, \ldots\}}{\{0,1\}}{p_i}{\soe{ll}{1 & p_i \in T^* \\ 0 & \lnot p_i \in T^*}}$$ Note that this assignment is well defined, because by construction of $T^*$ only one between $p_i \in T^*$ and $\lnot p_i \in T^*$ can hold.
-
-        \claim{
-            $\alpha^*(T) = 1$.
-        }{
-            Let $A \in T$, and let $p_{i_1}, \ldots, p_{i_k}$ the be the propositional variables that appear in $A$. Then, for each $j \in [k]$ let $$p_{i_j}^* := \soe{ll}{p_{i_j} & p_{i_j} \in T^* \\ \lnot p_{i_j} & \lnot p_{i_j} \in T^*}$$ and consider the set $\cbk{A, p_{i_1}^*, \ldots, p_{i_k}^*}$. Clearly, this is a finite subset of $T^*$ --- by definition of the various $T_0, T_1, T_2, \ldots$ that define $T^*$ --- hence $T^* \in \FINSAT$ implies that there must exist an assignment $\beta_A$ that satisfies this set, i.e. $$\beta_A(A) = \beta_A \rbk{p_{i_1}^*} = \ldots = \beta_A \rbk{p_{i_k}^*} = 1$$ Note that, for each $j \in [k]$, it holds that $$p_{i_j} \in T^* \implies p_{i_j}^* = p_{i_j} \land \alpha^*\rbk{p_{i_j}} = 1$$ and $1 = \beta_A (p_{i_j}^*) = \beta_A \rbk{p_{i_j}}$; analogously, it holds that $$\lnot p_{i_j} \in T^* \implies p_{i_j}^*= \lnot p_{i_j} \land \alpha^ *\rbk{p_{i_j}} = 0$$ and $1 = \beta_A (p_{i_j}^*) = \beta_A \rbk{\lnot p_{i_j}} = \lnot \beta_A \rbk{p_{i_j}} \implies \beta_A \rbk{p_{i_j}} = 0$. This proves that $\alpha^* \equiv \beta_A$ for all of $A$'s variables, therefore it must also be true that $\alpha^*(A) = \beta_A(A)$.
-
-            Hence, this shows that for any proposition $A \in T$ there is an assignment $\beta_A$, which satisfies $A$, that sets $A$'s variables as $\alpha^*$ does. Therefore, since this will be true for any of the $T$'s propositions, $\alpha^*$ satisfies $T$.
-        }
-
-        This claim proves that there exists an assignment $\alpha ^*$ that satisfies $T$, hence $T \in \SAT$, concluding the proof.
-    \end{proof}
-
-    The statement of this theorem is equivalent to the following one.
-
-    \begin{framedthm}{Compactness theorem (2nd version)}
-        Given an infinite theory $T$, and a proposition $A$, it holds that $$T \models A \iff \exists T' \subset T \ \mathrm{finite} \quad T' \models A$$
-    \end{framedthm}
-    
-    \proofiff{
-        We will prove the equivalence of the two formulations by assuming that the first version implies the second version of the theorem, and vice versa. First, notice that if there exist a $T' \subset T$ finite sub-theory of $T$ such that $T' \models A$ for some proposition $A$, then it is trivially true that $T \models A$ by definition of logical consequence. Hence, we just need to prove the direct implication of the second version of the theorem, assuming that the first version it true.
-
-        By way of contradiction, assume that $T \models A$ and for each $T' \subset T$ finite sub-theory of $T$, $T' \not\models A$. By definition of logical consequence, this implies that $$\forall T' \subset T \ \mathrm{finite} \quad \exists \alpha \quad \alpha(T') = 1 \land \alpha(A) = 0$$ or, equivalently, $\alpha(\lnot A) = 1$. This implies that $$\forall T' \subset T \ \mathrm{finite} \quad \exists \alpha \quad \alpha(T' \cup \{\lnot A\}) = 1$$ which means that any finite subset of $T \cup \{\lnot A\}$ is \SAT (recall that $T' \subset T$). Hence, by definition $T \cup \{\lnot A\} \in \FINSAT$, and since we are assuming the first version of the theorem, we have that $$T \cup \{\lnot A \} \in \FINSAT \iff T \cup \{\lnot A\} \in \SAT$$ which implies that $T \not\models A$ by definition of logical consequence.
-    }{
-        Consider a theory $T$ and a proposition $A$; by the second version of the theorem we know that $T \models A$ if and only if there is a finite sub-theory $T' \subset T$ such that $T' \models A$. Now, suppose that $T \in \UNSAT$; therefore, by definition we have that $T \models 0$, which implies that $$T \models 0 \iff \exists T' \subset' T \ \mathrm{finite} \quad T' \models 0$$ but again, $T' \models 0$ means that $T' \in \UNSAT$. Hence, we proved that $$T \in \UNSAT \iff \exists T' \subset T \ \mathrm{finite} \quad T' \in \UNSAT \iff T \notin \FINSAT$$ which is the contrapositive of the first version of the theorem.
-    }
-   
-    The compactness theorem can be proven to be equivalent to a special case of \href{https://en.wikipedia.org/wiki/K%C5%91nig%27s_lemma}{Kőnig's lemma} \cite{koenig}, which states the following.
-
-    \begin{framedlem}{Kőnig's lemma (special case)}
-        Every infinite tree contains either a vertex of infinite degree, or an infinite path.
-    \end{framedlem}
 
     \newpage
 
@@ -417,6 +270,8 @@
 
         In conclusion, we have that $\mathcal G_1 \equiv_2 \mathcal G_2$, and that $\mathcal G_1 \not\equiv_3 \mathcal G_2$.
     \end{proof}
+
+    \section{Homework 2}
 
     \newpage
 
@@ -774,7 +629,7 @@
     \solution{
         First, consider the follwing two claims.
 
-        \claim{
+        \claim[Claim 1]{
             If $X \subseteq \N$ is finite, and $Y \subseteq \N$ is co-finite, then $X \cup Y$ is co-finite.
         }{
             Since $X$ is finite, $\N - X$ is finite, and since $Y$ is co-finite, $\N - Y$ is finite; this implies that $$\N - (X \cup Y) = (\N - X) \cap (\N - Y)$$ is the intersection of a co-finite and a finite set. In particular, we observe that
@@ -788,7 +643,7 @@
             concluding that such intersection must be finite as well. Lastly, by definition we have that $\N - (X \cup Y)$ is finite if and only if $X \cup Y$ is co-finite.
         }
 
-        \claim{
+        \claim[Claim 2]{
             If $X, Y \subseteq \N$ are co-finite, then $X \cup Y$ is co-finite.
         }{
             By repeating the same argument of the previous claim, we have that $\N - (X \cup Y) = (\N - X) \cap (\N - Y)$ except that in this case both $\N - X$ and $\N - Y$ are finite, which implies that their intersection must be finite, hence $\N - (X \cup Y)$ is co-finite by definition.
@@ -800,8 +655,8 @@
             \item \tit{union}: fix two sets $X, Y \in A$; then, by definition of $A$, we have that
                 \begin{itemize}
                     \item if both $X$ and $Y$ are finite, then $X \cup Y$ is finite, hence $X \cup Y \in A$
-                    \item without loss of generality, if $X$ is finite and $Y$ is co-finite, by the first claim $X \cup Y$ is co-finite, therefore $X \cup Y \in A$
-                    \item if both $X$ and $Y$ are finite, then $X \cup Y$ is co-finite by the second claim, therefore $X \cup Y \in A$
+                    \item without loss of generality, if $X$ is finite and $Y$ is co-finite, by Claim 1 $X \cup Y$ is co-finite, therefore $X \cup Y \in A$
+                    \item if both $X$ and $Y$ are finite, then $X \cup Y$ is co-finite by Claim 2, therefore $X \cup Y \in A$
                 \end{itemize}
             \item \tit{relative complement}: fix a set $X \in A$; then, by definition of $A$ we trivially have that
 
@@ -818,15 +673,22 @@
         \end{itemize}
     }
 
-    \tbf{Exercise 5.1} TODO \todo{scrivimi}
+    \tbf{Exercise 5.1} Give $K$-proofs of $(\Box p \land \lozenge q) \to \lozenge (p \land q)$ and $\lozenge (p \lor q) \leftrightarrow (\lozenge p \lor \lozenge q)$.
 
     \solution{
-        TODO \todo{scrivimi}
+        In the first section of the solution, we are going to prove some useful derivations that will be extensively used in the actual $K$-proof of the two propositions. The right side of each line will be one of the following:
 
-        
-        First consider the following claim.
+        \begin{itemize}
+            \item (K): the K axiom
+            \item (D): the Dual axiom
+            \item (T): a propositional Tautology
+            \item (MP($i$, $j$)): the Modus Ponens rule applied on lines $i$ and $j$
+            \item (S($i$)): the Substitution rule applied on line $i$
+            \item (G($i$)): the Generalization rule applied on line $i$
+            \item ($\mbox{C}_k(i_1, \ldots i_n)$): the $k$-th Claim applied on lines $i_1, \ldots, i_n$ --- $k \in [7]$ and $n$ depends on the number of lines the Claim refers to
+        \end{itemize}
 
-        \claim{
+        \claim[Claim 1]{
             If $p \to q$ can be $K$-proved, and $q \to r$ can be $K$-proved, then $p \to r$ can be $K$-proved in 4 steps.
         }{
             Consider a $K$-proof in which $p \to q$ is proved at step $i$, and $q \to r$ is proved at step $j$ --- without loss of generality suppose that $i < j$; then we have that
@@ -844,7 +706,7 @@
             \end{equation*}
         }
 
-        \claim{
+        \claim[Claim 2]{
             If $p \to q$ can be $K$-proved, then $\Box p \to \Box q$ can be $K$-proved in 4 steps.
         }{
             Consider a $K$-proof in which $p \to q$ is proved at step $i$; then, we have that
@@ -860,7 +722,7 @@
             \end{equation*}
         }
 
-        \claim{
+        \claim[Claim 3]{
             If $p \to q$ can be $K$-proved, and $p \to r$ can be $K$-proved, then $p \to q \land r$ can be $K$-proved in 4 steps.
         }{
             Consider a $K$-proof in which $p \to q$ is proved at step $i$, and $p \to r$ is proved at step $j$ --- without loss of generality suppose $i < j$; then, we have that
@@ -868,7 +730,7 @@
                 \begin{alignedat}{2}
                     & \ldots && \\
                     i. \vdash & \ p \to q && \quad \quad \\
-                              & \vdots && \\
+                              & \ldots && \\
                     j. \vdash & \ p \to r && \quad \quad \\
                     j + 1. \vdash & \ (a \to b) \to ((a \to c) \to (a \to b \land c)) && \quad \quad (\mbox{T}) \\ 
                     j + 2. \vdash & \ (p \to q) \to ((p \to r) \to (p \to q \land r)) && \quad \quad (\mbox{S($j + 1$)}) \\
@@ -878,8 +740,8 @@
             \end{equation*}
         }
 
-        \claim{
-            If $p \to q$ can be $K$-proved, then $\lnot q \to \lnot p$ can be $K$-proved in 3 steps.
+        \claim[Claim 4]{
+            If $p \to q$ can be $K$-proved, then $\lnot q \to \lnot p$ can be $K$-proved in 3 steps. Moreover, if $p \to \lnot q$ can be $K$-proved, then $q \to \lnot p$ can be $K$-proved in 3 steps.
         }{
             Consider a $K$-proof in which $p \to q$ is proved at step $i$; then, we have that
             \begin{equation*}
@@ -891,9 +753,10 @@
                     i + 3. \vdash & \ \lnot q \to \lnot p && \quad \quad (\mbox{MP($i$, $i + 2$)})
                 \end{alignedat}
             \end{equation*}
+            The same $K$-proof can be used to prove the rest of the claim by using the propositional tautology $(a \to \lnot b) \to (b \to \lnot a)$.
         }
 
-        \claim{
+        \claim[Claim 5]{
             If $p \leftrightarrow q$ can be $K$-proved, then $p \to q$ and $q \to p$ can be $K$-proved in 3 steps.
         }{
             Consider a $K$-proof in which $p \leftrightarrow q$ is proved at step $i$; then, we have that
@@ -909,7 +772,7 @@
             The case for $q \to p$ can be proved analogously by using the propositional tautology $(a \leftrightarrow b) \to (b \to a)$.
         }
 
-        \claim{
+        \claim[Claim 6]{
             If $p \to (q \to r)$ can be $K$-proved, then $p \land q \to r$ can be $K$-proved in 3 steps.
         }{
             Consider a $K$-proof in which $p \to (q \to r)$ is proved at step $i$; then, we have that
@@ -924,7 +787,7 @@
             \end{equation*}
         }
 
-        \claim{
+        \claim[Claim 7]{
             If $p \to q$ can be $K$-proved, and $q \to p$ can be $K$-proved, then $p \leftrightarrow q$ can be proved in 4 steps.
         }{
             Consider a $K$-proof in which $p \to q$ is proved at step $i$, and $q \to p$ can be proved at step $j$ --- without loss of generality suppose $i < j$; then, we have that
@@ -941,69 +804,67 @@
                 \end{alignedat}
             \end{equation*}
         }
-        
-        \begin{equation*}
-            \begin{alignedat}{2}
-                1. \vdash & \ \Box (p \to q) \to ( \Box p \to \Box q) && \quad \quad (\mbox{K}) \\
-                2. \vdash & \ (\lnot a \lor \lnot b) \to (a \to \lnot b) && \quad \quad (\mbox{T}) \\
-                3. \vdash & \ (\lnot p \lor \lnot q) \to (p \to \lnot q) && \quad \quad (\mbox{S(2)}) \\
-                4. \vdash & \ \Box ((\lnot p \lor \lnot q) \to (p \to \lnot q)) && \quad \quad (\mbox{G(3)}) \\
-                5. \vdash & \ \Box ((\lnot p \lor \lnot q) \to (p \to \lnot q)) \to (\Box (\lnot p \lor \lnot q) \to \Box (p \to \lnot q)) && \quad \quad (\mbox{S(1)}) \\
-                6. \vdash & \ \Box (\lnot p \lor \lnot q) \to \Box (p \to \lnot q) && \quad \quad (\mbox{MP(4, 5)}) \\
-                7. \vdash & \ \Box (p \to \lnot q) \to (\Box p \to \Box \lnot q) && \quad \quad (\mbox{S(1)}) \\
-                          & \ldots && \\
-                11. \vdash & \ \Box (\lnot p \lor \lnot q) \to (\Box p \to \Box \lnot q) && \quad \quad (\mbox{C(6, 7)}) \\
-                12. \vdash & \ (a \to b) \to (\lnot a \lor b) && \quad \quad (\mbox{T}) \\
-                13. \vdash & \ (\Box p \to \Box \lnot q) \to (\lnot \Box p \lor \Box \lnot q) && \quad \quad (\mbox{S(12)}) \\
-                           & \ldots && \\
-                17. \vdash & \ \Box (\lnot p \lor \lnot q) \to (\lnot \Box p \lor \Box \lnot q) && \quad \quad (\mbox{C(11, 13)}) \\
-                18. \vdash & \ (\lnot a \lor b) \to \lnot (a \land \lnot b) && \quad \quad (\mbox{T}) \\
-                19. \vdash & \ (\lnot \Box p \lor \Box \lnot q) \to \lnot (\Box p \land \lnot \Box \lnot q) && \quad \quad (\mbox{S(18)}) \\
-                           & \ldots && \\
-                23. \vdash & \ \Box (\lnot p \lor \lnot q) \to \lnot (\Box p \land \lnot \Box \lnot q) && \quad \quad (\mbox{C(17, 19)}) \\
-                24. \vdash & \ (a \to \lnot b) \to (b \to \lnot a) && \quad \quad (\mbox{T}) \\
-                25. \vdash & \ (\Box (\lnot p \lor \lnot q) \to \lnot (\Box p \land \lnot \Box \lnot q)) \to ( (\Box p \land \lnot \Box \lnot q) \to \lnot \Box (\lnot p \lor \lnot q)) && \quad \quad (\mbox{S(24)}) \\
-                26. \vdash & \ (\Box p \land \lnot \Box \lnot q) \to \lnot \Box (\lnot p \lor \lnot q) && \quad \quad (\mbox{MP(23, 25)}) \\
-                27. \vdash & \ \lnot (a \land b) \to (\lnot a \lor \lnot b) && \quad \quad (\mbox{T}) \\
-                28. \vdash & \ \lnot (p \land q) \to (\lnot p \lor \lnot q) && \quad \quad (\mbox{S(27)}) \\
-                29. \vdash & \ \Box ((p \land q) \to (\lnot p \lor \lnot q)) && \quad \quad (\mbox{G(28)}) \\
-                30. \vdash & \ \Box ((p \land q) \to (\lnot p \lor \lnot q)) \to (\Box (\lnot (p \land q)) \to \Box (\lnot p \lor \lnot q)) && \quad \quad (\mbox{S(1)}) \\
-                31. \vdash & \ \Box \lnot (p \land q) \to \Box (\lnot p \lor \lnot q) && \quad \quad (\mbox{MP(29, 30)}) \\
-                32. \vdash & \ (a \to b) \to (\lnot b \to \lnot a) && \quad \quad (\mbox{T}) \\
-                33. \vdash & \ (\Box \lnot (p \land q) \to \Box (\lnot p \lor \lnot q)) \to (\lnot \Box (\lnot p \lor \lnot q) \to \lnot \Box \lnot (p \land q)) && \quad \quad (\mbox{S(32)}) \\
-                34. \vdash & \ \lnot \Box(\lnot p \lor \lnot q) \to \lnot \Box \lnot (p \land q) && \quad \quad (\mbox{MP(31, 33)}) \\
-                           & \ldots && \\
-                39. \vdash & \ (\Box p \land \lnot \Box \lnot q) \to \lnot \Box \lnot (p \land q) && \quad \quad (\mbox{C(26, 34)}) \\
-                40. \vdash & \ \lozenge p \leftrightarrow \lnot \Box \lnot p && \quad \quad (\mbox{K}) \\
-                41. \vdash & \ \lozenge(p \land q) \leftrightarrow \lnot \Box \lnot (p \land q) && \quad \quad (\mbox{S(40)}) \\
-                42. \vdash & \ (a \leftrightarrow b) \to (b \to a) && \quad \quad (\mbox{T}) \\
-                43. \vdash & \ (\lozenge (p \land q) \leftrightarrow \lnot \Box \lnot (p \land q)) \to (\lnot \Box \lnot (p \land q) \to \lozenge (p \land q)) && \quad \quad (\mbox{S(42)}) \\
-                44. \vdash & \ \lnot \Box \lnot (p \land q) \to \lozenge(p \land q) &&\quad \quad (\mbox{MP(41, 43)}) \\
-                           & \ldots && \\
-                48. \vdash & \ (\Box p \land \lnot \Box \lnot q) \to \lozenge(p \land q) && \quad \quad (\mbox{C(39, 44)}) \\
-            \end{alignedat}
-        \end{equation*}
 
-        \begin{equation*}
-            \begin{alignedat}{2}
-                49. \vdash & \ \lozenge q \leftrightarrow \lnot \Box \lnot q && \quad \quad (\mbox{S(40)}) \\
-                50. \vdash & \ (a \leftrightarrow b) \to (a \to b) && \quad \quad (\mbox{S(49)}) \\
-                51. \vdash & \ (\lozenge q \leftrightarrow \lnot \Box \lnot q) \to (\lozenge q \to \lnot \Box \lnot q) && \quad \quad (\mbox{S(50)}) \\
-                52. \vdash & \ \lozenge q \to \lnot \Box \lnot q && \quad \quad (\mbox{MP(49, 51)}) \\
-                53. \vdash & \ (b \to c) \to (a \land b \to a \land c) && \quad \quad (\mbox{T}) \\
-                54. \vdash & \ (\lozenge q \to \lnot \Box \lnot q) \to (\Box p \land \lozenge q \to \Box p \land \lnot \Box \lnot q) && \quad \quad (\mbox{S(53)}) \\
-                55. \vdash & \ \Box p \land \lozenge q \to \Box p \land \lnot \Box \lnot q && \quad \quad (\mbox{MP(52, 54)}) \\
-                           & \ldots && \\
-                56. \vdash & \ (\Box p \land \lozenge q) \to \lozenge (p \land q) && \quad \quad (\mbox{C(55, 48)}) \\
-            \end{alignedat}
-        \end{equation*}
+        Now that we proved some preliminary claims, we can prove the two given propositions.
 
-        \newpage
+        \claim[Claim 8]{
+            $(\Box p \land \lozenge q) \to \lozenge(p \land q)$ is $K$-provable.
+        }{
+            \begin{equation*}
+                \begin{alignedat}{2}
+                    1. \vdash & \ \Box (p \to q) \to ( \Box p \to \Box q) && \quad \quad (\mbox{K}) \\
+                    2. \vdash & \ (\lnot a \lor \lnot b) \to (a \to \lnot b) && \quad \quad (\mbox{T}) \\
+                    3. \vdash & \ (\lnot p \lor \lnot q) \to (p \to \lnot q) && \quad \quad (\mbox{S(2)}) \\
+                            & \ldots && \\
+                    7. \vdash & \ \Box (\lnot p \lor \lnot q) \to \Box (p \to \lnot q) && \quad \quad (\mbox{C}_2(3)) \\
+                    8. \vdash & \ \Box (p \to \lnot q) \to (\Box p \to \Box \lnot q) && \quad \quad (\mbox{S(1)}) \\
+                              & \ldots && \\
+                    12. \vdash & \ \Box (\lnot p \lor \lnot q) \to (\Box p \to \Box \lnot q) && \quad \quad (\mbox{C}_1(7, 8)) \\
+                    13. \vdash & \ (a \to b) \to (\lnot a \lor b) && \quad \quad (\mbox{T}) \\
+                    14. \vdash & \ (\Box p \to \Box \lnot q) \to (\lnot \Box p \lor \Box \lnot q) && \quad \quad (\mbox{S(13)}) \\
+                               & \ldots && \\
+                    18. \vdash & \ \Box (\lnot p \lor \lnot q) \to (\lnot \Box p \lor \Box \lnot q) && \quad \quad (\mbox{C}_1(12, 14)) \\
+                    19. \vdash & \ (\lnot a \lor b) \to \lnot (a \land \lnot b) && \quad \quad (\mbox{T}) \\
+                    20. \vdash & \ (\lnot \Box p \lor \Box \lnot q) \to \lnot (\Box p \land \lnot \Box \lnot q) && \quad \quad (\mbox{S(19)}) \\
+                               & \ldots && \\
+                    24. \vdash & \ \Box (\lnot p \lor \lnot q) \to \lnot (\Box p \land \lnot \Box \lnot q) && \quad \quad (\mbox{C}_1(18, 20)) \\
+                               & \ldots && \\
+                    27. \vdash & \ (\Box p \land \lnot \Box \lnot q) \to \lnot \Box (\lnot p \lor \lnot q) && \quad \quad (\mbox{C}_4(24)) \\
+                    28. \vdash & \ \lnot (a \land b) \to (\lnot a \lor \lnot b) && \quad \quad (\mbox{T}) \\
+                    29. \vdash & \ \lnot (p \land q) \to (\lnot p \lor \lnot q) && \quad \quad (\mbox{S(27)}) \\
+                               & \ldots && \\
+                    33. \vdash & \ \Box \lnot (p \land q) \to \Box (\lnot p \lor \lnot q) && \quad \quad (\mbox{C}_2(28)) \\
+                               & \ldots && \\
+                    36. \vdash & \ \lnot \Box(\lnot p \lor \lnot q) \to \lnot \Box \lnot (p \land q) && \quad \quad (\mbox{C}_4(32)) \\
+                               & \ldots && \\
+                    40. \vdash & \ (\Box p \land \lnot \Box \lnot q) \to \lnot \Box \lnot (p \land q) && \quad \quad (\mbox{C}_1(27, 36)) \\
+                    41. \vdash & \ \lozenge a \leftrightarrow \lnot \Box \lnot a && \quad \quad (\mbox{D}) \\
+                    42. \vdash & \ \lozenge(p \land q) \leftrightarrow \lnot \Box \lnot (p \land q) && \quad \quad (\mbox{S(41)}) \\
+                               & \ldots && \\
+                    45. \vdash & \ \lnot \Box \lnot (p \land q) \to \lozenge(p \land q) &&\quad \quad (\mbox{C}_5(42)) \\
+                               & \ldots && \\
+                    49. \vdash & \ (\Box p \land \lnot \Box \lnot q) \to \lozenge(p \land q) && \quad \quad (\mbox{C}_1(40, 45)) \\
+                \end{alignedat}
+            \end{equation*}
 
-        TODO \todo{scrivimi}
+            \begin{equation*}
+                \begin{alignedat}{2}
+                    50. \vdash & \ \lozenge q \leftrightarrow \lnot \Box \lnot q && \quad \quad (\mbox{S(41)}) \\
+                               & \ldots && \\
+                    53. \vdash & \ \lozenge q \to \lnot \Box \lnot q && \quad \quad (\mbox{C}_5(50)) \\
+                    54. \vdash & \ (b \to c) \to (a \land b \to a \land c) && \quad \quad (\mbox{T}) \\
+                    55. \vdash & \ (\lozenge q \to \lnot \Box \lnot q) \to (\Box p \land \lozenge q \to \Box p \land \lnot \Box \lnot q) && \quad \quad (\mbox{S(54)}) \\
+                    56. \vdash & \ \Box p \land \lozenge q \to \Box p \land \lnot \Box \lnot q && \quad \quad (\mbox{MP(53, 55)}) \\
+                               & \ldots && \\
+                    60. \vdash & \ (\Box p \land \lozenge q) \to \lozenge (p \land q) && \quad \quad (\mbox{C}_1(56, 49)) \\
+                \end{alignedat}
+            \end{equation*}
+        }
 
-        \claim{
-            TODO \todo{scrivimi}
+        This claim concludes the $K$-proof of the first proposition. To $K$-prove the second proposition, we are going to split the $K$-proof into 3 claims.
+
+        \claim[Claim 9]{
+            $(\lozenge p \lor \lozenge q) \to \lozenge(p \lor q)$ is $K$-provable.
         }{
             \begin{equation*}
                 \begin{alignedat}{2}
@@ -1049,8 +910,8 @@
             \end{equation*}
         }
 
-        \claim{
-            TODO \todo{scrivimi}
+        \claim[Claim 10]{
+            $\lozenge(p \lor q) \to (\lozenge p \lor \lozenge q)$ is $K$-provable.
         }{
             \begin{equation*}
                 \begin{alignedat}{2}
@@ -1087,7 +948,7 @@
                     & \ldots && \\
                     41. \vdash & \ \lnot \Box \lnot a \to \lozenge a && \quad \quad (\mbox{C}_5(37)) \\
                     42. \vdash & \ \lnot \Box \lnot p \to \lozenge p && \quad \quad (\mbox{S(41)}) \\
-                    42. \vdash & \ \lnot \Box \lnot q \to \lozenge q && \quad \quad (\mbox{S(41)}) \\
+                    43. \vdash & \ \lnot \Box \lnot q \to \lozenge q && \quad \quad (\mbox{S(41)}) \\
                     44. \vdash & \ (a \to c) \to ((b \to d) \to (a \lor b \to c \lor d)) && \quad \quad (\mbox{T}) \\
                     45. \vdash & \ (\lnot \Box \lnot p \to \lozenge p ) \to ((\lnot \Box \lnot q \to \lozenge q) \to (\lnot \Box \lnot p \lor \lnot \Box \lnot q \to \lozenge p \lor \lozenge q)) && \quad \quad (\mbox{S(44)}) \\
                     46. \vdash & \ (\lnot \Box \lnot q \to \lozenge q) \to (\lnot \Box \lnot p \lor \lnot \Box \lnot q \to \lozenge p \lor \lozenge q) && \quad \quad (\mbox{MP(41, 45)}) \\
@@ -1101,16 +962,24 @@
                     60. \vdash & \ \lozenge (p \lor q) \to \lozenge p \lor \lozenge q && \quad \quad (\mbox{C}_1(56, 47)) \\
                 \end{alignedat}
             \end{equation*}
+        }
 
+        \claim[Claim 11]{
+            $\lozenge(p \lor q) \leftrightarrow \lozenge(p \lor \lozenge q)$ is $K$-provable.
+        }{
             \begin{equation*}
                 \begin{alignedat}{2}
-                    1. \vdash & \ \lozenge p \lor \lozenge q \to \lozenge (p \lor q) && \quad \quad (\mbox{C}_8) \\
-                    2. \vdash & \ \lozenge (p \lor q) \to \lozenge p \lor \lozenge q && \quad \quad (\mbox{C}_9) \\
+                    & \ldots && \\
+                    59. \vdash & \ \lozenge p \lor \lozenge q \to \lozenge (p \lor q) && \quad \quad (\mbox{C}_9) \\
+                               & \ldots && \\
+                    119. \vdash & \ \lozenge (p \lor q) \to \lozenge p \lor \lozenge q && \quad \quad (\mbox{C}_{10}) \\
                               & \ldots && \\
-                    6. \vdash & \ \lozenge (p \lor q) \leftrightarrow \lozenge p \lor \lozenge q && \quad \quad (\mbox{C}_7(2, 1)) \\
+                    123. \vdash & \ \lozenge (p \lor q) \leftrightarrow \lozenge p \lor \lozenge q && \quad \quad (\mbox{C}_7(2, 1)) \\
                 \end{alignedat}
             \end{equation*}
         }
+
+        This last claim concludes that the second proposition is $K$-provable as well.
     }
 
     % \printbibliography % UNCOMMENT FOR BIBLIOGRAPHY
