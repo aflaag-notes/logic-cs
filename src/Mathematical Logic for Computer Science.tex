@@ -910,7 +910,7 @@
         }
 
         \claim{
-            If $p \to (q \to r)$ can be $K$-proveed, then $p \land q \to r$ can be $K$-proved in 3 steps.
+            If $p \to (q \to r)$ can be $K$-proved, then $p \land q \to r$ can be $K$-proved in 3 steps.
         }{
             Consider a $K$-proof in which $p \to (q \to r)$ is proved at step $i$; then, we have that
             \begin{equation*}
@@ -924,61 +924,79 @@
             \end{equation*}
         }
 
-        % \begin{equation*}
-        %     \begin{alignedat}{2}
-        %         1. \vdash & \ \Box (p \to q) \to ( \Box p \to \Box q) && \quad \quad (\mbox{K}) \\
-        %         2. \vdash & \ (\lnot a \lor \lnot b) \to (a \to \lnot b) && \quad \quad (\mbox{T}) \\
-        %         3. \vdash & \ (\lnot p \lor \lnot q) \to (p \to \lnot q) && \quad \quad (\mbox{S(2)}) \\
-        %         4. \vdash & \ \Box ((\lnot p \lor \lnot q) \to (p \to \lnot q)) && \quad \quad (\mbox{G(3)}) \\
-        %         5. \vdash & \ \Box ((\lnot p \lor \lnot q) \to (p \to \lnot q)) \to (\Box (\lnot p \lor \lnot q) \to \Box (p \to \lnot q)) && \quad \quad (\mbox{S(1)}) \\
-        %         6. \vdash & \ \Box (\lnot p \lor \lnot q) \to \Box (p \to \lnot q) && \quad \quad (\mbox{MP(4, 5)}) \\
-        %         7. \vdash & \ \Box (p \to \lnot q) \to (\Box p \to \Box \lnot q) && \quad \quad (\mbox{S(1)}) \\
-        %                   & \ldots && \\
-        %         11. \vdash & \ \Box (\lnot p \lor \lnot q) \to (\Box p \to \Box \lnot q) && \quad \quad (\mbox{C(6, 7)}) \\
-        %         12. \vdash & \ (a \to b) \to (\lnot a \lor b) && \quad \quad (\mbox{T}) \\
-        %         13. \vdash & \ (\Box p \to \Box \lnot q) \to (\lnot \Box p \lor \Box \lnot q) && \quad \quad (\mbox{S(12)}) \\
-        %                    & \ldots && \\
-        %         17. \vdash & \ \Box (\lnot p \lor \lnot q) \to (\lnot \Box p \lor \Box \lnot q) && \quad \quad (\mbox{C(11, 13)}) \\
-        %         18. \vdash & \ (\lnot a \lor b) \to \lnot (a \land \lnot b) && \quad \quad (\mbox{T}) \\
-        %         19. \vdash & \ (\lnot \Box p \lor \Box \lnot q) \to \lnot (\Box p \land \lnot \Box \lnot q) && \quad \quad (\mbox{S(18)}) \\
-        %                    & \ldots && \\
-        %         23. \vdash & \ \Box (\lnot p \lor \lnot q) \to \lnot (\Box p \land \lnot \Box \lnot q) && \quad \quad (\mbox{C(17, 19)}) \\
-        %         24. \vdash & \ (a \to \lnot b) \to (b \to \lnot a) && \quad \quad (\mbox{T}) \\
-        %         25. \vdash & \ (\Box (\lnot p \lor \lnot q) \to \lnot (\Box p \land \lnot \Box \lnot q)) \to ( (\Box p \land \lnot \Box \lnot q) \to \lnot \Box (\lnot p \lor \lnot q)) && \quad \quad (\mbox{S(24)}) \\
-        %         26. \vdash & \ (\Box p \land \lnot \Box \lnot q) \to \lnot \Box (\lnot p \lor \lnot q) && \quad \quad (\mbox{MP(23, 25)}) \\
-        %         27. \vdash & \ \lnot (a \land b) \to (\lnot a \lor \lnot b) && \quad \quad (\mbox{T}) \\
-        %         28. \vdash & \ \lnot (p \land q) \to (\lnot p \lor \lnot q) && \quad \quad (\mbox{S(27)}) \\
-        %         29. \vdash & \ \Box ((p \land q) \to (\lnot p \lor \lnot q)) && \quad \quad (\mbox{G(28)}) \\
-        %         30. \vdash & \ \Box ((p \land q) \to (\lnot p \lor \lnot q)) \to (\Box (\lnot (p \land q)) \to \Box (\lnot p \lor \lnot q)) && \quad \quad (\mbox{S(1)}) \\
-        %         31. \vdash & \ \Box \lnot (p \land q) \to \Box (\lnot p \lor \lnot q) && \quad \quad (\mbox{MP(29, 30)}) \\
-        %         32. \vdash & \ (a \to b) \to (\lnot b \to \lnot a) && \quad \quad (\mbox{T}) \\
-        %         33. \vdash & \ (\Box \lnot (p \land q) \to \Box (\lnot p \lor \lnot q)) \to (\lnot \Box (\lnot p \lor \lnot q) \to \lnot \Box \lnot (p \land q)) && \quad \quad (\mbox{S(32)}) \\
-        %         34. \vdash & \ \lnot \Box(\lnot p \lor \lnot q) \to \lnot \Box \lnot (p \land q) && \quad \quad (\mbox{MP(31, 33)}) \\
-        %                    & \ldots && \\
-        %         39. \vdash & \ (\Box p \land \lnot \Box \lnot q) \to \lnot \Box \lnot (p \land q) && \quad \quad (\mbox{C(26, 34)}) \\
-        %         40. \vdash & \ \lozenge p \leftrightarrow \lnot \Box \lnot p && \quad \quad (\mbox{K}) \\
-        %         41. \vdash & \ \lozenge(p \land q) \leftrightarrow \lnot \Box \lnot (p \land q) && \quad \quad (\mbox{S(40)}) \\
-        %         42. \vdash & \ (a \leftrightarrow b) \to (b \to a) && \quad \quad (\mbox{T}) \\
-        %         43. \vdash & \ (\lozenge (p \land q) \leftrightarrow \lnot \Box \lnot (p \land q)) \to (\lnot \Box \lnot (p \land q) \to \lozenge (p \land q)) && \quad \quad (\mbox{S(42)}) \\
-        %         44. \vdash & \ \lnot \Box \lnot (p \land q) \to \lozenge(p \land q) &&\quad \quad (\mbox{MP(41, 43)}) \\
-        %                    & \ldots && \\
-        %         48. \vdash & \ (\Box p \land \lnot \Box \lnot q) \to \lozenge(p \land q) && \quad \quad (\mbox{C(39, 44)}) \\
-        %     \end{alignedat}
-        % \end{equation*}
-        %
-        % \begin{equation*}
-        %     \begin{alignedat}{2}
-        %         49. \vdash & \ \lozenge q \leftrightarrow \lnot \Box \lnot q && \quad \quad (\mbox{S(40)}) \\
-        %         50. \vdash & \ (a \leftrightarrow b) \to (a \to b) && \quad \quad (\mbox{S(49)}) \\
-        %         51. \vdash & \ (\lozenge q \leftrightarrow \lnot \Box \lnot q) \to (\lozenge q \to \lnot \Box \lnot q) && \quad \quad (\mbox{S(50)}) \\
-        %         52. \vdash & \ \lozenge q \to \lnot \Box \lnot q && \quad \quad (\mbox{MP(49, 51)}) \\
-        %         53. \vdash & \ (b \to c) \to (a \land b \to a \land c) && \quad \quad (\mbox{T}) \\
-        %         54. \vdash & \ (\lozenge q \to \lnot \Box \lnot q) \to (\Box p \land \lozenge q \to \Box p \land \lnot \Box \lnot q) && \quad \quad (\mbox{S(53)}) \\
-        %         55. \vdash & \ \Box p \land \lozenge q \to \Box p \land \lnot \Box \lnot q && \quad \quad (\mbox{MP(52, 54)}) \\
-        %                    & \ldots && \\
-        %         56. \vdash & \ (\Box p \land \lozenge q) \to \lozenge (p \land q) && \quad \quad (\mbox{C(55, 48)}) \\
-        %     \end{alignedat}
-        % \end{equation*}
+        \claim{
+            If $p \to q$ can be $K$-proved, and $q \to p$ can be $K$-proved, then $p \leftrightarrow q$ can be proved in 4 steps.
+        }{
+            Consider a $K$-proof in which $p \to q$ is proved at step $i$, and $q \to p$ can be proved at step $j$ --- without loss of generality suppose $i < j$; then, we have that
+            \begin{equation*}
+                \begin{alignedat}{2}
+                    & \ldots && \\
+                    i. \vdash & \ p \to q && \quad \quad \\
+                              & \ldots && \\
+                    j. \vdash & \ q \to p && \quad \quad \\
+                    j + 1. \vdash & \ (a \to b) \to ((b \to a) \to (a \leftrightarrow b)) && \quad \quad (\mbox{T}) \\
+                    j + 2. \vdash & \ (p \to q) \to ((q \to p) \to (p \leftrightarrow q)) && \quad \quad (\mbox{S($j + 1$)}) \\
+                    j + 3. \vdash & \ (q \to p) \to (p \leftrightarrow q) && \quad \quad (\mbox{MP($i$, $j + 2$)}) \\
+                    j + 4. \vdash & \ p \leftrightarrow q && \quad \quad (\mbox{MP($j$, $j + 3$)}) \\
+                \end{alignedat}
+            \end{equation*}
+        }
+        
+        \begin{equation*}
+            \begin{alignedat}{2}
+                1. \vdash & \ \Box (p \to q) \to ( \Box p \to \Box q) && \quad \quad (\mbox{K}) \\
+                2. \vdash & \ (\lnot a \lor \lnot b) \to (a \to \lnot b) && \quad \quad (\mbox{T}) \\
+                3. \vdash & \ (\lnot p \lor \lnot q) \to (p \to \lnot q) && \quad \quad (\mbox{S(2)}) \\
+                4. \vdash & \ \Box ((\lnot p \lor \lnot q) \to (p \to \lnot q)) && \quad \quad (\mbox{G(3)}) \\
+                5. \vdash & \ \Box ((\lnot p \lor \lnot q) \to (p \to \lnot q)) \to (\Box (\lnot p \lor \lnot q) \to \Box (p \to \lnot q)) && \quad \quad (\mbox{S(1)}) \\
+                6. \vdash & \ \Box (\lnot p \lor \lnot q) \to \Box (p \to \lnot q) && \quad \quad (\mbox{MP(4, 5)}) \\
+                7. \vdash & \ \Box (p \to \lnot q) \to (\Box p \to \Box \lnot q) && \quad \quad (\mbox{S(1)}) \\
+                          & \ldots && \\
+                11. \vdash & \ \Box (\lnot p \lor \lnot q) \to (\Box p \to \Box \lnot q) && \quad \quad (\mbox{C(6, 7)}) \\
+                12. \vdash & \ (a \to b) \to (\lnot a \lor b) && \quad \quad (\mbox{T}) \\
+                13. \vdash & \ (\Box p \to \Box \lnot q) \to (\lnot \Box p \lor \Box \lnot q) && \quad \quad (\mbox{S(12)}) \\
+                           & \ldots && \\
+                17. \vdash & \ \Box (\lnot p \lor \lnot q) \to (\lnot \Box p \lor \Box \lnot q) && \quad \quad (\mbox{C(11, 13)}) \\
+                18. \vdash & \ (\lnot a \lor b) \to \lnot (a \land \lnot b) && \quad \quad (\mbox{T}) \\
+                19. \vdash & \ (\lnot \Box p \lor \Box \lnot q) \to \lnot (\Box p \land \lnot \Box \lnot q) && \quad \quad (\mbox{S(18)}) \\
+                           & \ldots && \\
+                23. \vdash & \ \Box (\lnot p \lor \lnot q) \to \lnot (\Box p \land \lnot \Box \lnot q) && \quad \quad (\mbox{C(17, 19)}) \\
+                24. \vdash & \ (a \to \lnot b) \to (b \to \lnot a) && \quad \quad (\mbox{T}) \\
+                25. \vdash & \ (\Box (\lnot p \lor \lnot q) \to \lnot (\Box p \land \lnot \Box \lnot q)) \to ( (\Box p \land \lnot \Box \lnot q) \to \lnot \Box (\lnot p \lor \lnot q)) && \quad \quad (\mbox{S(24)}) \\
+                26. \vdash & \ (\Box p \land \lnot \Box \lnot q) \to \lnot \Box (\lnot p \lor \lnot q) && \quad \quad (\mbox{MP(23, 25)}) \\
+                27. \vdash & \ \lnot (a \land b) \to (\lnot a \lor \lnot b) && \quad \quad (\mbox{T}) \\
+                28. \vdash & \ \lnot (p \land q) \to (\lnot p \lor \lnot q) && \quad \quad (\mbox{S(27)}) \\
+                29. \vdash & \ \Box ((p \land q) \to (\lnot p \lor \lnot q)) && \quad \quad (\mbox{G(28)}) \\
+                30. \vdash & \ \Box ((p \land q) \to (\lnot p \lor \lnot q)) \to (\Box (\lnot (p \land q)) \to \Box (\lnot p \lor \lnot q)) && \quad \quad (\mbox{S(1)}) \\
+                31. \vdash & \ \Box \lnot (p \land q) \to \Box (\lnot p \lor \lnot q) && \quad \quad (\mbox{MP(29, 30)}) \\
+                32. \vdash & \ (a \to b) \to (\lnot b \to \lnot a) && \quad \quad (\mbox{T}) \\
+                33. \vdash & \ (\Box \lnot (p \land q) \to \Box (\lnot p \lor \lnot q)) \to (\lnot \Box (\lnot p \lor \lnot q) \to \lnot \Box \lnot (p \land q)) && \quad \quad (\mbox{S(32)}) \\
+                34. \vdash & \ \lnot \Box(\lnot p \lor \lnot q) \to \lnot \Box \lnot (p \land q) && \quad \quad (\mbox{MP(31, 33)}) \\
+                           & \ldots && \\
+                39. \vdash & \ (\Box p \land \lnot \Box \lnot q) \to \lnot \Box \lnot (p \land q) && \quad \quad (\mbox{C(26, 34)}) \\
+                40. \vdash & \ \lozenge p \leftrightarrow \lnot \Box \lnot p && \quad \quad (\mbox{K}) \\
+                41. \vdash & \ \lozenge(p \land q) \leftrightarrow \lnot \Box \lnot (p \land q) && \quad \quad (\mbox{S(40)}) \\
+                42. \vdash & \ (a \leftrightarrow b) \to (b \to a) && \quad \quad (\mbox{T}) \\
+                43. \vdash & \ (\lozenge (p \land q) \leftrightarrow \lnot \Box \lnot (p \land q)) \to (\lnot \Box \lnot (p \land q) \to \lozenge (p \land q)) && \quad \quad (\mbox{S(42)}) \\
+                44. \vdash & \ \lnot \Box \lnot (p \land q) \to \lozenge(p \land q) &&\quad \quad (\mbox{MP(41, 43)}) \\
+                           & \ldots && \\
+                48. \vdash & \ (\Box p \land \lnot \Box \lnot q) \to \lozenge(p \land q) && \quad \quad (\mbox{C(39, 44)}) \\
+            \end{alignedat}
+        \end{equation*}
+
+        \begin{equation*}
+            \begin{alignedat}{2}
+                49. \vdash & \ \lozenge q \leftrightarrow \lnot \Box \lnot q && \quad \quad (\mbox{S(40)}) \\
+                50. \vdash & \ (a \leftrightarrow b) \to (a \to b) && \quad \quad (\mbox{S(49)}) \\
+                51. \vdash & \ (\lozenge q \leftrightarrow \lnot \Box \lnot q) \to (\lozenge q \to \lnot \Box \lnot q) && \quad \quad (\mbox{S(50)}) \\
+                52. \vdash & \ \lozenge q \to \lnot \Box \lnot q && \quad \quad (\mbox{MP(49, 51)}) \\
+                53. \vdash & \ (b \to c) \to (a \land b \to a \land c) && \quad \quad (\mbox{T}) \\
+                54. \vdash & \ (\lozenge q \to \lnot \Box \lnot q) \to (\Box p \land \lozenge q \to \Box p \land \lnot \Box \lnot q) && \quad \quad (\mbox{S(53)}) \\
+                55. \vdash & \ \Box p \land \lozenge q \to \Box p \land \lnot \Box \lnot q && \quad \quad (\mbox{MP(52, 54)}) \\
+                           & \ldots && \\
+                56. \vdash & \ (\Box p \land \lozenge q) \to \lozenge (p \land q) && \quad \quad (\mbox{C(55, 48)}) \\
+            \end{alignedat}
+        \end{equation*}
 
         \newpage
 
@@ -1047,7 +1065,49 @@
                     14. \vdash & \ \Box \lnot p \land \Box \lnot q \to \Box (\lnot p \land \lnot q) && \quad \quad (\mbox{C}_6(11)) \\
                                & \ldots && \\
                     17. \vdash & \ \lnot \Box (\lnot p \land \lnot q) \to \lnot (\Box \lnot p \land \Box \lnot q) && \quad \quad (\mbox{C}_4(14)) \\
+                    18. \vdash & \ \lnot (a \land b) \to \lnot a \lor \lnot b && \quad \quad (\mbox T) \\
+                    19. \vdash & \ \lnot (\Box \lnot p \land \Box \lnot q) \to \lnot \Box \lnot p \lor \lnot \Box \lnot q && \quad \quad (\mbox{S(18)}) \\
+                               & \ldots && \\
+                    23. \vdash & \ \lnot \Box (\lnot p \land \lnot q) \to \lnot \Box \lnot p \lor \lnot \Box \lnot q && \quad \quad (\mbox{C}_1(17, 19)) \\
+                    24. \vdash & \ (\lnot a \land \lnot b) \to \lnot (a \lor b) && \quad \quad (\mbox{T}) \\
+                    25. \vdash & \ (\lnot p \land \lnot q) \to \lnot (p \lor q) && \quad \quad (\mbox{S(24)}) \\
+                               & \ldots && \\
+                    29. \vdash & \ \Box (\lnot p \land \lnot q) \to \Box \lnot (p \lor q) && \quad \quad (\mbox{C}_2(25)) \\
+                               & \ldots && \\
+                    32. \vdash & \ \lnot \Box \lnot (p \lor q) \to \lnot \Box (\lnot p \land \lnot q) && \quad \quad (\mbox{C}_4(29)) \\
+                               & \ldots && \\
+                    36. \vdash & \ \lnot \Box \lnot (p \lor q) \to \lnot \Box \lnot p \lor \lnot \Box \lnot q && \quad \quad (\mbox{C}_1(32, 23)) \\
+                    37. \vdash & \ \lozenge a \leftrightarrow \lnot \Box \lnot a && \quad \quad (\mbox{D}) \\
+                               & \ldots && \\
+                \end{alignedat}
+            \end{equation*}
 
+            \begin{equation*}
+                \begin{alignedat}{2}
+                    & \ldots && \\
+                    41. \vdash & \ \lnot \Box \lnot a \to \lozenge a && \quad \quad (\mbox{C}_5(37)) \\
+                    42. \vdash & \ \lnot \Box \lnot p \to \lozenge p && \quad \quad (\mbox{S(41)}) \\
+                    42. \vdash & \ \lnot \Box \lnot q \to \lozenge q && \quad \quad (\mbox{S(41)}) \\
+                    44. \vdash & \ (a \to c) \to ((b \to d) \to (a \lor b \to c \lor d)) && \quad \quad (\mbox{T}) \\
+                    45. \vdash & \ (\lnot \Box \lnot p \to \lozenge p ) \to ((\lnot \Box \lnot q \to \lozenge q) \to (\lnot \Box \lnot p \lor \lnot \Box \lnot q \to \lozenge p \lor \lozenge q)) && \quad \quad (\mbox{S(44)}) \\
+                    46. \vdash & \ (\lnot \Box \lnot q \to \lozenge q) \to (\lnot \Box \lnot p \lor \lnot \Box \lnot q \to \lozenge p \lor \lozenge q) && \quad \quad (\mbox{MP(41, 45)}) \\
+                    47. \vdash & \ \lnot \Box \lnot p \lor \lnot \Box \lnot q \to \lozenge p \lor \lozenge q && \quad \quad (\mbox{MP(42, 46)}) \\
+                               & \ldots && \\
+                    51. \vdash & \ \lozenge a \to \lnot \Box \lnot a && \quad \quad (\mbox{C}_5(37)) \\
+                    52. \vdash & \ \lozenge (p \lor q) \to \lnot \Box \lnot (p \lor q) && \quad \quad (\mbox{S(51)}) \\
+                               & \ldots && \\
+                    56. \vdash & \ \lozenge (p \lor q) \to (\lnot \Box \lnot p \lor \lnot \Box \lnot q) && \quad \quad (\mbox{C}_1(52, 36)) \\
+                               & \ldots && \\
+                    60. \vdash & \ \lozenge (p \lor q) \to \lozenge p \lor \lozenge q && \quad \quad (\mbox{C}_1(56, 47)) \\
+                \end{alignedat}
+            \end{equation*}
+
+            \begin{equation*}
+                \begin{alignedat}{2}
+                    1. \vdash & \ \lozenge p \lor \lozenge q \to \lozenge (p \lor q) && \quad \quad (\mbox{C}_8) \\
+                    2. \vdash & \ \lozenge (p \lor q) \to \lozenge p \lor \lozenge q && \quad \quad (\mbox{C}_9) \\
+                              & \ldots && \\
+                    6. \vdash & \ \lozenge (p \lor q) \leftrightarrow \lozenge p \lor \lozenge q && \quad \quad (\mbox{C}_7(2, 1)) \\
                 \end{alignedat}
             \end{equation*}
         }
