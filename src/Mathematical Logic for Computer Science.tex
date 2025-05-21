@@ -679,6 +679,56 @@
         TODO \todo{scrivimi}
 
         \claim{
+            TODO \todo{scrivimi}
+        }{
+            Assume that $\Sigma \models_{\textsf F}^g \phi$; fix a frame $\mathcal F \in \textsf F$ defined over a world $W$, a model $\mathfrak M$ over $\mathcal F$, and a world $w \in W$. Suppose that $\mathfrak M, w \models \Pi$; then, by the claim of Exercise 2.2 we know that
+            \begin{equation*}
+                \begin{split}
+                         & \forall \sigma \in \Sigma, n \in \N \quad \mathfrak M, w \models \Box^n \sigma \\
+                    \iff & \forall \sigma \in \Sigma, n \in \N, x_1, \ldots, x_n \in W \quad w \stackrel{R}{\to} x_1 \stackrel{R}{\to} \ldots \stackrel{R}{\to} x_n \implies \mathfrak M, x_n \models \sigma
+                \end{split}
+            \end{equation*}
+
+            Now, consider the following restriction of $W$ $$W_w := \{v \in W_w \mid \exists n \in \N, x_1, \ldots, x_{n - 1} \in W \quad w \stackrel{R}{\to} x_1 \stackrel{R}{\to} \ldots \stackrel{R}{\to} x_{n - 1} \stackrel{R}{\to} v\}$$ where $v \in W_w$ if and onlhy if $v$ can be $R$-reached from $w$ through a sequence of $R$-accessible elements. Moreover, consider the following restriction of $R$ $$R_w := (W_w \times W_w) \cap R$$ in which we consider the tuples of $R$ that connect elements of $W_w$. Then, since $\textsf F$ is the class of all frames, we know that $\mathcal F_w = (W_w, R_w) \in \textsf F$. Lastly, consider a model $\mathfrak M_w$ over $\mathcal F_w$ such that $\mathfrak M_w = (W_w, R_w, V_w)$ where $$V_w = W_w \cap V$$
+
+            Consider some $x_1, \ldots, x_n \in W$ such that $w \stackrel{R}{\to} x_1 \stackrel{R}{\to} \ldots \stackrel{R}{\to} x_n$; by definition of $W_w$, this implies that all $x_1, \ldots, x_n$ are $R$-reachable, which implies that $x_1, \ldots, x_n \in W_w$; this means that
+            \begin{equation*}
+                \begin{split}
+                         & \forall \sigma \in \Sigma, n \in \N, x_1, \ldots, x_n \in W \quad w \stackrel{R}{\to} x_1 \stackrel{R}{\to} \ldots \stackrel{R}{\to} x_n \implies \mathfrak M, x_n \models \sigma \\
+                    \implies & \forall \sigma \in \Sigma, n \in \N, x_1 \ldots, x_n \in W_W \quad w \stackrel{R}{\to} x_1 \stackrel{R}{\to} \ldots \stackrel{R}{\to} x_n \implies \mathfrak M, x_n \models \sigma
+                \end{split}
+            \end{equation*}
+            Moreover, since $x_1, \ldots, x_n$ are elements of $W_w$, by definition of $R_w$ it holds that
+            \begin{equation*}
+                \begin{split}
+                    & \forall \sigma \in \Sigma, n \in \N, x_1 \ldots, x_n \in W_W \quad w \stackrel{R}{\to} x_1 \stackrel{R}{\to} \ldots \stackrel{R}{\to} x_n \implies \mathfrak M, x_n \models \sigma \\
+                    \implies & \forall \sigma \in \Sigma, n \in \N, x_1 \ldots, x_n \in W_W \quad w \stackrel{R_w}{\to} x_1 \stackrel{R_w}{\to} \ldots \stackrel{R_w}{\to} x_n \implies \mathfrak M, x_n \models \sigma
+                \end{split}
+            \end{equation*}
+            Furthermore, since $W_w \subseteq W$ and $R_w \subseteq R$, by definition of $\mathfrak M_w$ we get that
+            \begin{equation*}
+                \begin{split}
+                    & \forall \sigma \in \Sigma, n \in \N, x_1 \ldots, x_n \in W_W \quad w \stackrel{R_w}{\to} x_1 \stackrel{R_w}{\to} \ldots \stackrel{R_w}{\to} x_n \implies \mathfrak M, x_n \models \sigma \\
+                    \implies & \forall \sigma \in \Sigma, n \in \N, x_1 \ldots, x_n \in W_W \quad w \stackrel{R_w}{\to} x_1 \stackrel{R_w}{\to} \ldots \stackrel{R_w}{\to} x_n \implies \mathfrak M_w, x_n \models \sigma
+                \end{split}
+            \end{equation*}
+
+            Now fix $v \in W_w$; by definition there are $y_1, \ldots, y_k \in W$ such that $w \stackrel{R_w}{\to} y_1 \stackrel{R_w}{\to} \ldots \stackrel{R_w}{\to} y_k \stackrel{R}{\to} v$, therefore by the previous observation we get that
+            \begin{equation*}
+                \begin{alignedat}{2}
+                    & \forall \sigma \in \Sigma, v \in W_w \quad \mathfrak M_w, v \models \sigma && \\
+                    \implies & \forall v \in W_w, \sigma \in \Sigma \quad \mathfrak M_w, v \models \sigma && \\
+                    \implies & \forall v \in W_w \quad \mathfrak M_w, v \models \Sigma && \\
+                    \implies & \forall v \in W_w \quad \mathfrak M_w, v \models \phi && \quad \quad (\Sigma \models_{\textsf F}^g \phi) \\
+                    \iff & \forall v \in W_w \quad w \in V_w(\phi) && \\
+                    \implies & W_w \subseteq V_w(\phi) \subseteq V(\phi) && \\
+                \end{alignedat}
+            \end{equation*}
+            Lastly, we observe that $w \in W_w$, and since $W_w \subseteq V(\phi)$ we have that $w \in V(\phi)$, which happens if and only if $\mathfrak M, w \models \phi$.
+        }
+
+        \claim{
+            TODO \todo{scrivimi}
         }{
             Assume that $\Pi \models_{\textsf F} \phi$; fix a frame $\mathcal F \in \textsf F$ defined over a world $W$, and a model $\mathfrak M$ over $\mathcal F$. Suppose that $\forall w \in W \quad \mathfrak M, w \models \Sigma$; then, by the claim of Exercise 2.2 we know that $$\forall w \in W \quad \mathfrak M, w \models \Sigma \iff \forall w \in W, \sigma \in \Sigma \quad \mathfrak M, w \models \sigma$$ We observe that this implies that $$\forall n \in \N, w, x_1, \ldots, x_n \in W, \sigma \in \Sigma \quad R(w, x_1) \land R(x_1, x_2) \land \ldots \land R(x_{n - 1}, x_n) \implies \mathfrak M, x_n \models \sigma$$ therefore $$\forall n \in \N, w \in W, \sigma \in \Sigma \quad \mathfrak M, w \models \Box^n \sigma$$ Finally, this concludes that $$\forall w \in W \quad \mathfrak M, w \models \Pi \implies \forall w \in W \quad \mathfrak M, w \models \phi$$
 
