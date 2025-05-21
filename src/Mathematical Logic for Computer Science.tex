@@ -673,6 +673,19 @@
         \end{itemize}
     }
 
+    \tbf{Exercise 4.3} TODO \todo{scrivimi}.
+
+    \solution{
+        TODO \todo{scrivimi}
+
+        \claim{
+        }{
+            Assume that $\Pi \models_{\textsf F} \phi$; fix a frame $\mathcal F \in \textsf F$ defined over a world $W$, and a model $\mathfrak M$ over $\mathcal F$. Suppose that $\forall w \in W \quad \mathfrak M, w \models \Sigma$; then, by the claim of Exercise 2.2 we know that $$\forall w \in W \quad \mathfrak M, w \models \Sigma \iff \forall w \in W, \sigma \in \Sigma \quad \mathfrak M, w \models \sigma$$ We observe that this implies that $$\forall n \in \N, w, x_1, \ldots, x_n \in W, \sigma \in \Sigma \quad R(w, x_1) \land R(x_1, x_2) \land \ldots \land R(x_{n - 1}, x_n) \implies \mathfrak M, x_n \models \sigma$$ therefore $$\forall n \in \N, w \in W, \sigma \in \Sigma \quad \mathfrak M, w \models \Box^n \sigma$$ Finally, this concludes that $$\forall w \in W \quad \mathfrak M, w \models \Pi \implies \forall w \in W \quad \mathfrak M, w \models \phi$$
+
+            This proves that for any frame $\mathcal F \in \textsf F$ defined over a world $W$, and any model $\mathfrak M$ over $\mathcal F$ it holds that $$\forall w \in W \quad \mathfrak M, w \models \Sigma \implies \forall w \in W \quad \mathfrak M, w \models \phi$$ which implies that $\Sigma \models_{\textsf F}^g \phi$ by definition.
+        }
+    }
+
     \tbf{Exercise 5.1} Give $K$-proofs of $(\Box p \land \lozenge q) \to \lozenge (p \land q)$ and $\lozenge (p \lor q) \leftrightarrow (\lozenge p \lor \lozenge q)$.
 
     \solution{
