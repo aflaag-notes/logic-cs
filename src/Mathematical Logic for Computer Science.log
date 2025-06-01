@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.4.8)  21 MAY 2025 21:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.4.8)  1 JUN 2025 20:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2819,9 +2819,6 @@ LaTeX Font Info:    No math alphabet change to frozen version normal on input li
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
 LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 762.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
@@ -2854,12 +2851,7 @@ LaTeX Font Info:    No math alphabet change to frozen version normal on input li
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
 LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 762.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
 LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 762.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
@@ -2977,16 +2969,10 @@ LaTeX Font Info:    No math alphabet change to frozen version normal on input li
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
 LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 762.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
 LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 762.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
 LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 762.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
@@ -3044,9 +3030,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 Package cleveref Info: loaded `english' language definitions on input line 762.
 [17]
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
 LaTeX Font Info:    Undo math alphabet allocation in version normal on input line 762.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 762.
@@ -4081,7 +4064,7 @@ Here is how much of TeX's memory you used:
  36 hyphenation exceptions out of 8191
  119i,22n,123p,1930b,2247s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/latxfont/lasy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc2074.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1440.pfb>
-Output written on "Mathematical Logic for Computer Science.pdf" (27 pages, 417484 bytes).
+Output written on "Mathematical Logic for Computer Science.pdf" (27 pages, 416911 bytes).
 PDF statistics:
  339 PDF objects out of 1000 (max. 8388607)
  252 compressed objects within 3 object streams

@@ -673,15 +673,15 @@
         \end{itemize}
     }
 
-    \tbf{Exercise 4.3} Let $\Sigma$ be a set of formulas in the basic modal language, and let $\textsf F$ denote the class of all frames. Show that $\Sigma \models_{\textsf F}^g \phi$ if and only if $\{\Box ^n \sigma \mid \sigma \in \Sigma, n \in \N\} \models_{\textsf F} \phi$.
+    \tbf{Exercise 4.3} Let $\Sigma$ be a set of formulas in the basic modal language, and let $\textsf M$ denote the class of all models. Show that $\Sigma \models_{\textsf M}^g \phi$ if and only if $\{\Box ^n \sigma \mid \sigma \in \Sigma, n \in \N\} \models_{\textsf M} \phi$.
 
     \solution{
         Let $\Pi := \{\Box ^n \sigma \mid \sigma \in \Sigma, n \in \N\}$. We are going to split the two directions of the proof into two claims.
 
         \claim{
-            If $\Sigma \models_{\textsf F}^g \phi$, then $\Pi \models_{\textsf F} \phi$.
+            If $\Sigma \models_{\textsf M}^g \phi$, then $\Pi \models_{\textsf M} \phi$.
         }{
-            Assume that $\Sigma \models_{\textsf F}^g \phi$; fix a frame $\mathcal F \in \textsf F$ defined over a world $W$, a model $\mathfrak M$ over $\mathcal F$, and a world $w \in W$. Suppose that $\mathfrak M, w \models \Pi$; then, by the claim of Exercise 2.2 we know that
+            Assume that $\Sigma \models_{\textsf M}^g \phi$; fix a model $\mathfrak M$ defined over a domain $W$, and a world $w \in W$. Suppose that $\mathfrak M, w \models \Pi$; then, by the claim of Exercise 2.2 we know that
             \begin{equation*}
                 \begin{split}
                          & \forall \sigma \in \Sigma, n \in \N \quad \mathfrak M, w \models \Box^n \sigma \\
@@ -690,7 +690,7 @@
             \end{equation*}
             where $a \stackrel{R}{\to} b \iff R(a, b)$.
 
-            Now, consider the following restriction of $W$ $$W_w := \{v \in W_w \mid \exists n \in \N, x_1, \ldots, x_{n - 1} \in W \quad w \stackrel{R}{\to} x_1 \stackrel{R}{\to} \ldots \stackrel{R}{\to} x_{n - 1} \stackrel{R}{\to} v\}$$ where $v \in W_w$ if and only if $v$ can be $R$-reached from $w$ through a sequence of $R$-accessible elements. Moreover, consider the following restriction of $R$ $$R_w := (W_w \times W_w) \cap R$$ in which we consider the tuples of $R$ that connect elements of $W_w$. Then, since $\textsf F$ is the class of all frames, we know that $\mathcal F_w = (W_w, R_w) \in \textsf F$. Lastly, consider a model $\mathfrak M_w$ over $\mathcal F_w$ such that $\mathfrak M_w = (W_w, R_w, V_w)$ where $$V_w = W_w \cap V$$
+            Now, consider the following restriction of $W$ $$W_w := \{v \in W_w \mid \exists n \in \N, x_1, \ldots, x_{n - 1} \in W \quad w \stackrel{R}{\to} x_1 \stackrel{R}{\to} \ldots \stackrel{R}{\to} x_{n - 1} \stackrel{R}{\to} v\}$$ where $v \in W_w$ if and only if $v$ can be $R$-reached from $w$ through a sequence of $R$-accessible elements. Moreover, consider the following restriction of $R$ $$R_w := (W_w \times W_w) \cap R$$ in which we consider the tuples of $R$ that connect elements of $W_w$. Then, consider a model $\mathfrak M_w$ such that $\mathfrak M_w = (W_w, R_w, V_w)$ where $$V_w = W_w \cap V$$
 
             Consider some $x_1, \ldots, x_n \in W$ such that $w \stackrel{R}{\to} x_1 \stackrel{R}{\to} \ldots \stackrel{R}{\to} x_n$; by definition of $W_w$, this implies that all $x_1, \ldots, x_n$ are $R$-reachable from $w$, which implies that $x_1, \ldots, x_n \in W_w$; this means that
             \begin{equation*}
@@ -730,20 +730,20 @@
                     \implies & \forall \sigma \in \Sigma, v \in W_w \quad \mathfrak M_w, v \models \sigma && \\
                     \implies & \forall v \in W_w, \sigma \in \Sigma \quad \mathfrak M_w, v \models \sigma && \\
                     \iff & \forall v \in W_w \quad \mathfrak M_w, v \models \Sigma && \\
-                    \implies & \forall v \in W_w \quad \mathfrak M_w, v \models \phi \quad \quad \quad \quad (\Sigma \models_{\textsf F}^g \phi) && \\
+                    \implies & \forall v \in W_w \quad \mathfrak M_w, v \models \phi \quad \quad \quad \quad (\Sigma \models_{\textsf M}^g \phi) && \\
                     \iff & \forall v \in W_w \quad w \in V_w(\phi) && \\
                     \implies & W_w \subseteq V_w(\phi) \subseteq V(\phi) && \\
                 \end{alignedat}
             \end{equation*}
             Lastly, we observe that $w \in W_w$, and since $W_w \subseteq V(\phi)$ we have that $w \in V(\phi)$, which happens if and only if $\mathfrak M, w \models \phi$.
 
-            This proves that for any frame $\mathcal F \in \textsf F$ defined over a world $W$, any model $\mathfrak M$ over $\mathcal F$, and every world $w \in W$, it holds that $$\mathfrak M, w \models \Pi \implies \mathfrak M, w \models \phi$$ which implies that $\Pi \models_{\textsf F} \phi$ by definition.
+            This proves that for any model $\mathfrak M$ defined over a domain $W$, and every world $w \in W$, it holds that $$\mathfrak M, w \models \Pi \implies \mathfrak M, w \models \phi$$ which implies that $\Pi \models_{\textsf M} \phi$ by definition.
         }
 
         \claim{
-            If $\Pi \models_{\textsf F} \phi$, then $\Sigma \models_{\textsf F}^g \phi$.
+            If $\Pi \models_{\textsf M} \phi$, then $\Sigma \models_{\textsf M}^g \phi$.
         }{
-            Assume that $\Pi \models_{\textsf F} \phi$; fix a frame $\mathcal F \in \textsf F$ defined over a world $W$, and a model $\mathfrak M$ over $\mathcal F$. Suppose that $\forall w \in W \quad \mathfrak M, w \models \Sigma$; then, by the claim of Exercise 2.2 we obtain the following
+            Assume that $\Pi \models_{\textsf M} \phi$; fix a model $\mathfrak M$ defined over a domain $W$, and suppose that $\forall w \in W \quad \mathfrak M, w \models \Sigma$; then, by the claim of Exercise 2.2 we obtain the following
             \begin{equation*}
                 \begin{split}
                     & \forall w \in W \quad \mathfrak M, w \models \Sigma \\
@@ -751,11 +751,11 @@
                     \implies & \forall n \in \N, w, x_1, \ldots, x_n \in W, \sigma \in \Sigma \quad w \stackrel{R}{\to} x_1 \stackrel{R}{\to} \ldots \stackrel{R}{\to} x_n \implies \mathfrak M, x_n \models \sigma \\
                     \implies & \forall n \in \N, w \in W, \sigma \in \Sigma \quad \mathfrak M, w \models \Box^n \sigma \\
                     \iff & \forall w \in W \quad \mathfrak M, w \models \Pi \\
-                    \implies & \forall w \in W \quad \mathfrak M, w \models \phi \quad \quad \quad (\Pi \models_{\textsf F}\phi) \\
+                    \implies & \forall w \in W \quad \mathfrak M, w \models \phi \quad \quad \quad (\Pi \models_{\textsf M}\phi) \\
                 \end{split}
             \end{equation*}
 
-            This proves that for any frame $\mathcal F \in \textsf F$ defined over a world $W$, and any model $\mathfrak M$ over $\mathcal F$ it holds that $$\forall w \in W \quad \mathfrak M, w \models \Sigma \implies \forall w \in W \quad \mathfrak M, w \models \phi$$ which implies that $\Sigma \models_{\textsf F}^g \phi$ by definition.
+            This proves that for any model $\mathfrak M$ defined over a domain $W$ it holds that $$\forall w \in W \quad \mathfrak M, w \models \Sigma \implies \forall w \in W \quad \mathfrak M, w \models \phi$$ which implies that $\Sigma \models_{\textsf M}^g \phi$ by definition.
         }
 
         Finally, the two claims conclude the exercise.
