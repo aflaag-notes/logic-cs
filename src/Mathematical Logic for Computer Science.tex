@@ -1079,6 +1079,152 @@
         This last claim concludes that the second proposition is $K$-provable as well.
     }
 
-    % \printbibliography % UNCOMMENT FOR BIBLIOGRAPHY
+    \chapter{Script}
+
+    \section{Introduction}
+
+    Dynamic Logics are modal logics for representing the states and the events of dynamic systems. Their languages is both an assertion language able to express properties of computation states, and a programming language able to express properties of system transitions between these states.
+
+    Pratt's \todo{who tf is pratt} original dynamic logic of programs was a \tit{first-order} modal logic, and \tbf{Propositional Dynamic Logic} (PDL) is the propositional counterpart of it. Being propositional, it makes no use of terms, predicates or functions, and its only two syntactic categories are \tit{propositions} and \tit{programs}.
+
+    Therefore, to give meaning to statements in PDL we typically work with an abstract semantics in terms of \tbf{Labeled Transition Systems} (LTS), in which we label the transitions between the \tit{worlds} (i.e. the \tit{states} of the LTS) by names of \tit{atomic programs}. For instance, a transition labeled $\pi$ from one state $x$ to a state $y$ indicates that starting in $x$ there is a possible execution of the program $\pi$ that finishes in $y$. \tit{Possibility} and \tit{necessity} are expressed through modal operators that also indicate the programs they are referring to. In particular, the formula $\abk \pi \phi$ indicates that, starting from the \curlyquotes{current} state, there is a possible execution of the program $\pi$ that ends in a state in which $\phi$ is true. Analogously, the formula $\sbk \pi \phi$ means that, starting from the \curlyquotes{current} state, \tit{all} the possible executions of the program $\pi$ end in states in which $\phi$ is true.
+
+    \section{Syntax}
+
+    Now we are going to provide a more formal definition of the PDL version we will discuss. The syntax of the \curlyquotes{basic} PDL is based upon two countably infinite sets of symbols, namely $\Phi_0$ --- the set of \tit{atomic formulas} --- and $\Pi_0$ --- the set of \tit{atomic programs}.
+
+    Then, we define the set of \tit{more complex formulas} $\mathrm{Form}(\Phi_0)$ inductively as follows
+
+    \begin{itemize}
+        \item $\forall \phi \in \Phi_0 \quad \phi \in \mathrm{Form}(\Phi_0)$
+        \item $\bot \in \mathrm{Form}(\Phi_0)$
+        \item $\forall \phi \in \mathrm{Form}(\Phi_0) \quad \lnot \Phi_0 \in \mathrm{Form}(\Phi_0)$
+        \item $\forall \phi, \psi \in \mathrm{Form}(\Phi_0) \quad \phi \lor \psi \in \mathrm{Form}(\Phi_0)$
+        \item $\forall \alpha \in \mathrm{Prog}(\Pi_0), \psi \in \mathrm{Form}(\Phi_0) \quad \sbk \alpha \psi \in \mathrm{Form}(\Phi_0)$
+    \end{itemize}
+
+    where $\mathrm{Prog}(\Phi_0)$ is the set of \tit{more complex programs}, which is inductively as follows
+    
+    \begin{itemize}
+        \item $\forall \alpha \in \Pi_0 \quad \alpha \in \mathrm{Prog}(\Pi_0)$
+        \item $\forall \alpha, \beta \in \mathrm{Prog}(\Pi_0) \quad (\alpha ; \beta) \in \mathrm{Prog}(\Pi_0)$
+        \item $\forall \alpha, \beta \in \mathrm{Prog}(\Pi_0) \quad (\alpha \cup \beta) \in \mathrm{Prog}(\Pi_0)$
+        \item $\forall \alpha \in \mathrm{Prog}(\Pi_0) \quad \alpha^* \in \mathrm{Prog}(\Pi_0)$
+        \item $\forall \phi \in \mathrm{Form}(\Phi_0) \quad \phi? \in \mathrm{Prog}(\Pi_0)$
+    \end{itemize}
+
+    The meaning of the operators inside this definition is the following:
+
+    \begin{itemize}
+        \item \tit{sequence}: $(\alpha ; \beta)$ is interpreted as \curlyquotes{do $\alpha$ followed by $\beta$}
+        \item \tit{non-deterministic choice}: $(\alpha \cup \beta)$ is interpreted as \curlyquotes{do $\alpha$ followed by $\beta$, non-deterministically}
+        \item \tit{unbounded iteration}: $\alpha^*$ is interpreted as \curlyquotes{repeat $\alpha$ a finite, but non-deterministically determined, number of times}
+        \item \tit{test}: $\phi?$ is interpreted as \curlyquotes{proceed is $\phi$ is true, else fail}
+    \end{itemize}
+
+    The other boolean connectives $\land$, $\to$ and $\leftrightarrow$ are defined through $\lnot$ and $\lor$, and $\abk \alpha$ is defined to be the dual of $\sbk \alpha$, i.e. $\abk \alpha \phi \leftrightarrow \lnot \sbk \alpha \lnot \phi$. Some examples of formulas in PDL are
+
+    \begin{itemize}
+        \item $\sbk{\alpha \cup \beta}\phi$ means that whenever prorgam $\alpha$ or $\beta$ is successfully executed, a state is reached where $\phi$ holds
+        \item $\abk{(\alpha ; \beta)^*}\phi$ menas that there is a s sequence of alternating executions of $\alpha$ and $\beta$ such that a state is reached where $\phi$ holds
+    \end{itemize}
+
+    As previously mentioned, the \tit{meaning} of PDL formulas and programs is interpreted over LTSs: in particular, we construct an LTS $\mathfrak M = (W, R, V)$ where
+    
+    \begin{itemize}
+        \item $W$ is a non-empty set of states
+        \item $R$ is a mapping from $\Pi_0$ into binary relations on $W$
+        \item $V$ is a mapping from $\Phi_0$ into subsets of $W$
+    \end{itemize}
+
+    More specifically, $R$ assigns to each $\pi \in \Pi_0$ some binary relation $R(\pi)$ on $W$ with the intended meaning that $(x, y) \in R(\pi)$ if and only if there exists an execution of $\pi$ from $x$ that leads to $y$. Analogously, $V$ assigns to each atomic formula $p \in \Phi_0$ some subset $V(p) \subseteq W$ with the intended meaning that $x \in V(p)$ if and only if $p$ is true in the state $x$.
+
+    However, in order to define such meanings we need to extend inductively $R$ and $V$ as follows:
+
+    \begin{itemize}
+        \item $(x, y) \in R(\alpha; \beta) \iff \exists z \in W \quad (x, z) \in R(\alpha) \land (z, y) \in R(\beta)$
+        \item $(x, y) \in R(\alpha \cup \beta) \iff (x, y) \in R(\alpha) \lor (x, y) \in R(\beta)$
+        \item $(x, y) \in R(\alpha^*) \iff \exists z_0, \ldots, z_n \in W \quad z_0 = x \land z_n = y \land (\forall k \in [n] \quad (z_{k - 1}, z_k) \in R(\alpha))$
+        \item $(x, y) \in R(\phi?) \iff x = y \land y \in V(\phi)$
+        \item $V(\bot) = \varnothing$
+        \item $V(\lnot \phi) = W - V(\phi)$
+        \item $V(\phi \lor \psi) = V(\phi) \cup V(\psi)$
+        \item $V(\sbk \alpha \phi) = \{x \mid \forall y \in W \quad (x, y) \in R(\alpha) \implies y \in V(\phi)\}$
+    \end{itemize}
+
+    For instance, consider the following LTS $\mathfrak = (W, R, V)$
+
+    \centeredimage[An LTS.]{0.2}{../assets/model.png}
+
+    This LTS is formally defined as follows:
+
+    \begin{itemize}
+        \item $W = \{y_1, y_2, y_3, y_4\}$
+        \item $R(\pi_1) = \{(y_1, y_2), (y_2, y_2)\}$
+        \item $R(\pi_2) = \{(y_1, y_3), (y_2, y_4)\}$
+        \item $V(p) = \{y_1, y_2\}$
+        \item $V(q) = \{y_3, y_4\}$
+    \end{itemize}
+
+    These are some examples of formulas over $\mathfrak M$:
+
+    \begin{itemize}
+        \item $\mathfrak M, y_1 \models \abk{\pi_1^*; \pi_2} q$
+        \item $\mathfrak M, y_2 \models \sbk{\pi_1^*}p$
+        \item $\mathfrak M, y_1 \models \sbk{\pi_1 \cup \pi_2}(p \lor q)$
+        \item $\mathfrak M, y_3 \models \sbk{\pi_1 \cup \pi_2} \bot$
+    \end{itemize}
+
+    TODO \todo{bisimulation? idk}
+
+    \section{Axiomatization}
+
+    Given a model $\mathfrak M = (W, R, V)$, and a formula $\phi$, we say that $\mathfrak M, w \models \phi$ if and only if $w \in V(\phi)$. If this is true for all worlds $w \in W$, we say that $\phi$ is \tit{valid in $\mathfrak M$}, denoted as $$\mathfrak M \models \phi \iff \forall w \in W \quad \mathfrak M, w \models \phi$$ Lastly, we say that $\phi$ is \tit{valid} if it is valid in any model, i.e. $$\models \phi \iff \forall \mathfrak M \quad \mathfrak M \models \phi$$
+
+    The purpose of the proof theory is to provide a \tit{characterization of validity} in terms of axioms and rules of inference. We are going to define a \tbf{deducibility predicate} $\vdash$ inductively by operations on formulas that depend only on their syntactic structure, in such a way that for all the formulas $\phi$ it holds that $$\vdash \phi \iff \models \phi$$
+
+    As axioms, we assert that PDL contains every instance of the \tbf{distribution} axiom schema --- namely (K) --- and it is closed under the \tbf{necessitation} rule of inference --- or \tit{generalization} (N).
+    \begin{equation*}
+        \begin{alignedat}{2}
+            (\mbox K) & \quad \quad && \sbk \alpha (\phi \to \psi) \to (\sbk \alpha \phi \to \sbk \alpha \psi) \\
+            (\mbox N) & \quad \quad && \dfrac{\phi}{\sbk \pi \phi} \\
+        \end{alignedat}
+    \end{equation*}
+    A modal logic is \tbf{normal} if it obeys (K) and (N). PDL can then be defined as the \tit{least normal} modal logic containing every instance of the following axiom schemas
+    \begin{equation*}
+        \begin{alignedat}{2}
+            (\mbox A 1) & \quad \quad && \sbk{\alpha ; \beta} \phi \leftrightarrow \sbk \alpha \sbk \beta \phi \\
+            (\mbox A 2) & \quad \quad && \sbk{\alpha \cup \beta} \phi \leftrightarrow \sbk \alpha \phi \land \sbk \beta \phi \\
+            (\mbox A 3) & \quad \quad && \sbk{\alpha ^*} \phi \leftrightarrow \phi \land \sbk \alpha \sbk{\alpha ^*} \phi \\
+            (\mbox A 4) & \quad \quad && \sbk{\phi?} \psi \leftrightarrow (\phi \to \psi) \\
+        \end{alignedat}
+    \end{equation*}
+    and closed under the \tit{loop invariance} rule of inference: $$(\mbox I) \quad \quad \dfrac{\phi \to \sbk \alpha \phi}{\phi \to \sbk{\alpha^*} \phi}$$ We also require PDL to satisfy the \tit{Modus Ponens} inference rule $$(\mbox{MP}) \quad \quad \dfrac{\phi \quad \phi \to \psi}{\psi}$$ and the usual \tbf{substitution} rule.
+
+    We are now ready to define $\vdash$: first, we have that $$\vdash \phi \iff \varnothing \vdash \phi$$ in which case we say that $\phi$ is \tbf{$\vdash$-deducible}. Then, given a set of formulas $F$ and a formula $\phi$, we say that $\phi$ is \tbf{$\vdash$-deducible} from $F$ --- denoted as $F \vdash \phi$ if there exists a sequence $\phi_0, \ldots, \phi_n$ of formulas such that $\phi_n = \phi$, and for all $i \in [n]$ it holds that $\phi_i$ satisfies one of the following
+
+    \begin{itemize}
+        \item $\phi_i$ is an instance of an axiom schema
+        \item $\phi_i$ is an instance of a formula of $\phi$
+        \item $\phi_i$ comes from earlier formulas of the sequence by a rule of inference
+    \end{itemize}
+
+    \section{Completeness}
+
+    In 1977 \textcite{segerberg} proposed an axiomatization of PDL which replaces (I) with the following fifth axiom --- the so called \tbf{induction} axiom schema $$(\mbox A 5) \quad \quad \phi \land \sbk{\alpha ^*} (\phi \to \sbk \alpha \phi) \to \sbk{\alpha^*} \phi$$ In fact, it is easy to prove that (I) can be $\vdash$-deduced from the other axioms:
+    \begin{equation*}
+        \begin{alignedat}{2}
+            1. \vdash & \ \phi \to \sbk \alpha \phi && \quad \quad \mbox{(premise)} \\
+            2. \vdash & \ \sbk{\alpha ^*}(\phi \to \sbk \alpha \phi) && \quad \quad \mbox{(from 1 using (N) with } \pi = \alpha^*) \\
+            3. \vdash & \ \phi \land \sbk{\alpha ^*} (\phi \to \sbk \alpha \phi) \to \sbk{\alpha^*} \phi && \quad \quad (\mbox A 5) \\
+            4. \vdash & \ \sbk{\alpha^*}(\phi \to \sbk \alpha \phi) \to (\phi \to \sbk{\alpha^*} \phi) && \quad \quad (\mbox{from 3 through prop. reasoning}) \\
+            5. \vdash & \ \phi \to \sbk{\alpha^*} \phi && \quad \quad (\mbox{from 2 and 4 using \tit{Modus Ponens}})
+        \end{alignedat}
+    \end{equation*}
+    The goal of Segerberg's work was to prove that such axiomatization of PDL was such that $\vdash$-deductions were \tbf{sound} and \tbf{complete}. \tit{Soundness} of $\vdash$ w.r.t. $\models$, which requires that $$\forall \phi \in \mathrm{Form}(\Phi_0) \quad \vdash \phi \implies \models \phi$$ can be proved by induction on the length of $\phi$'s deduction in $\vdash$.
+    
+    On the other hand, \tit{completeness} of $\vdash$ w.r.t. $\models$, which requires that $$\forall \phi \in \mathrm{Form}(\Phi_0) \quad \models \phi \implies \vdash \phi$$ was pursued by several logicians. Segerberg's work was the first attempt to prove the completeness of $\vdash$, however in 1978 he found a flaw in his argument. Then, in 1978 \textcite{parikh} published what is now considered the first proof of the completeness of $\vdash$, and since then various proofs have been published since, most notably the work by \textcite{kozen} of 1981.
+
+    TODO \todo{vdash prime?}
 
 \end{document}

@@ -5,3 +5,8 @@
 \contentsline {chapter}{\numberline {1}Homeworks}{2}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Homework 1}{2}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Homework 2}{6}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Script}{26}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Introduction}{26}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Syntax}{26}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Axiomatization}{29}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Completeness}{30}{section.2.4}%

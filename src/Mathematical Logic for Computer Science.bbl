@@ -16,5 +16,109 @@
   {}
 \endgroup
 
-\datalist[entry]{anyt/global//global/global/global}\enddatalist
+\datalist[entry]{anyt/global//global/global/global}
+  \entry{kozen}{article}{}{}
+    \name{author}{2}{}{%
+      {{hash=KD}{%
+         family={Kozen},
+         familyi={K\bibinitperiod},
+         given={Dexter},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=PR}{%
+         family={Parikh},
+         familyi={P\bibinitperiod},
+         given={Rohit},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Elsevier BV}%
+    }
+    \strng{namehash}{KDPR1}
+    \strng{fullhash}{KDPR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{KP81}
+    \field{sortinit}{K}
+    \field{sortinithash}{K}
+    \verb{doi}
+    \verb 10.1016/0304-3975(81)90019-0
+    \endverb
+    \field{issn}{0304-3975}
+    \field{number}{1}
+    \field{pages}{113–118}
+    \field{title}{An elementary proof of the completeness of PDL}
+    \verb{url}
+    \verb http://dx.doi.org/10.1016/0304-3975(81)90019-0
+    \endverb
+    \field{volume}{14}
+    \field{journaltitle}{Theoretical Computer Science}
+    \field{year}{1981}
+  \endentry
+
+  \entry{parikh}{inbook}{}{}
+    \name{author}{1}{}{%
+      {{hash=PR}{%
+         family={Parikh},
+         familyi={P\bibinitperiod},
+         given={Rohit},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer Berlin Heidelberg}%
+    }
+    \strng{namehash}{PR1}
+    \strng{fullhash}{PR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Par78}
+    \field{sortinit}{P}
+    \field{sortinithash}{P}
+    \field{booktitle}{Mathematical Foundations of Computer Science 1978}
+    \verb{doi}
+    \verb 10.1007/3-540-08921-7_88
+    \endverb
+    \field{isbn}{9783540357575}
+    \field{issn}{1611-3349}
+    \field{pages}{403–415}
+    \field{title}{The completeness of propositional dynamic logic}
+    \verb{url}
+    \verb http://dx.doi.org/10.1007/3-540-08921-7_88
+    \endverb
+    \field{year}{1978}
+  \endentry
+
+  \entry{segerberg}{article}{}{}
+    \name{author}{1}{}{%
+      {{hash=SK}{%
+         family={Segerberg},
+         familyi={S\bibinitperiod},
+         given={Krister},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \list{language}{1}{%
+      {eng}%
+    }
+    \keyw{Kripke semantics; completeness; regular dynamic logic; canonical models; filtrations; inverse operator}
+    \strng{namehash}{SK1}
+    \strng{fullhash}{SK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Seg82}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{number}{1}
+    \field{pages}{31\bibrangedash 46}
+    \field{title}{A completeness theorem in the modal logic of programs}
+    \verb{url}
+    \verb http://eudml.org/doc/209235
+    \endverb
+    \field{volume}{9}
+    \field{journaltitle}{Banach Center Publications}
+    \field{year}{1982}
+  \endentry
+\enddatalist
 \endinput
