@@ -1085,10 +1085,9 @@
 
     Dynamic Logics are modal logics for representing the states and the events of dynamic systems. Their languages is both an assertion language able to express properties of computation states, and a programming language able to express properties of system transitions between these states.
 
-    Pratt's \todo{who tf is pratt} original dynamic logic of programs was a \tit{first-order} modal logic, and \tbf{Propositional Dynamic Logic} (PDL) is the propositional counterpart of it. Being propositional, it makes no use of terms, predicates or functions, and its only two syntactic categories are \tit{propositions} and \tit{programs} \todo{talk about pratt and who invented ts}
+    Pratt's \todo{who tf is pratt} original dynamic logic of programs was a \tit{first-order} modal logic, and \tbf{Propositional Dynamic Logic} (PDL) is the propositional counterpart of it. Being propositional, it makes no use of terms, predicates or functions, and its only two syntactic categories are \tit{propositions} and \tit{programs}.
 
-    \tit{Possibility} and \tit{necessity} are expressed through modal operators that also indicate the programs they are referring to. In particular, the formula $\abk \pi \phi$ indicates that, starting from the \curlyquotes{current} state, there is a possible execution of the program $\pi$ that ends in a state in which $\phi$ is true. Analogously, the formula $\sbk \pi \phi$ means that, starting from the \curlyquotes{current} state, \tit{all} the possible executions of the program $\pi$ end in states in which $\phi$ is true.
-
+    Therefore, to give meaning to statements in PDL we typically work with an abstract semantics in terms of \tbf{Labeled Transition Systems} (LTS), in which we label the transitions between the \tit{worlds} (i.e. the \tit{states} of the LTS) by names of \tit{atomic programs}. For instance, a transition labeled $\pi$ from one state $x$ to a state $y$ indicates that starting in $x$ there is a possible execution of the program $\pi$ that finishes in $y$. \tit{Possibility} and \tit{necessity} are expressed through modal operators that also indicate the programs they are referring to. In particular, the formula $\abk \pi \phi$ indicates that, starting from the \curlyquotes{current} state, there is a possible execution of the program $\pi$ that ends in a state in which $\phi$ is true. Analogously, the formula $\sbk \pi \phi$ means that, starting from the \curlyquotes{current} state, \tit{all} the possible executions of the program $\pi$ end in states in which $\phi$ is true.
 
     \section{Syntax}
 
@@ -1101,10 +1100,10 @@
         \item $\bot \in \mathrm{Form}(\Phi_0)$
         \item $\forall \phi \in \mathrm{Form}(\Phi_0) \quad \lnot \Phi_0 \in \mathrm{Form}(\Phi_0)$
         \item $\forall \phi, \psi \in \mathrm{Form}(\Phi_0) \quad \phi \lor \psi \in \mathrm{Form}(\Phi_0)$
-        \item $\forall \alpha \in \mathrm{Prog}(\Pi_0), \phi \in \mathrm{Form}(\Phi_0) \quad \sbk \alpha \phi \in \mathrm{Form}(\Phi_0)$
+        \item $\forall \alpha \in \mathrm{Prog}(\Pi_0), \psi \in \mathrm{Form}(\Phi_0) \quad \sbk \alpha \psi \in \mathrm{Form}(\Phi_0)$
     \end{itemize}
 
-    where $\mathrm{Prog}(\Pi_0)$ is the set of \tit{more complex programs}, which is inductively as follows
+    where $\mathrm{Prog}(\Phi_0)$ is the set of \tit{more complex programs}, which is inductively as follows
     
     \begin{itemize}
         \item $\forall \alpha \in \Pi_0 \quad \alpha \in \mathrm{Prog}(\Pi_0)$
@@ -1130,9 +1129,7 @@
         \item $\abk{(\alpha ; \beta)^*}\phi$ menas that there is a s sequence of alternating executions of $\alpha$ and $\beta$ such that a state is reached where $\phi$ holds
     \end{itemize}
 
-    \subsection{LTSs}
-
-    To give meaning to statements in PDL we typically work with an abstract semantics in terms of \tbf{Labeled Transition Systems} (LTS), in which we label the transitions between the \tit{worlds} (i.e. the \tit{states} of the LTS) by names of \tit{atomic programs}. For instance, a transition labeled $\pi$ from one state $x$ to a state $y$ indicates that starting in $x$ there is a possible execution of the program $\pi$ that finishes in $y$. Formally, consider an LTS $\mathfrak M = (W, R, V)$ where
+    As previously mentioned, the \tit{meaning} of PDL formulas and programs is interpreted over LTSs: in particular, we construct an LTS $\mathfrak M = (W, R, V)$ where
     
     \begin{itemize}
         \item $W$ is a non-empty set of states
@@ -1182,7 +1179,7 @@
 
     \section{Axiomatization}
 
-    Given a model $\mathfrak M = (W, R, V)$, and a formula $\phi$, we say that $\mathfrak M, w \models \phi$ if and only if $w \in V(\phi)$. If this is true for all worlds $w \in W$, we say that $\phi$ is \tit{valid in $\mathfrak M$}, denoted as $$\mathfrak M \models \phi \iff \forall w \in W \quad \mathfrak M, w \models \phi$$ Lastly, we say that $\phi$ is \tbf{valid} if it is valid in any model, i.e. $$\models \phi \iff \forall \mathfrak M \quad \mathfrak M \models \phi$$
+    Given a model $\mathfrak M = (W, R, V)$, and a formula $\phi$, we say that $\mathfrak M, w \models \phi$ if and only if $w \in V(\phi)$. If this is true for all worlds $w \in W$, we say that $\phi$ is \tit{valid in $\mathfrak M$}, denoted as $$\mathfrak M \models \phi \iff \forall w \in W \quad \mathfrak M, w \models \phi$$ Lastly, we say that $\phi$ is \tit{valid} if it is valid in any model, i.e. $$\models \phi \iff \forall \mathfrak M \quad \mathfrak M \models \phi$$
 
     The purpose of the proof theory is to provide a \tit{characterization of validity} in terms of axioms and rules of inference. We are going to define a \tbf{deducibility predicate} $\vdash$ inductively by operations on formulas that depend only on their syntactic structure, in such a way that for all the formulas $\phi$ it holds that $$\vdash \phi \iff \models \phi$$
 
@@ -1232,13 +1229,11 @@
 
     \section{Complexity}
 
-    Given a model $\mathfrak M = (W, R, V)$, a PDL formula $\phi$ is said to be \tit{satisfiable in $\mathfrak M$} if there exists a world $w \in W$ such that $\mathfrak M, w \models \phi$. Then, $\phi$ is said to be \tbf{satisfiable} if there exists a model $\mathfrak M$ such that $\phi$ is satisfiable in $\mathfrak M$.
-    
-    Now, consider the following language $$\mbox{PDL-SAT} := \{\abk{\phi} \mid \phi \ \mbox{is a satisfiable PDL formula}\}$$ We observe that a formula $\phi$ is valid if and only if $\lnot \phi$ is unsatisfiable. So, if a formula $\phi$ is not satisfiable, it suffices to prove that $\lnot \phi$ is valid. Luckily, the recursive definition of the set of valid PDL formulas immediately provides a procedure $P$ that consists in enumerating all the possible $\vdash$-deducible formulas, starting from the axioms and inferring other theorems through inference rules. Therefore, given enough time, if $\lnot \phi$ is $\vdash$-deducible $P$ will eventually find it and determine that $\phi$ is \tit{not} valid.
+    A PDL formula $\phi$ is said to be \tit{satisfiable} --- written as $\models \phi$ --- if and only if there exists a model $\mathfrak M$ such that $\mathfrak \models \phi$, i.e. a model in which $\phi$ is \tit{valid}. Now, consider the following language $$\mbox{PDL-SAT} := \{\abk{\phi} \mid \phi \ \mbox{is a satisfiable PDL formula}\}$$ We observe that a formula $\phi$ is valid if and only if $\lnot \phi$ is unsatisfiable. So, if a formula $\phi$ is not satisfiable, it suffices to prove that $\lnot \phi$ is valid. Indeed, the recursive definition of the sef of valid PDL formulas immediately provides a procedure $P$ that consists in enumerating all the possible $\vdash$-deducible formulas, starting from the axioms and inferring other theorems through inference rules. Given enough time, if $\lnot \phi$ is $\vdash$-deducible, our procedure $P$ will eventually find it and determine that $\phi$ is \tit{not} valid.
 
-    However, if $\phi$ \tit{\underline{is}} valid, such procedure $P$ would never terminate. Nonetheless, one of the earliest results on PDL was that PDL has the \tbf{finite model property}: $$\forall \phi \in \mathrm{Form}(\Phi_0) \quad \abk{\phi} \in \mbox{PDL-SAT} \implies \exists \mathfrak M_{fin} \ \mbox{finite} \quad \phi \ \mbox{satisfiable in} \ \mathfrak M_{fin}$$ Such property directly provides an additional procedure $P'$ that consists in enumerating all the possible finite models $\mathfrak M_{fin}$ of PDL and testing one by one if $\mathfrak M_{fin} \models \phi$.
+    However, if $\phi$ \tit{is} valid, such procedure $P$ would never terminate. Nonetheless, one of the earliest results on PDL was that PDL has the \tbf{finite model property}: $$\forall \phi \in \mathrm{Form}(\Phi_0) \quad \models \phi \implies \exists \mathfrak M_{fin} \ \mbox{finite} \quad \mathfrak M_{fin} \models \phi$$ Such property directly provides an additional procedure $P'$ that consists in enumerating all the possible finite models $\mathfrak M_{fin}$ of PDL and testing one by one if $\mathfrak M_{fin} \models \phi$.
 
-    Thus, together $P$ and $P'$ offer a way of deciding whether a PDL formula $\phi$ is satisfiable or not, which implies that by running $P$ and $P'$ in parallel we can decide PDL-SAT. However, this algorithm is \tit{very} inefficient. A result by \textcite{kozen} proves that PDL has the \tbf{small model property}: $$\forall \phi \in \mathrm{Form}(\Phi_0) \quad \abk{\phi} \in \mbox{PDL-SAT} \implies \exists \mathfrak M_{fin} \ \mbox{finite} \quad \soe{l}{\abs{\mathfrak M_{fin}} < \mathrm{exp}(\abs \phi) \\ \phi \ \mbox{satisfiable in} \ \mathfrak M_{fin}}$$ This result implies that we can use $P'$ to test whether a formula is satisfiable, but once we have exhausted all \curlyquotes{small} models, we can conclude that the formula is not satisfiable. Such a procedure concludes that $\mbox{PDL-SAT} \in \NEXP$. Then, in 1980 \textcite{pratt} proved that PDL-SAT is actually \EXP-Complete.
+    Thus, together $P$ and $P'$ offer a way of deciding whether a PDL formula $\phi$ is satisfiable or not, which implies that by running $P$ and $P'$ in parallel we can decide PDL-SAT. However, this algorithm is \tit{very} inefficient. A result by \textcite{kozen} proves that PDL has the \tbf{small model property}: $$\forall \phi \in \mathrm{Form}(\Phi_0) \quad \models \phi \implies \exists \mathfrak M_{fin} \ \mbox{finite} \quad \abs{\mathfrak M_{fin}} < \mathrm{exp}(\abs \phi) \land \mathfrak M_{fin} \models \phi$$ This result implies that we can use $P'$ to test whether a formula is satisfiable, but once we have exhausted all \curlyquotes{small} models, we can conclude that the formula is not satisfiable. Such a procedure concludes that $\mbox{PDL-SAT} \in \NEXP$. Then, in 1980 \textcite{pratt} proved that PDL-SAT is actually \EXP-Complete.
 
     \section{Variants}
 
@@ -1252,10 +1247,10 @@
     \begin{equation*}
         \begin{alignedat}{2}
             (\mbox A 6) & \quad \quad && \phi \to \sbk \alpha \abk{\alpha^{-1}} \phi \\
-            (\mbox A 7) & \quad \quad && \phi \to \sbk{\alpha ^{-1}} \abk \alpha \phi \\
+            (\mbox A 7) & \quad \quad && \phi \to \sbk{\alpha ^{-1}} \abk \alpha \phi
         \end{alignedat}
     \end{equation*}
-    As for PDL, CPDL has the \tbf{samll model property} as well, and CPDL-SAT is also \EXP-Complete.
+    As for PDL, CPDL has the \tbf{samll model property} as well, and CDPL-SAT is also \EXP-Complete.
 
     What about the expressive power? Consider the two following LTSs:
     
@@ -1274,6 +1269,6 @@
             \end{itemize}
     \end{itemize}
 
-    We observe that through the perspective of PDL $y \in \mathfrak M$ and $y' \in \mathfrak M'$ are completely \tit{undistinguishable}, in fact for any formula $\phi$ it is the case that $$\mathfrak M, y \models \phi \iff \mathfrak M', y' \models \phi$$ However, since $\top$ is true at all worlds by definition, we have that $$\mathfrak M, y \models \abk{\pi^{-1}} \top$$ $$\mathfrak M', y' \not\models \abk{\pi^{-1}} \top$$ because there is a $\pi$-edge $(x, y)$ in $\mathfrak M$ and no such edge in $\mathfrak M'$. This proves that, unsurprisingly, CDPL has more expressive power than standard PDL.
+    We observe that through the perspective of PDL $y \in \mathfrak M$ and $y \in \mathfrak M'$ are completely \tit{undistinguishable}, in fact for any formula $\phi$ it is the case that $$\mathfrak M, y \models \phi \iff \mathfrak M', y' \models \phi$$ However, since $\top$ is true at all worlds by definition, we have that $$\mathfrak M, y \models \abk{\pi^{-1}} \top$$ $$\mathfrak M', y' \not\models \abk{\pi^{-1}} \top$$ because there is a $\pi$-edge $(x, y)$ in $\mathfrak M$ and no such edge in $\mathfrak M'$. This proves that, unsurprisingly, CDPL has more expressive power than standard PDL.
 
 \end{document}

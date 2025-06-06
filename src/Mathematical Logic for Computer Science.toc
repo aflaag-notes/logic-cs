@@ -8,5 +8,10 @@
 \contentsline {chapter}{\numberline {2}Script}{26}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Introduction}{26}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Syntax}{26}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}LTSs}{27}{subsection.2.2.1}%
 \contentsline {section}{\numberline {2.3}Axiomatization}{29}{section.2.3}%
 \contentsline {section}{\numberline {2.4}Completeness}{30}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Complexity}{31}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Variants}{31}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Test-less PDL}{31}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}CDPL}{32}{subsection.2.6.2}%

@@ -17,6 +17,46 @@
 \endgroup
 
 \datalist[entry]{anyt/global//global/global/global}
+  \entry{Berman}{article}{}{}
+    \name{author}{2}{}{%
+      {{hash=BF}{%
+         family={Berman},
+         familyi={B\bibinitperiod},
+         given={Francine},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=PM}{%
+         family={Paterson},
+         familyi={P\bibinitperiod},
+         given={Michael},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Elsevier BV}%
+    }
+    \strng{namehash}{BFPM1}
+    \strng{fullhash}{BFPM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{BP81}
+    \field{sortinit}{B}
+    \field{sortinithash}{B}
+    \verb{doi}
+    \verb 10.1016/0304-3975(81)90102-x
+    \endverb
+    \field{issn}{0304-3975}
+    \field{number}{3}
+    \field{pages}{321–328}
+    \field{title}{Propositional dynamic logic is weaker without tests}
+    \verb{url}
+    \verb http://dx.doi.org/10.1016/0304-3975(81)90102-X
+    \endverb
+    \field{volume}{16}
+    \field{journaltitle}{Theoretical Computer Science}
+    \field{year}{1981}
+  \endentry
+
   \entry{kozen}{article}{}{}
     \name{author}{2}{}{%
       {{hash=KD}{%
@@ -88,6 +128,33 @@
     \verb http://dx.doi.org/10.1007/3-540-08921-7_88
     \endverb
     \field{year}{1978}
+  \endentry
+
+  \entry{pratt}{article}{}{}
+    \name{author}{1}{}{%
+      {{hash=PVR}{%
+         family={Pratt},
+         familyi={P\bibinitperiod},
+         given={Vaughan\bibnamedelima R},
+         giveni={V\bibinitperiod\bibinitdelim R\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Elsevier}%
+    }
+    \strng{namehash}{PVR1}
+    \strng{fullhash}{PVR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Pra80}
+    \field{sortinit}{P}
+    \field{sortinithash}{P}
+    \field{number}{2}
+    \field{pages}{231\bibrangedash 254}
+    \field{title}{A near-optimal method for reasoning about action}
+    \field{volume}{20}
+    \field{journaltitle}{Journal of Computer and System Sciences}
+    \field{year}{1980}
   \endentry
 
   \entry{segerberg}{article}{}{}
