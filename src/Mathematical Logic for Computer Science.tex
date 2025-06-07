@@ -1083,28 +1083,27 @@
 
     \section{Introduction}
 
-    Dynamic Logics are modal logics for representing the states and the events of dynamic systems. Their languages is both an assertion language able to express properties of computation states, and a programming language able to express properties of system transitions between these states.
+    \tbf{Dynamic Logics} are modal logics for representing the states and the events of dynamic systems. Their language is both an \tit{assertion language} able to express properties of computation states, and a \tit{programming language} able to express properties of system transitions between these states.
 
-    Pratt's \todo{who tf is pratt} original dynamic logic of programs was a \tit{first-order} modal logic, and \tbf{Propositional Dynamic Logic} (PDL) is the propositional counterpart of it. Being propositional, it makes no use of terms, predicates or functions, and its only two syntactic categories are \tit{propositions} and \tit{programs} \todo{talk about pratt and who invented ts}
+    The first DL system was developed in 1976 by \href{https://en.wikipedia.org/wiki/Vaughan_Pratt}{Vaughan Pratt}, an early pioneer in the field of computer science who has made several contributions to foundational areas such as search algorithms, sorting algorithms, and primality testing. Pratt's original dynamic logic of programs was a \tit{first-order} modal logic, and \tbf{Propositional Dynamic Logic} (PDL) is the propositional counterpart of it. Being propositional, it makes no use of terms, predicates or functions, and its only two syntactic categories are \tit{propositions} and \tit{programs}.
 
-    \tit{Possibility} and \tit{necessity} are expressed through modal operators that also indicate the programs they are referring to. In particular, the formula $\abk \pi \phi$ indicates that, starting from the \curlyquotes{current} state, there is a possible execution of the program $\pi$ that ends in a state in which $\phi$ is true. Analogously, the formula $\sbk \pi \phi$ means that, starting from the \curlyquotes{current} state, \tit{all} the possible executions of the program $\pi$ end in states in which $\phi$ is true.
-
+    In particular, \tit{possibility} and \tit{necessity} are expressed through modal operators that also indicate the programs they are referring to. For instance, the formula $\abk \pi \phi$ indicates that, starting from the \curlyquotes{current} state, there is a possible execution of the program $\pi$ that ends in a state in which $\phi$ is true. Analogously, the formula $\sbk \pi \phi$ means that, starting from the \curlyquotes{current} state, \tit{all} the possible executions of the program $\pi$ end in states in which $\phi$ is true.
 
     \section{Syntax}
 
-    Now we are going to provide a more formal definition of the PDL version we will discuss. The syntax of the \curlyquotes{basic} PDL is based upon two countably infinite sets of symbols, namely $\Phi_0$ --- the set of \tit{atomic formulas} --- and $\Pi_0$ --- the set of \tit{atomic programs}.
+    The syntax of standard PDL is based upon two countably infinite sets of symbols, namely $\Phi_0$ --- the set of \tit{atomic formulas} --- and $\Pi_0$ --- the set of \tit{atomic programs}.
 
     Then, we define the set of \tit{more complex formulas} $\mathrm{Form}(\Phi_0)$ inductively as follows
 
     \begin{itemize}
         \item $\forall \phi \in \Phi_0 \quad \phi \in \mathrm{Form}(\Phi_0)$
         \item $\bot \in \mathrm{Form}(\Phi_0)$
-        \item $\forall \phi \in \mathrm{Form}(\Phi_0) \quad \lnot \Phi_0 \in \mathrm{Form}(\Phi_0)$
+        \item $\forall \phi \in \mathrm{Form}(\Phi_0) \quad \lnot \phi \in \mathrm{Form}(\Phi_0)$
         \item $\forall \phi, \psi \in \mathrm{Form}(\Phi_0) \quad \phi \lor \psi \in \mathrm{Form}(\Phi_0)$
         \item $\forall \alpha \in \mathrm{Prog}(\Pi_0), \phi \in \mathrm{Form}(\Phi_0) \quad \sbk \alpha \phi \in \mathrm{Form}(\Phi_0)$
     \end{itemize}
 
-    where $\mathrm{Prog}(\Pi_0)$ is the set of \tit{more complex programs}, which is inductively as follows
+    where $\mathrm{Prog}(\Pi_0)$ is the set of \tit{more complex programs}, which is inductively defined as follows
     
     \begin{itemize}
         \item $\forall \alpha \in \Pi_0 \quad \alpha \in \mathrm{Prog}(\Pi_0)$
@@ -1127,7 +1126,7 @@
 
     \begin{itemize}
         \item $\sbk{\alpha \cup \beta}\phi$ means that whenever prorgam $\alpha$ or $\beta$ is successfully executed, a state is reached where $\phi$ holds
-        \item $\abk{(\alpha ; \beta)^*}\phi$ menas that there is a s sequence of alternating executions of $\alpha$ and $\beta$ such that a state is reached where $\phi$ holds
+        \item $\abk{(\alpha ; \beta)^*}\phi$ menas that there is a sequence of alternating executions of $\alpha$ and $\beta$ such that a state is reached where $\phi$ holds
     \end{itemize}
 
     \subsection{LTSs}
@@ -1140,9 +1139,7 @@
         \item $V$ is a mapping from $\Phi_0$ into subsets of $W$
     \end{itemize}
 
-    More specifically, $R$ assigns to each $\pi \in \Pi_0$ some binary relation $R(\pi)$ on $W$ with the intended meaning that $(x, y) \in R(\pi)$ if and only if there exists an execution of $\pi$ from $x$ that leads to $y$. Analogously, $V$ assigns to each atomic formula $p \in \Phi_0$ some subset $V(p) \subseteq W$ with the intended meaning that $x \in V(p)$ if and only if $p$ is true in the state $x$.
-
-    However, in order to define such meanings we need to extend inductively $R$ and $V$ as follows:
+    More specifically, $R$ assigns to each $\pi \in \Pi_0$ some binary relation $R(\pi)$ on $W$ with the intended meaning that $(x, y) \in R(\pi)$ if and only if there exists an execution of $\pi$ from $x$ that leads to $y$. Analogously, $V$ assigns to each atomic formula $p \in \Phi_0$ some subset $V(p) \subseteq W$ with the intended meaning that $x \in V(p)$ if and only if $p$ is true in the state $x$. However, in order to define such meanings we need to extend inductively $R$ and $V$ as follows:
 
     \begin{itemize}
         \item $(x, y) \in R(\alpha; \beta) \iff \exists z \in W \quad (x, z) \in R(\alpha) \land (z, y) \in R(\beta)$
@@ -1182,11 +1179,9 @@
 
     \section{Axiomatization}
 
-    Given a model $\mathfrak M = (W, R, V)$, and a formula $\phi$, we say that $\mathfrak M, w \models \phi$ if and only if $w \in V(\phi)$. If this is true for all worlds $w \in W$, we say that $\phi$ is \tit{valid in $\mathfrak M$}, denoted as $$\mathfrak M \models \phi \iff \forall w \in W \quad \mathfrak M, w \models \phi$$ Lastly, we say that $\phi$ is \tbf{valid} if it is valid in any model, i.e. $$\models \phi \iff \forall \mathfrak M \quad \mathfrak M \models \phi$$
+    Given a model $\mathfrak M = (W, R, V)$, and a formula $\phi$, we write that $\mathfrak M, w \models \phi$ if and only if $w \in V(\phi)$. If this is true for all worlds $w \in W$, we say that $\phi$ is \tit{valid in $\mathfrak M$}, denoted as $\mathfrak M \models \phi$ $$\mathfrak M \models \phi \iff \forall w \in W \quad \mathfrak M, w \models \phi$$ Lastly, we say that $\phi$ is \tbf{valid} if it is valid in any model, written as $\models \phi$ $$\models \phi \iff \forall \mathfrak M \quad \mathfrak M \models \phi$$
 
-    The purpose of the proof theory is to provide a \tit{characterization of validity} in terms of axioms and rules of inference. We are going to define a \tbf{deducibility predicate} $\vdash$ inductively by operations on formulas that depend only on their syntactic structure, in such a way that for all the formulas $\phi$ it holds that $$\vdash \phi \iff \models \phi$$
-
-    As axioms, we assert that PDL contains every instance of the \tbf{distribution} axiom schema --- namely (K) --- and it is closed under the \tbf{necessitation} rule of inference --- or \tit{generalization} (N).
+    The purpose of the proof theory is to provide a \tit{characterization of validity} in terms of axioms and rules of inference. To derive valid formulas, we are going to define a \tbf{deducibility predicate} $\vdash$ inductively, by operations on formulas that depend only on their syntactic structure. For the axioms, we assert that PDL contains every instance of the \tbf{distribution} axiom schema --- namely (K) --- and it is closed under the \tbf{necessitation} rule of inference --- or \tit{generalization} (N).
     \begin{equation*}
         \begin{alignedat}{2}
             (\mbox K) & \quad \quad && \sbk \alpha (\phi \to \psi) \to (\sbk \alpha \phi \to \sbk \alpha \psi) \\
@@ -1204,17 +1199,21 @@
     \end{equation*}
     and closed under the \tit{loop invariance} rule of inference: $$(\mbox I) \quad \quad \dfrac{\phi \to \sbk \alpha \phi}{\phi \to \sbk{\alpha^*} \phi}$$ We also require PDL to satisfy the \tit{Modus Ponens} inference rule $$(\mbox{MP}) \quad \quad \dfrac{\phi \quad \phi \to \psi}{\psi}$$ and the usual \tbf{substitution} rule.
 
-    We are now ready to define $\vdash$: first, we have that $$\vdash \phi \iff \varnothing \vdash \phi$$ in which case we say that $\phi$ is \tbf{$\vdash$-deducible}. Then, given a set of formulas $F$ and a formula $\phi$, we say that $\phi$ is \tbf{$\vdash$-deducible} from $F$ --- denoted as $F \vdash \phi$ if there exists a sequence $\phi_0, \ldots, \phi_n$ of formulas such that $\phi_n = \phi$, and for all $i \in [n]$ it holds that $\phi_i$ satisfies one of the following
+    We are now ready to define $\vdash$: first, we have that $$\vdash \phi \iff \varnothing \vdash \phi$$ in which case we say that $\phi$ is \tbf{$\vdash$-deducible}. Then, given a set of formulas $\Sigma$ and a formula $\phi$, we say that $\phi$ is \tit{$\vdash$-deducible} from $\Sigma$ --- denoted as $\Sigma \vdash \phi$ --- if there exists a sequence $\phi_0, \ldots, \phi_n$ of formulas such that $\phi_n = \phi$, and for all $i \in [n]$ it holds that $\phi_i$ satisfies one of the following
 
     \begin{itemize}
         \item $\phi_i$ is an instance of an axiom schema
-        \item $\phi_i$ is an instance of a formula of $\phi$
+        \item $\phi_i$ is an instance of a formula of $\Sigma$
         \item $\phi_i$ comes from earlier formulas of the sequence by a rule of inference
     \end{itemize}
 
+    The objective is to obtain an axiomatization of PDL such that $\vdash$-deductions are both \tbf{sound} and \tbf{complete} in terms of validity, i.e. for any PDL formula $\phi$ it holds that $$\vdash \phi \iff \models \phi$$ In fact, the direct implication is the \tit{soundness} of $\vdash$ w.r.t $\models$, and the converse implication is the \tit{completeness}. Do this set of axioms succeed in achieving this?
+
     \section{Completeness}
 
-    In 1977 \textcite{segerberg} proposed an axiomatization of PDL which replaces (I) with the following fifth axiom --- the so called \tbf{induction} axiom schema $$(\mbox A 5) \quad \quad \phi \land \sbk{\alpha ^*} (\phi \to \sbk \alpha \phi) \to \sbk{\alpha^*} \phi$$ In fact, it is easy to prove that (I) can be $\vdash$-deduced from the other axioms:
+    In 1977 \textcite{segerberg} proposed an axiomatization of PDL which replaces (I) with the following fifth axiom --- the so called \tbf{induction} axiom schema $$(\mbox A 5) \quad \quad \phi \land \sbk{\alpha ^*} (\phi \to \sbk \alpha \phi) \to \sbk{\alpha^*} \phi$$ with the specific goal of proving that such axiomatization of PDL was indeed both \tit{sound} and \tit{complete}.
+
+    First, it is easy to prove that (I) can be $\vdash$-deduced from the other axioms:
     \begin{equation*}
         \begin{alignedat}{2}
             1. \vdash & \ \phi \to \sbk \alpha \phi && \quad \quad \mbox{(premise)} \\
@@ -1224,40 +1223,40 @@
             5. \vdash & \ \phi \to \sbk{\alpha^*} \phi && \quad \quad (\mbox{from 2 and 4 using \tit{Modus Ponens}})
         \end{alignedat}
     \end{equation*}
-    The goal of Segerberg's work was to prove that such axiomatization of PDL was such that $\vdash$-deductions were \tbf{sound} and \tbf{complete}. \tit{Soundness} of $\vdash$ w.r.t. $\models$, which requires that $$\forall \phi \in \mathrm{Form}(\Phi_0) \quad \vdash \phi \implies \models \phi$$ can be proved by induction on the length of $\phi$'s deduction in $\vdash$.
+    Moreover, \tit{soundness} of $\vdash$ w.r.t. $\models$ can be proved by induction on the length of $\phi$'s deduction in $\vdash$. So, what about completeness?
     
-    On the other hand, \tit{completeness} of $\vdash$ w.r.t. $\models$, which requires that $$\forall \phi \in \mathrm{Form}(\Phi_0) \quad \models \phi \implies \vdash \phi$$ was pursued by several logicians. Segerberg's work was the first attempt to prove the completeness of $\vdash$, however in 1978 he found a flaw in his argument. Then, in 1978 \textcite{parikh} published what is now considered the first proof of the completeness of $\vdash$, and since then various proofs have been published since, most notably the work by \textcite{kozen} of 1981.
+    \tit{Completeness} was pursued by several logicians. Segerberg's work was the first attempt to prove the completeness of $\vdash$, however in 1978 he found a flaw in his argument. Then, in the same year \textcite{parikh} published what is now considered the first proof of the completeness of $\vdash$, and since then various proofs have been published over the years, most notably the work by \textcite{kozen} of 1981. \todo{expand somehow on completeness}
 
-    TODO \todo{vdash prime?}
+    TODO \todo{vdash prime? should be done cuz mandatory technically}
 
     \section{Complexity}
 
     Given a model $\mathfrak M = (W, R, V)$, a PDL formula $\phi$ is said to be \tit{satisfiable in $\mathfrak M$} if there exists a world $w \in W$ such that $\mathfrak M, w \models \phi$. Then, $\phi$ is said to be \tbf{satisfiable} if there exists a model $\mathfrak M$ such that $\phi$ is satisfiable in $\mathfrak M$.
     
-    Now, consider the following language $$\mbox{PDL-SAT} := \{\abk{\phi} \mid \phi \ \mbox{is a satisfiable PDL formula}\}$$ We observe that a formula $\phi$ is valid if and only if $\lnot \phi$ is unsatisfiable. So, if a formula $\phi$ is not satisfiable, it suffices to prove that $\lnot \phi$ is valid. Luckily, the recursive definition of the set of valid PDL formulas immediately provides a procedure $P$ that consists in enumerating all the possible $\vdash$-deducible formulas, starting from the axioms and inferring other theorems through inference rules. Therefore, given enough time, if $\lnot \phi$ is $\vdash$-deducible $P$ will eventually find it and determine that $\phi$ is \tit{not} valid.
+    Now, consider the following language $$\mbox{PDL-SAT} := \{\abk{\phi} \mid \phi \ \mbox{is a satisfiable PDL formula}\}$$ We observe that a formula $\phi$ is valid if and only if $\lnot \phi$ is unsatisfiable. So, if a formula $\phi$ is not satisfiable, it suffices to prove that $\lnot \phi$ is valid. Luckily, the recursive definition of the set of valid PDL formulas immediately provides a procedure $P$ that consists in enumerating all the possible $\vdash$-deducible formulas, starting from the axioms and inferring other theorems through inference rules. Therefore, given enough time, if $\lnot \phi$ is $\vdash$-deducible $P$ will eventually find it and determine that $\phi$ is \tit{not} satistiable.
 
-    However, if $\phi$ \tit{\underline{is}} valid, such procedure $P$ would never terminate. Nonetheless, one of the earliest results on PDL was that PDL has the \tbf{finite model property}: $$\forall \phi \in \mathrm{Form}(\Phi_0) \quad \abk{\phi} \in \mbox{PDL-SAT} \implies \exists \mathfrak M_{fin} \ \mbox{finite} \quad \phi \ \mbox{satisfiable in} \ \mathfrak M_{fin}$$ Such property directly provides an additional procedure $P'$ that consists in enumerating all the possible finite models $\mathfrak M_{fin}$ of PDL and testing one by one if $\mathfrak M_{fin} \models \phi$.
+    However, if $\phi$ \tit{is} satistiable, such procedure $P$ would never terminate. Nonetheless, one of the earliest results on PDL was that PDL has the \tbf{finite model property}: $$\forall \phi \in \mathrm{Form}(\Phi_0) \quad \abk{\phi} \in \mbox{PDL-SAT} \implies \exists \mathfrak M_{fin} \ \mbox{finite} \quad \phi \ \mbox{satisfiable in} \ \mathfrak M_{fin}$$ By contrapositive, such property directly provides an additional procedure $P'$ that consists in enumerating all the possible finite models $\mathfrak M_{fin}$ of PDL and testing one by one if $\phi$ is satistiable in $\mathfrak M_{fin} \models \phi$.
 
-    Thus, together $P$ and $P'$ offer a way of deciding whether a PDL formula $\phi$ is satisfiable or not, which implies that by running $P$ and $P'$ in parallel we can decide PDL-SAT. However, this algorithm is \tit{very} inefficient. A result by \textcite{kozen} proves that PDL has the \tbf{small model property}: $$\forall \phi \in \mathrm{Form}(\Phi_0) \quad \abk{\phi} \in \mbox{PDL-SAT} \implies \exists \mathfrak M_{fin} \ \mbox{finite} \quad \soe{l}{\abs{\mathfrak M_{fin}} < \mathrm{exp}(\abs \phi) \\ \phi \ \mbox{satisfiable in} \ \mathfrak M_{fin}}$$ This result implies that we can use $P'$ to test whether a formula is satisfiable, but once we have exhausted all \curlyquotes{small} models, we can conclude that the formula is not satisfiable. Such a procedure concludes that $\mbox{PDL-SAT} \in \NEXP$. Then, in 1980 \textcite{pratt} proved that PDL-SAT is actually \EXP-Complete.
+    Thus, together $P$ and $P'$ offer a way of deciding whether a PDL formula $\phi$ is satisfiable or not, which implies that by running $P$ and $P'$ in parallel we can decide PDL-SAT. However, this algorithm is \tit{very} inefficient. Can we do any better?
+
+    A result by \textcite{kozen} proves that PDL has another useful property, namely the \tbf{small model property}: $$\forall \phi \in \mathrm{Form}(\Phi_0) \quad \abk{\phi} \in \mbox{PDL-SAT} \implies \exists \mathfrak M_{fin} \ \mbox{finite} \quad \soe{l}{\abs{\mathfrak M_{fin}} < \mathrm{exp}(\abs \phi) \\ \phi \ \mbox{satisfiable in} \ \mathfrak M_{fin}}$$ Hence again, by contrapositive this result implies that we can use $P'$ to test whether a formula is satisfiable, but once we have exhausted all \curlyquotes{small} models, we can conclude that the formula is not satisfiable. Such a procedure concludes that $\mbox{PDL-SAT} \in \NEXP$. Then, in 1980 \textcite{pratt} proved that PDL-SAT is actually \EXP-complete. \todo{info about exp compl?}
 
     \section{Variants}
 
     \subsection{Test-less PDL}
 
-    The \curlyquotes{?} operator seems a bit \tit{off} and rather different from the other operators: is it even needed in PDL? Let $\mbox{PDL}_0$ be the restriction of PDL to test-free regular programs, i.e. programs which do not contain tests. Is $\mbox{PDL}_0$ as expressive as PDL? In 1981 \textcite{Berman} proved that the following PDL formula $$\abk{(\phi?; \pi)^*; \lnot \phi ? ; \pi; \phi ?}\top$$ has no $\mbox{PDL}_0$ equivalent formula, proving that test-less PDL has indeed \tit{less expressive power}. This formula can be rewritten as follows $$\abk{\mbox{while} \ p \ \mbox{do} \ \pi} \abk{\pi} \phi$$ Furthermore, their argument can be actually generalized as follows: for all $n \in \N$ let $\mathrm{PDL}_{n + 1}$ be the subset of PDL in which programs can contain tests $\phi?$ only if $\phi$ is a $\mbox{PDL}_n$ formula. Now, consider $\phi$ and $p$ of the previous formula, and define the following formula $$\hat \phi_{n + 1} := \abk{\mbox{while} \ \hat \phi_n \ \mbox{do} \ \pi_n} \abk{\pi_n} \hat \phi_n$$ where $\hat \phi_0 = \phi$ and $\pi_0 = \pi$. Berman and Paterson were able to show that there is no $\mbox{PDL}_n$ formula equivalent to $\hat \phi_{n + 1}$, which proves that for all $n \in \N$ it holds that $\mbox{PDL}_{n + 1}$ has more expressive power than $\mbox{PDL}_n$.
+    The \curlyquotes{?} operator seems a bit \tit{off} and rather different from the other operators: is it even needed in PDL? Let $\mbox{PDL}_0$ be the restriction of PDL to test-free regular programs, i.e. programs which do not contain tests. Is $\mbox{PDL}_0$ as expressive as PDL? In 1981 \textcite{Berman} proved that the following PDL formula $$\abk{(\phi?; \pi)^*; \lnot \phi ? ; \pi; \phi ?}\top$$ has no $\mbox{PDL}_0$ equivalent formula, proving that test-less PDL has indeed \tit{less expressive power}. This formula can be rewritten as follows $$\abk{\mbox{while} \ p \ \mbox{do} \ \pi} \abk{\pi} \phi$$ Furthermore, their argument can be actually generalized: for all $n \in \N$ let $\mathrm{PDL}_{n + 1}$ be the subset of PDL in which programs can contain tests $\phi?$ only if $\phi$ is a $\mbox{PDL}_n$ formula. Now, consider $\phi$ and $p$ of the previous formula, and define the following formula $$\hat \phi_{n + 1} := \abk{\mbox{while} \ \hat \phi_n \ \mbox{do} \ \pi_n} \abk{\pi_n} \hat \phi_n$$ where $\hat \phi_0 = \phi$ and $\pi_0 = \pi$. Berman and Paterson were able to show that there is no $\mbox{PDL}_n$ formula equivalent to $\hat \phi_{n + 1}$, which proves that for all $n \in \N$ it holds that $\mbox{PDL}_{n + 1}$ has more expressive power than $\mbox{PDL}_n$.
 
-    \subsection{CDPL}
+    \subsection{CPDL}
 
-    CDPL is the extension of PDL with the addition of the \tbf{converse}. For all programs $\alpha$, let $\alpha^{-1}$ stand for a new program such that $$(x, y) \in R(\alpha^{-1}) \iff (y, x) \in R(\alpha)$$ For instance, $\sbk{\alpha ^{-1}}\phi$ means that before executing $\alpha$, $\phi$ had to hold. To obtain a sound and complete system, the addition of these two axioms schemas suffices
+    CPDL is the extension of PDL with the addition of the \tbf{converse}. For all programs $\alpha$, let $\alpha^{-1}$ stand for a new program such that $$(x, y) \in R(\alpha^{-1}) \iff (y, x) \in R(\alpha)$$ For instance, $\sbk{\alpha ^{-1}}\phi$ means that before executing $\alpha$, $\phi$ had to hold. To obtain a sound and complete system, the addition of these two axioms schemas suffices
     \begin{equation*}
         \begin{alignedat}{2}
             (\mbox A 6) & \quad \quad && \phi \to \sbk \alpha \abk{\alpha^{-1}} \phi \\
             (\mbox A 7) & \quad \quad && \phi \to \sbk{\alpha ^{-1}} \abk \alpha \phi \\
         \end{alignedat}
     \end{equation*}
-    As for PDL, CPDL has the \tbf{samll model property} as well, and CPDL-SAT is also \EXP-Complete.
-
-    What about the expressive power? Consider the two following LTSs:
+    As for PDL, it can be proven that CPDL has the \tbf{small model property} as well, and CPDL-SAT is also \EXP-complete. So, what about the expressive power? Consider the two following LTSs:
     
     \begin{itemize}
         \item $\mathfrak M = (W, R, V)$
@@ -1274,6 +1273,8 @@
             \end{itemize}
     \end{itemize}
 
-    We observe that through the perspective of PDL $y \in \mathfrak M$ and $y' \in \mathfrak M'$ are completely \tit{undistinguishable}, in fact for any formula $\phi$ it is the case that $$\mathfrak M, y \models \phi \iff \mathfrak M', y' \models \phi$$ However, since $\top$ is true at all worlds by definition, we have that $$\mathfrak M, y \models \abk{\pi^{-1}} \top$$ $$\mathfrak M', y' \not\models \abk{\pi^{-1}} \top$$ because there is a $\pi$-edge $(x, y)$ in $\mathfrak M$ and no such edge in $\mathfrak M'$. This proves that, unsurprisingly, CDPL has more expressive power than standard PDL.
+    We observe that through the perspective of PDL $y \in \mathfrak M$ and $y' \in \mathfrak M'$ are completely \tit{undistinguishable}, in fact for any formula $\phi$ it is the case that $$\mathfrak M, y \models \phi \iff \mathfrak M', y' \models \phi$$ However, since $\top$ is true at all worlds by definition, we have that $$\mathfrak M, y \models \abk{\pi^{-1}} \top$$ $$\mathfrak M', y' \not\models \abk{\pi^{-1}} \top$$ because there is a $\pi$-edge $(x, y)$ in $\mathfrak M$ and no such edge in $\mathfrak M'$. This proves that, unsurprisingly, CPDL has more expressive power than standard PDL.
+
+    % \printbibliography % UNCOMMENT FOR BIBLIOGRAPHY
 
 \end{document}
