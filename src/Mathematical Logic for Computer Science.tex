@@ -1071,7 +1071,7 @@
                                & \ldots && \\
                     119. \vdash & \ \lozenge (p \lor q) \to \lozenge p \lor \lozenge q && \quad \quad (\mbox{C}_{10}) \\
                               & \ldots && \\
-                    123. \vdash & \ \lozenge (p \lor q) \leftrightarrow \lozenge p \lor \lozenge q && \quad \quad (\mbox{C}_7(2, 1)) \\
+                    123. \vdash & \ \lozenge (p \lor q) \leftrightarrow \lozenge p \lor \lozenge q && \quad \quad (\mbox{C}_7(59, 119)) \\
                 \end{alignedat}
             \end{equation*}
         }
@@ -1277,9 +1277,11 @@
 
     \subsection{IPDL}
 
-    The operators defined over programs on standard PDL do not include \tbf{intersection}, but what happens when we add such operator? We obtain IPDL, in which for all programs $\alpha, \beta \in \mathrm{Prog}(\Pi_0)$ the expression $\alpha \cap \beta$ stands for a new programs that has the following semantics $$(x, y) \in R(\alpha \cap y) \iff (x, y) \in R(\alpha) \land (x, y) \in R(\beta)$$ For instance, the intended reading of $\abk{\alpha \cap \beta} \phi$ is that if we execute $\alpha$ and $\beta$ in the \curlyquotes{current} state, there exists a state reachable by both programs which satisfies $\phi$. Thus, we have the following valid formula $$\models \abk{\alpha \cap \beta} \phi \to \abk \alpha \phi \land \abk \beta \phi$$ even though, in general, the converse is \tit{not} true. However, differntly from PDL and CPDL, the axiomatization of IDPL has been an open problem until 2003, when \textcite{TODO} proved that \todo{todo da finire}
-    
-    In terms of complexity, \textcite{ipdl} proved that IPDL-SAT is \textsf{2EXP}-complete, and ICPDL-SAT --- the variant of the PDL satisfiability problem in which there are both the \tit{intersection} and the \tit{converse} operator --- is \textsf{2EXP}-complete as well, as proved by \textcite{icpdl}.
+    The operators defined over programs on standard PDL do not include \tbf{intersection}, but what happens when we add such operator? We obtain IPDL, in which for all programs $\alpha, \beta \in \mathrm{Prog}(\Pi_0)$ the expression $\alpha \cap \beta$ stands for a new programs that has the following semantics $$(x, y) \in R(\alpha \cap y) \iff (x, y) \in R(\alpha) \land (x, y) \in R(\beta)$$ For instance, the intended reading of $\abk{\alpha \cap \beta} \phi$ is that if we execute $\alpha$ and $\beta$ in the \curlyquotes{current} state, there exists a state reachable by both programs which satisfies $\phi$. Thus, we have the following valid formula $$\models \abk{\alpha \cap \beta} \phi \to \abk \alpha \phi \land \abk \beta \phi$$ even though, in general, the converse is \tit{not} true.
+
+    Differntly from PDL and CPDL, the axiomatization of IDPL has been an open problem until 2003, when \textcite{balbiani} presented a \tit{complete} proof system of IPDL. In terms of complexity, \textcite{ipdl} proved that IPDL-SAT is \textsf{2EXP}-complete.
+
+    As a final note, the variant of the PDL satisfiability problem in which there are both the \tit{intersection} and the \tit{converse} operator ICPDL-SAT has been proven to be \textsf{2EXP}-complete as well by \textcite{icpdl} in 2008.
 
     % \printbibliography % UNCOMMENT FOR BIBLIOGRAPHY
 

@@ -57,6 +57,39 @@
     \field{year}{1981}
   \endentry
 
+  \entry{balbiani}{article}{}{}
+    \name{author}{2}{}{%
+      {{hash=BP}{%
+         family={Balbiani},
+         familyi={B\bibinitperiod},
+         given={Philippe},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=VD}{%
+         family={Vakarelov},
+         familyi={V\bibinitperiod},
+         given={Dimiter},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Taylor \& Francis}%
+    }
+    \strng{namehash}{BPVD1}
+    \strng{fullhash}{BPVD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{BV03}
+    \field{sortinit}{B}
+    \field{sortinithash}{B}
+    \field{number}{3-4}
+    \field{pages}{231\bibrangedash 276}
+    \field{title}{PDL with intersection of programs: a complete axiomatization}
+    \field{volume}{13}
+    \field{journaltitle}{Journal of Applied Non-Classical Logics}
+    \field{year}{2003}
+  \endentry
+
   \entry{icpdl}{article}{}{}
     \name{author}{3}{}{%
       {{hash=GS}{%
