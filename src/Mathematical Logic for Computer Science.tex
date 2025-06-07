@@ -1117,7 +1117,7 @@
 
     \begin{itemize}
         \item \tit{sequence}: $(\alpha ; \beta)$ is interpreted as \curlyquotes{do $\alpha$ followed by $\beta$}
-        \item \tit{non-deterministic choice}: $(\alpha \cup \beta)$ is interpreted as \curlyquotes{do $\alpha$ followed by $\beta$, non-deterministically}
+        \item \tit{non-deterministic choice}: $(\alpha \cup \beta)$ is interpreted as \curlyquotes{do $\alpha$ or $\beta$, non-deterministically}
         \item \tit{unbounded iteration}: $\alpha^*$ is interpreted as \curlyquotes{repeat $\alpha$ a finite, but non-deterministically determined, number of times}
         \item \tit{test}: $\phi?$ is interpreted as \curlyquotes{proceed is $\phi$ is true, else fail}
     \end{itemize}
@@ -1126,7 +1126,7 @@
 
     \begin{itemize}
         \item $\sbk{\alpha \cup \beta}\phi$ means that whenever prorgam $\alpha$ or $\beta$ is successfully executed, a state is reached where $\phi$ holds
-        \item $\abk{(\alpha ; \beta)^*}\phi$ menas that there is a sequence of alternating executions of $\alpha$ and $\beta$ such that a state is reached where $\phi$ holds
+        \item $\abk{(\alpha ; \beta)^*}\phi$ means that there is a sequence of alternating executions of $\alpha$ and $\beta$ such that a state is reached where $\phi$ holds
     \end{itemize}
 
     \subsection{LTSs}
@@ -1227,7 +1227,7 @@
     
     \tit{Completeness} was pursued by several logicians. Segerberg's work was the first attempt to prove the completeness of $\vdash$, however in 1978 he found a flaw in his argument. Then, in the same year \textcite{parikh} published what is now considered the first proof of the completeness of $\vdash$, and since then various proofs have been published over the years, most notably the work by \textcite{kozen} of 1981. \todo{expand somehow on completeness}
     
-    Different alternative proof theories of PDL have also been sought after, and various alternative formulations of deducibility predicates were defined even shortly after Parikh's work. For example, in 1992 \textcite{goldblatt} proposed a deducibility predicate that exploits an \tit{infinitary rule} of inference (i.e. a rule that takes an \tit{infinite} number of premises). Let $\vdash'$ be the deducibility predicate corresponding in the languate of PDL to the \tit{least normal} modal logic containing every instance of the axiom schemas (A1), (A2), (A3) and (A4), and closed under the following \tit{infinitary} rule of inference $$(\mbox I') \quad \quad \dfrac{\{\sbk \beta \sbk{\alpha^n} \phi \mid n \in \N\}}{\sbk{\beta} \sbk{\alpha^*} \phi}$$ Goldblatt was able to prove that $\vdash'$ is both sound and complete w.r.t. $\models$.
+    Different alternative proof theories of PDL have also been sought after, and various alternative formulations of deducibility predicates were defined even shortly after Parikh's work. For example, in 1992 \textcite{goldblatt} proposed a deducibility predicate that exploits an \tit{infinitary rule} of inference (i.e. a rule that takes an \tit{infinite} number of premises). Let $\vdash'$ be the deducibility predicate corresponding in the language of PDL to the \tit{least normal} modal logic containing every instance of the axiom schemas (A1), (A2), (A3) and (A4), and closed under the following \tit{infinitary} rule of inference $$(\mbox I') \quad \quad \dfrac{\{\sbk \beta \sbk{\alpha^n} \phi \mid n \in \N\}}{\sbk{\beta} \sbk{\alpha^*} \phi}$$ Goldblatt was able to prove that $\vdash'$ is both sound and complete w.r.t. $\models$.
 
     \section{Complexity}
 
@@ -1235,7 +1235,7 @@
     
     Now, consider the following language $$\mbox{PDL-SAT} := \{\abk{\phi} \mid \phi \ \mbox{is a satisfiable PDL formula}\}$$ We observe that a formula $\phi$ is valid if and only if $\lnot \phi$ is unsatisfiable. So, if a formula $\phi$ is not satisfiable, it suffices to prove that $\lnot \phi$ is valid. Luckily, the recursive definition of the set of valid PDL formulas immediately provides a procedure $P$ that consists in enumerating all the possible $\vdash$-deducible formulas, starting from the axioms and inferring other theorems through inference rules. Therefore, given enough time, if $\lnot \phi$ is $\vdash$-deducible $P$ will eventually find it and determine that $\phi$ is \tit{not} satistiable.
 
-    However, if $\phi$ \tit{is} satistiable, such procedure $P$ would never terminate. Nonetheless, one of the earliest results on PDL was that PDL has the \tbf{finite model property}: $$\forall \phi \in \mathrm{Form}(\Phi_0) \quad \abk{\phi} \in \mbox{PDL-SAT} \implies \exists \mathfrak M_{fin} \ \mbox{finite} \quad \phi \ \mbox{satisfiable in} \ \mathfrak M_{fin}$$ By contrapositive, such property directly provides an additional procedure $P'$ that consists in enumerating all the possible finite models $\mathfrak M_{fin}$ of PDL and testing one by one if $\phi$ is satistiable in $\mathfrak M_{fin} \models \phi$.
+    However, if $\phi$ \tit{is} satistiable, such procedure $P$ would never terminate. Nonetheless, one of the earliest results on PDL was that PDL has the \tbf{finite model property}: $$\forall \phi \in \mathrm{Form}(\Phi_0) \quad \abk{\phi} \in \mbox{PDL-SAT} \implies \exists \mathfrak M_{fin} \ \mbox{finite} \quad \phi \ \mbox{satisfiable in} \ \mathfrak M_{fin}$$ By contrapositive, such property directly provides an additional procedure $P'$ that consists in enumerating all the possible finite models $\mathfrak M_{fin}$ of PDL and testing one by one if $\phi$ is satistiable in $\mathfrak M_{fin}$.
 
     Thus, together $P$ and $P'$ offer a way of deciding whether a PDL formula $\phi$ is satisfiable or not, which implies that by running $P$ and $P'$ in parallel we can decide PDL-SAT. However, this algorithm is \tit{very} inefficient. Can we do any better?
 
