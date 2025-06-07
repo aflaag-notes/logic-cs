@@ -19,47 +19,49 @@ Reallocated singl_function (elt_size=8) to 100 items from 50.
 Reallocated singl_function (elt_size=8) to 100 items from 50.
 Database file #1: Mathematical_Logic_for_Computer_Science-blx.bib
 Database file #2: ./references.bib
+Warning--I didn't find a database entry for "TODO"
 Biblatex version: 3.20
 Reallocated wiz_functions (elt_size=8) to 9000 items from 6000.
 Reallocated singl_function (elt_size=8) to 100 items from 50.
-You've used 6 entries,
+You've used 9 entries,
             6402 wiz_defined-function locations,
-            1249 strings with 10108 characters,
-and the built_in function-call counts, 32279 in all, are:
-= -- 2223
-> -- 615
-< -- 221
-+ -- 752
-- -- 216
-* -- 2236
-:= -- 3301
+            1276 strings with 10815 characters,
+and the built_in function-call counts, 56604 in all, are:
+= -- 4120
+> -- 1104
+< -- 460
++ -- 1433
+- -- 371
+* -- 3740
+:= -- 5599
 add.period$ -- 0
-call.type$ -- 6
-change.case$ -- 132
-chr.to.int$ -- 44
-cite$ -- 10
-duplicate$ -- 3377
-empty$ -- 2975
-format.name$ -- 300
-if$ -- 6802
+call.type$ -- 9
+change.case$ -- 301
+chr.to.int$ -- 50
+cite$ -- 16
+duplicate$ -- 6052
+empty$ -- 5000
+format.name$ -- 518
+if$ -- 11980
 int.to.chr$ -- 0
-int.to.str$ -- 15
+int.to.str$ -- 25
 missing$ -- 0
-newline$ -- 191
-num.names$ -- 299
-pop$ -- 1726
+newline$ -- 302
+num.names$ -- 573
+pop$ -- 2795
 preamble$ -- 1
-purify$ -- 148
+purify$ -- 332
 quote$ -- 0
-skip$ -- 1131
+skip$ -- 2060
 stack$ -- 0
-substring$ -- 3687
-swap$ -- 868
-text.length$ -- 173
-text.prefix$ -- 8
+substring$ -- 6657
+swap$ -- 1485
+text.length$ -- 282
+text.prefix$ -- 12
 top$ -- 1
-type$ -- 192
+type$ -- 294
 warning$ -- 0
-while$ -- 443
+while$ -- 738
 width$ -- 0
-write$ -- 186
+write$ -- 294
+(There was 1 warning)

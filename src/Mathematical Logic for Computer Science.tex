@@ -1226,8 +1226,8 @@
     Moreover, \tit{soundness} of $\vdash$ w.r.t. $\models$ can be proved by induction on the length of $\phi$'s deduction in $\vdash$. So, what about completeness?
     
     \tit{Completeness} was pursued by several logicians. Segerberg's work was the first attempt to prove the completeness of $\vdash$, however in 1978 he found a flaw in his argument. Then, in the same year \textcite{parikh} published what is now considered the first proof of the completeness of $\vdash$, and since then various proofs have been published over the years, most notably the work by \textcite{kozen} of 1981. \todo{expand somehow on completeness}
-
-    TODO \todo{vdash prime? should be done cuz mandatory technically}
+    
+    Different alternative proof theories of PDL have also been sought after, and various alternative formulations of deducibility predicates were defined even shortly after Parikh's work. For example, in 1992 \textcite{goldblatt} proposed a deducibility predicate that exploits an \tit{infinitary rule} of inference (i.e. a rule that takes an \tit{infinite} number of premises). Let $\vdash'$ be the deducibility predicate corresponding in the languate of PDL to the \tit{least normal} modal logic containing every instance of the axiom schemas (A1), (A2), (A3) and (A4), and closed under the following \tit{infinitary} rule of inference $$(\mbox I') \quad \quad \dfrac{\{\sbk \beta \sbk{\alpha^n} \phi \mid n \in \N\}}{\sbk{\beta} \sbk{\alpha^*} \phi}$$ Goldblatt was able to prove that $\vdash'$ is both sound and complete w.r.t. $\models$.
 
     \section{Complexity}
 
@@ -1274,6 +1274,12 @@
     \end{itemize}
 
     We observe that through the perspective of PDL $y \in \mathfrak M$ and $y' \in \mathfrak M'$ are completely \tit{undistinguishable}, in fact for any formula $\phi$ it is the case that $$\mathfrak M, y \models \phi \iff \mathfrak M', y' \models \phi$$ However, since $\top$ is true at all worlds by definition, we have that $$\mathfrak M, y \models \abk{\pi^{-1}} \top$$ $$\mathfrak M', y' \not\models \abk{\pi^{-1}} \top$$ because there is a $\pi$-edge $(x, y)$ in $\mathfrak M$ and no such edge in $\mathfrak M'$. This proves that, unsurprisingly, CPDL has more expressive power than standard PDL.
+
+    \subsection{IPDL}
+
+    The operators defined over programs on standard PDL do not include \tbf{intersection}, but what happens when we add such operator? We obtain IPDL, in which for all programs $\alpha, \beta \in \mathrm{Prog}(\Pi_0)$ the expression $\alpha \cap \beta$ stands for a new programs that has the following semantics $$(x, y) \in R(\alpha \cap y) \iff (x, y) \in R(\alpha) \land (x, y) \in R(\beta)$$ For instance, the intended reading of $\abk{\alpha \cap \beta} \phi$ is that if we execute $\alpha$ and $\beta$ in the \curlyquotes{current} state, there exists a state reachable by both programs which satisfies $\phi$. Thus, we have the following valid formula $$\models \abk{\alpha \cap \beta} \phi \to \abk \alpha \phi \land \abk \beta \phi$$ even though, in general, the converse is \tit{not} true. However, differntly from PDL and CPDL, the axiomatization of IDPL has been an open problem until 2003, when \textcite{TODO} proved that \todo{todo da finire}
+    
+    In terms of complexity, \textcite{ipdl} proved that IPDL-SAT is \textsf{2EXP}-complete, and ICPDL-SAT --- the variant of the PDL satisfiability problem in which there are both the \tit{intersection} and the \tit{converse} operator --- is \textsf{2EXP}-complete as well, as proved by \textcite{icpdl}.
 
     % \printbibliography % UNCOMMENT FOR BIBLIOGRAPHY
 

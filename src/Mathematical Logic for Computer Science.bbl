@@ -57,6 +57,76 @@
     \field{year}{1981}
   \endentry
 
+  \entry{icpdl}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=GS}{%
+         family={G\"{o}ller},
+         familyi={G\bibinitperiod},
+         given={Stefan},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=LM}{%
+         family={Lohrey},
+         familyi={L\bibinitperiod},
+         given={Markus},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=LC}{%
+         family={Lutz},
+         familyi={L\bibinitperiod},
+         given={Carsten},
+         giveni={C\bibinitperiod},
+      }}%
+    }
+    \list{language}{1}{%
+      {en}%
+    }
+    \list{publisher}{1}{%
+      {Schloss Dagstuhl – Leibniz-Zentrum f\"{u}r Informatik}%
+    }
+    \keyw{Satisfiability, Propositional Dynamic Logic, Computational Complexity}
+    \strng{namehash}{GSLMLC1}
+    \strng{fullhash}{GSLMLC1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{GLL08}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \verb{doi}
+    \verb 10.4230/DAGSEMPROC.07441.5
+    \endverb
+    \field{title}{PDL with Intersection and Converse is 2EXP-complete}
+    \verb{url}
+    \verb https://drops.dagstuhl.de/entities/document/10.4230/DagSemProc.07441.
+    \verb 5
+    \endverb
+    \field{year}{2008}
+  \endentry
+
+  \entry{goldblatt}{book}{}{}
+    \name{author}{1}{}{%
+      {{hash=GR}{%
+         family={Goldblatt},
+         familyi={G\bibinitperiod},
+         given={Robert},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{2}{%
+      {Center for the Study of Language}%
+      {Information}%
+    }
+    \strng{namehash}{GR1}
+    \strng{fullhash}{GR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Gol87}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \field{title}{Logics of time and computation}
+    \field{year}{1987}
+  \endentry
+
   \entry{kozen}{article}{}{}
     \name{author}{2}{}{%
       {{hash=KD}{%
@@ -95,6 +165,47 @@
     \field{volume}{14}
     \field{journaltitle}{Theoretical Computer Science}
     \field{year}{1981}
+  \endentry
+
+  \entry{ipdl}{article}{}{}
+    \name{author}{2}{}{%
+      {{hash=LM}{%
+         family={Lange},
+         familyi={L\bibinitperiod},
+         given={Martin},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=LC}{%
+         family={Lutz},
+         familyi={L\bibinitperiod},
+         given={Carsten},
+         giveni={C\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Cambridge University Press (CUP)}%
+    }
+    \strng{namehash}{LMLC1}
+    \strng{fullhash}{LMLC1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{LL05}
+    \field{sortinit}{L}
+    \field{sortinithash}{L}
+    \verb{doi}
+    \verb 10.2178/jsl/1129642115
+    \endverb
+    \field{issn}{1943-5886}
+    \field{number}{4}
+    \field{pages}{1072–1086}
+    \field{title}{2-Exp Time lower bounds for propositional dynamic logics with intersection}
+    \verb{url}
+    \verb http://dx.doi.org/10.2178/jsl/1129642115
+    \endverb
+    \field{volume}{70}
+    \field{journaltitle}{Journal of Symbolic Logic}
+    \field{month}{12}
+    \field{year}{2005}
   \endentry
 
   \entry{parikh}{inbook}{}{}
