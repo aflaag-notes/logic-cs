@@ -298,13 +298,13 @@ Over the years multiple versions of PDL have been studied
 
 We will discuss the following
 
-- Test-less PDL
+- Test-free PDL
 - CPDL
 - IPDL
 
 ---
 
-# Variants - Test-less PDL
+# Variants - Test-free PDL
 
 The "$?$" operator seems _different_ with respect to the other programs, can we remove this operator from PDL?
 
