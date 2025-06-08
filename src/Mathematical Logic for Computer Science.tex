@@ -1257,8 +1257,8 @@
         \item $W_m = \{w_0, \ldots, w_{2m}\}$
         \item $R_m(A) = \{(w_i, w_{i + 1}) \mid i \in [0, 2m - 1]\} \cup \{(w_{2m}, w_0)\}$
         \item $R_m(B) = \varnothing$ for any other atomic program $B \in \Pi_0 - \{A\}$
-        \item $V(P) = W_m - \{w_{m - 1}, w_{2m - 1}, w_{2m}\}$
-        \item $V(Q) = W_m$ for any other atomic formula $Q \in \Phi_0 - \{P\}$
+        \item $V_m(P) = W_m - \{w_{m - 1}, w_{2m - 1}, w_{2m}\}$
+        \item $V_m(Q) = W_m$ for any other atomic formula $Q \in \Phi_0 - \{P\}$
     \end{itemize}
 
     TODO \todo{add image}
@@ -1285,7 +1285,7 @@
         \claim{
             For any $p \in L_A$, any $m \ge 2$ such that $2m + 1 \in \Primes$, and any $0 \le k \le m - n_A(p) - 1$ it holds that $\mathfrak A_m, w_k \models p \iff \mathfrak A_m, w_{k + m} \models p$.
         }{
-            We proceed by structural induction on $p$. If $p$ is a propositional variable, or $\top$, or $\bot$, then $n_A(p) = 0$ therefore for any $0 \le k \le m$ it holds that $$\mathfrak A_m, w_k \models p \iff \mathfrak A_m, w_{k + m} \models p$$ because $V(Q) = W_m$ for any $Q \in \Phi_0 - \{P\}$ by construction of $\mathfrak A_m$. Now, consider a formula $p$ different from the base cases, and let $m, k \in \N$ two integers satisfying the claim.
+            We proceed by structural induction on $p$. If $p$ is a propositional variable, or $\top$, or $\bot$, then $n_A(p) = 0$ therefore for any $0 \le k \le m$ it holds that $$\mathfrak A_m, w_k \models p \iff \mathfrak A_m, w_{k + m} \models p$$ because $V_m(Q) = W_m$ for any $Q \in \Phi_0 - \{P\}$ by construction of $\mathfrak A_m$. Now, consider a formula $p$ different from the base cases, and let $m, k \in \N$ two integers satisfying the claim.
 
             If $p = \lnot q$ then $n_A(p) = n_A(q)$, thus by induction on $q$ we have that $$\mathfrak A_m, w_k \models q \iff \mathfrak A_m, w_{k + m} \models q$$ therefore $$\mathfrak A_m, w_k \models \lnot q \iff \mathfrak A_m, w_{k + m} \models \lnot q$$
 
@@ -1303,11 +1303,19 @@
             Thus, since $p \in L_A$ the only case left to prove is if $p = \abk {(A^n)^*}q$, and we have only two options depending on $n$:
 
             \begin{itemize}
-                \item TODO \todo{da finire}
+                \item if $(2m + 1) \mid n$ then $(w_i, w_j) \in A^n \iff i = j$, therefore $$\mathfrak A_m, w_i \models \abk{(A^n)^*}q \iff \mathfrak A_m w_i \models q$$ and by applying this observation to $i = k$ and $i = k + m$ we get that
+                    \begin{equation*}
+                        \begin{alignedat}{2}
+                            \mathfrak A_m, w_k \models \abk{(A^n)^*}q &\iff \mathfrak A_m w_k \models q && \\
+                                                                      &\iff \mathfrak A_m w_{k + m} \models q && \quad \quad (\mbox{by inductive hypothesis on $q$})\\
+                                                                      &\iff \mathfrak A_m w_{k + m} \models \abk{(A^n)^*}q &&
+                        \end{alignedat}
+                    \end{equation*}
+                \item otherwise, if $(2m + 1) \nmid n$, since $2m + 1 \in \Primes$ we get that $$0n, 1n, 2n, \ldots, (2m - 1)n, (2m)n$$ have all the $(2m + 1)$ possible residues modulo $2m + 1$. This implies that $(w_i, w_j) \in (A^n)^*$ for all $w_i, w_j \in W_m$, meaning that $$\mathfrak A_m, w_i \models \abk{(A^n)^*}q \iff \exists w_j \in W \quad \mathfrak A_m, w_j \models q$$ and by applying this observation to $i = k$ and $j = k + m$ we get that $$\mathfrak A_m, w_k \models \abk{(A^n)^*}q \iff \exists w_j \in W \quad \mathfrak A_m, w_j \models q \iff \mathfrak A_m, w_{k + m} \models \abk{(A^n)^*}q$$
             \end{itemize}
         }
 
-        By way of contradiction, suppose that there exists a test-free formula $p$ equivalent to $z$. Let $p' \in L_A$ be a formula that satisfies the previous lemma, and fix $m \ge 2$ and $k \ge 0$ to satisfy the conditions of the previous claim. Then, by the claim it holds that $$\mathfrak A_m, w_k \models p' \iff \mathfrak A_m, w_{k + m} \models p'$$ However, by definition of $\mathfrak A_m$ it holds that $\mathfrak A_m, w_0 \models z$ but $\mathfrak A_m, w_m \not\models z$, contradicting the fact that $z$ and $p$ were equivalent $\lightning$.
+        By way of contradiction, suppose that there exists a test-free formula $p$ equivalent to $z$. Let $p' \in L_A$ be a formula that satisfies the previous lemma and fix $m \ge 2$; then, by the claim it holds that $$\mathfrak A_m, w_0 \models p' \iff \mathfrak A_m, w_{m} \models p'$$ by applying the claim on $k = 0$. However, by definition of $V_m$ it holds that $\mathfrak A_m, w_0 \models z$ but $\mathfrak A_m, w_m \not\models z$, contradicting the fact that $z$ and $p$ were equivalent $\lightning$.
     \end{proof}
 
     % This formula can be rewritten as follows $$\abk{\mbox{while} \ \phi \ \mbox{do} \ \pi} \abk{\pi} \phi$$ Furthermore, their argument can be actually generalized: for all $n \in \N$ let $\mathrm{PDL}_{n + 1}$ be the subset of PDL in which programs can contain tests $\phi?$ only if $\phi$ is a $\mbox{PDL}_n$ formula. Now, consider $\phi$ and $p$ of the previous formula, and define the following formula $$\hat \phi_{n + 1} := \abk{\mbox{while} \ \hat \phi_n \ \mbox{do} \ \pi_n} \abk{\pi_n} \hat \phi_n$$ where $\hat \phi_0 = \phi$ and $\pi_0 = \pi$. Berman and Paterson were able to show that there is no $\mbox{PDL}_n$ formula equivalent to $\hat \phi_{n + 1}$, which proves that for all $n \in \N$ it holds that $\mbox{PDL}_{n + 1}$ has more expressive power than $\mbox{PDL}_n$.
