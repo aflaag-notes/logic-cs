@@ -67,11 +67,11 @@ $$x \in V(p) \iff p \ \mbox{is true at} \ x$$
 
 <style>
 img.left-center {
-  position: absolute;
-  left: 2em;
-  top: 50%;
-  transform: translateY(-40%);
-  height: 500px;
+    position: absolute;
+    left: 2em;
+    top: 50%;
+    transform: translateY(-40%);
+    height: 500px;
 }
 </style>
 
@@ -89,11 +89,11 @@ img.left-center {
 
 <style>
 img.left-center {
-  position: absolute;
-  left: 2em;
-  top: 50%;
-  transform: translateY(-40%);
-  height: 500px;
+    position: absolute;
+    left: 2em;
+    top: 50%;
+    transform: translateY(-40%);
+    height: 500px;
 }
 </style>
 
@@ -318,7 +318,7 @@ $$\left \langle \mbox{while} \ \phi \ \mbox{do} \ \pi \right \rangle \langle \pi
 
 ---
 
-# Variants - CDPL
+# Variants - CPDL
 
 CPDL is a variant which adds the **converse** operator to PDL programs
 
@@ -329,34 +329,79 @@ To get a sound a complete system, two additional axioms are needed
 $$
     \begin{equation*}
         \begin{alignedat}{2}
-            (\mbox A 6) & \quad \quad && \phi \to \sbk \alpha \abk{\alpha^{-1}} \phi \\
-            (\mbox A 7) & \quad \quad && \phi \to \sbk{\alpha ^{-1}} \abk \alpha \phi \\
+            (\mbox A 6) & \quad \quad && \phi \to [ \alpha] \left \langle \alpha^{-1} \right \rangle \phi \\
+            (\mbox A 7) & \quad \quad && \phi \to \left [ \alpha ^{-1} \right ] \langle \alpha \rangle \phi \\
         \end{alignedat}
     \end{equation*}
 $$
 
-As for PDL, CPDL has the **small model property**, hence it holds that $$\mbox{CPDL-SAT} \in \textsf{EXP}\mbox{-complete}$$
+As for PDL, CPDL has the **small model property**, hence it holds that $\mbox{CPDL-SAT} \in \textsf{EXP}\mbox{-complete}$
 
 ---
 
+<style>
+table {
+    margin: 0 auto;
+    background-color: none;
+}
+</style>
+
 # Variants - CPDL
 
-What about the expressive power, consider the two following models:
+What about the expressive power? Consider these two models:
 
-- $\mathfrak M = (W, R, V)$
-    - $W = \{x, y\}$
-    - $R(\pi) = \{(x, y)\}$
-    - $V(x) = V(y) = \varnothing$
-- $\mathfrak M' = (W', R', V')$
-    - $W' = \{y'\}$
-    - $R'(\pi) = \varnothing$
-    - $V'(y') = \varnothing$
+<div style="height: 50px;"></div>
+
+| $\mathfrak M = (M, R, V)$   | $\mathfrak M' = (W', R', V')$ |
+|-----------------------------|-------------------------------|
+| $W = \{x, y\}$              | $W' = \{y'\}$                 |
+| $R(\pi) = \{(x, y)\}$       | $R'(\pi) = \varnothing$       |
+| $V(x) = V(y) = \varnothing$ | $V'(y') = \varnothing$        |
+
+---
+
+<style>
+table {
+    margin: 0 auto;
+    background-color: none;
+}
+</style>
+
+# Variants - CPDL
+
+<div style="height: 40px;"></div>
+
+| $\mathfrak M = (M, R, V)$   | $\mathfrak M' = (W', R', V')$ |
+|-----------------------------|-------------------------------|
+| $W = \{x, y\}$              | $W' = \{y'\}$                 |
+| $R(\pi) = \{(x, y)\}$       | $R'(\pi) = \varnothing$       |
+| $V(x) = V(y) = \varnothing$ | $V'(y') = \varnothing$        |
 
 From the perspective of PDL $y$ and $y'$ are _indistinguishable_, in fact
 
 $$\mathfrak M, y \models \phi \iff \mathfrak M', y' \models \phi$$
 
-However
+---
 
-$$\mathfrak M, y \models \left \langle \pi^{-1} \right \rangle \top$$
-$$\mathfrak M', y' \not\models \left \langle pi^{-1} \right \rangle \top$$
+<style>
+table {
+    margin: 0 auto;
+    background-color: none;
+}
+</style>
+
+# Variants - CPDL
+
+<div style="height: 40px;"></div>
+
+| $\mathfrak M = (M, R, V)$   | $\mathfrak M' = (W', R', V')$ |
+|-----------------------------|-------------------------------|
+| $W = \{x, y\}$              | $W' = \{y'\}$                 |
+| $R(\pi) = \{(x, y)\}$       | $R'(\pi) = \varnothing$       |
+| $V(x) = V(y) = \varnothing$ | $V'(y') = \varnothing$        |
+
+However CPDL _can_ distinguish $y$ and $y'$ because
+
+$$\mathfrak M, y \models \left \langle \pi^{-1} \right \rangle \top \quad \quad \quad \mathfrak M', y' \not\models \left \langle \pi^{-1} \right \rangle \top$$
+
+meaning that CPDL has **more expressive power** than PDL

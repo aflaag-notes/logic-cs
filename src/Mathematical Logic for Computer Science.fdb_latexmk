@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex Mathematical Logic for Computer Science"] 1749295070.41644 "Mathematical Logic for Computer Science.aux" "Mathematical Logic for Computer Science.bbl" "Mathematical Logic for Computer Science" 1749309140.47558 0
-  "./Mathematical_Logic_for_Computer_Science-blx.bib" 1749309139.915 344 b9a53cb296db97caea92c7ca383542c0 ""
+["bibtex Mathematical Logic for Computer Science"] 1749295070.41644 "Mathematical Logic for Computer Science.aux" "Mathematical Logic for Computer Science.bbl" "Mathematical Logic for Computer Science" 1749388708.93149 0
+  "./Mathematical_Logic_for_Computer_Science-blx.bib" 1749388708.39567 344 b9a53cb296db97caea92c7ca383542c0 ""
   "./references.bib" 1749294764.46501 3474 8bedd7fc4d1ff4d80abe87dbc7d9e5c4 ""
   "/usr/share/texmf-dist/bibtex/bst/biblatex/biblatex.bst" 1742685315 65510 b1f696b0241395385f422f67543c37fd ""
-  "Mathematical Logic for Computer Science.aux" 1749309139.88397 5073 c6485426771c2e336e584ca38d174cd4 "pdflatex"
+  "Mathematical Logic for Computer Science.aux" 1749388708.36203 5073 c6485426771c2e336e584ca38d174cd4 "pdflatex"
   (generated)
   "Mathematical Logic for Computer Science.bbl"
   "Mathematical Logic for Computer Science.blg"
   (rewritten before read)
-["pdflatex"] 1749309135.19464 "Mathematical Logic for Computer Science.tex" "Mathematical Logic for Computer Science.pdf" "Mathematical Logic for Computer Science" 1749309140.47588 0
+["pdflatex"] 1749388703.54448 "Mathematical Logic for Computer Science.tex" "Mathematical Logic for Computer Science.pdf" "Mathematical Logic for Computer Science" 1749388708.93173 0
   "../../packages/Nyx/logo.png" 1710239380.27782 91419 8de48debf770a599a084520c83ce5d80 ""
   "../../packages/Nyx/nyx-frames.sty" 1744281245.10092 4480 04a89589d0a12ba668ea579e07c3b82c ""
   "../../packages/Nyx/nyx-intro.sty" 1710239380.27782 3476 d82343305e561945eb7e4f3f9e3a4fe2 ""
@@ -407,12 +407,12 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1742685315 42087 b0f9697c952c8f5a8eede4134282cb0d ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1744107509 5311557 9da84c45f5b388655502706482323571 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1744107485 2061848 f1d7532ca274ab6747b442193289434a ""
-  "Mathematical Logic for Computer Science.aux" 1749309139.88397 5073 c6485426771c2e336e584ca38d174cd4 "pdflatex"
+  "Mathematical Logic for Computer Science.aux" 1749388708.36203 5073 c6485426771c2e336e584ca38d174cd4 "pdflatex"
   "Mathematical Logic for Computer Science.bbl" 1749295070.48503 9000 5f6a47c04dc1ac331a5d636b0debd372 "bibtex Mathematical Logic for Computer Science"
-  "Mathematical Logic for Computer Science.out" 1749309139.911 1557 7e2c873df66399f4bd31240032b3a7ec "pdflatex"
-  "Mathematical Logic for Computer Science.run.xml" 1749309139.91768 2859 618c773bd31ff9545ccf499cc0414421 "pdflatex"
-  "Mathematical Logic for Computer Science.tex" 1749309134.074 108944 1a308b439c413e82745988c81f166e1d ""
-  "Mathematical Logic for Computer Science.toc" 1749309139.91768 1241 ccf7f8e3c062e70a85b2e4545e5c05f7 "pdflatex"
+  "Mathematical Logic for Computer Science.out" 1749388708.38967 1557 7e2c873df66399f4bd31240032b3a7ec "pdflatex"
+  "Mathematical Logic for Computer Science.run.xml" 1749388708.39667 2859 618c773bd31ff9545ccf499cc0414421 "pdflatex"
+  "Mathematical Logic for Computer Science.tex" 1749382075.95902 108929 318abaf799f6d4eedc80d9cef6a24ff9 ""
+  "Mathematical Logic for Computer Science.toc" 1749388708.39667 1241 ccf7f8e3c062e70a85b2e4545e5c05f7 "pdflatex"
   (generated)
   "Mathematical Logic for Computer Science.aux"
   "Mathematical Logic for Computer Science.log"
