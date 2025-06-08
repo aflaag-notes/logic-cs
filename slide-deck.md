@@ -289,3 +289,74 @@ $$\forall \phi \in \mathrm{Form}(\Phi_0) \quad \langle \phi \rangle \in \mbox{PD
 This property implies that we can stop $P'$ as soon as all the "small" models have been exhausted, to conclude that $\phi$ is not satisfiable.
 
 This concludes that $\mbox{PDL-SAT} \in \textsf{NEXP}$. In 1980 Pratt was able to prove that $\mbox{PDL-SAT} \in \textsf{EXP}\mbox{-complete}$.
+
+---
+
+# Variants
+
+Over the years multiple versions of PDL have been studied
+
+We will discuss the following
+
+- Test-less PDL
+- CPDL
+- IPDL
+
+---
+
+# Variants - Test-less PDL
+
+The "$?$" operator seems _different_ with respect to the other programs, can we remove this operator from PDL?
+
+Let $\mbox{PDL}_0$ be the test-free version of PDL. In 1981 Berman and Paterson proved that this PDL formula
+
+$$\left \langle (\phi?; \pi)^*; \lnot \phi ? ; \pi; \phi ? \right \rangle \top$$
+
+has no $\mbox{PDL}_0$ equivalent formula. This formula can be rewritten as
+
+$$\left \langle \mbox{while} \ \phi \ \mbox{do} \ \pi \right \rangle \langle \pi \rangle \phi$$
+
+---
+
+# Variants - CDPL
+
+CPDL is a variant which adds the **converse** operator to PDL programs
+
+$$(x, y) \in R(\alpha^{-1}) \iff (y, x) \in R(\alpha)$$
+
+To get a sound a complete system, two additional axioms are needed
+
+$$
+    \begin{equation*}
+        \begin{alignedat}{2}
+            (\mbox A 6) & \quad \quad && \phi \to \sbk \alpha \abk{\alpha^{-1}} \phi \\
+            (\mbox A 7) & \quad \quad && \phi \to \sbk{\alpha ^{-1}} \abk \alpha \phi \\
+        \end{alignedat}
+    \end{equation*}
+$$
+
+As for PDL, CPDL has the **small model property**, hence it holds that $$\mbox{CPDL-SAT} \in \textsf{EXP}\mbox{-complete}$$
+
+---
+
+# Variants - CPDL
+
+What about the expressive power, consider the two following models:
+
+- $\mathfrak M = (W, R, V)$
+    - $W = \{x, y\}$
+    - $R(\pi) = \{(x, y)\}$
+    - $V(x) = V(y) = \varnothing$
+- $\mathfrak M' = (W', R', V')$
+    - $W' = \{y'\}$
+    - $R'(\pi) = \varnothing$
+    - $V'(y') = \varnothing$
+
+From the perspective of PDL $y$ and $y'$ are _indistinguishable_, in fact
+
+$$\mathfrak M, y \models \phi \iff \mathfrak M', y' \models \phi$$
+
+However
+
+$$\mathfrak M, y \models \left \langle \pi^{-1} \right \rangle \top$$
+$$\mathfrak M', y' \not\models \left \langle pi^{-1} \right \rangle \top$$
