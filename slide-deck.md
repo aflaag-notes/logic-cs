@@ -310,11 +310,15 @@ The "$?$" operator seems _different_ with respect to the other programs, can we 
 
 Let $\mbox{PDL}_0$ be the test-free version of PDL. In 1981 Berman and Paterson proved that this PDL formula
 
-$$\left \langle (\phi?; \pi)^*; \lnot \phi ? ; \pi; \phi ? \right \rangle \top$$
+<!-- $$\left \langle (\phi?; \pi)^*; \lnot \phi ? ; \pi; \phi ? \right \rangle \top$$ -->
+
+$$\abk{(P?; A)^*; \lnot P ? ; A; P ?}\top$$
 
 has no $\mbox{PDL}_0$ equivalent formula. This formula can be rewritten as
 
-$$\left \langle \mbox{while} \ \phi \ \mbox{do} \ \pi \right \rangle \langle \pi \rangle \phi$$
+<!-- has no $\mbox{PDL}_0$ equivalent formula. This formula can be rewritten as -->
+
+<!-- $$\left \langle \mbox{while} \ \phi \ \mbox{do} \ \pi \right \rangle \langle \pi \rangle \phi$$ -->
 
 ---
 

@@ -1243,9 +1243,74 @@
 
     \section{Variants}
 
-    \subsection{Test-less PDL}
+    \subsection{Test-free PDL}
 
-    The \curlyquotes{?} operator seems a bit \tit{off} and rather different from the other operators: is it even needed in PDL? Let $\mbox{PDL}_0$ be the restriction of PDL to test-free regular programs, i.e. programs which do not contain tests. Is $\mbox{PDL}_0$ as expressive as PDL? In 1981 \textcite{Berman} proved that the following PDL formula $$\abk{(\phi?; \pi)^*; \lnot \phi ? ; \pi; \phi ?}\top$$ has no $\mbox{PDL}_0$ equivalent formula, proving that test-free PDL has indeed \tit{less expressive power}. This formula can be rewritten as follows $$\abk{\mbox{while} \ \phi \ \mbox{do} \ \pi} \abk{\pi} \phi$$ Furthermore, their argument can be actually generalized: for all $n \in \N$ let $\mathrm{PDL}_{n + 1}$ be the subset of PDL in which programs can contain tests $\phi?$ only if $\phi$ is a $\mbox{PDL}_n$ formula. Now, consider $\phi$ and $p$ of the previous formula, and define the following formula $$\hat \phi_{n + 1} := \abk{\mbox{while} \ \hat \phi_n \ \mbox{do} \ \pi_n} \abk{\pi_n} \hat \phi_n$$ where $\hat \phi_0 = \phi$ and $\pi_0 = \pi$. Berman and Paterson were able to show that there is no $\mbox{PDL}_n$ formula equivalent to $\hat \phi_{n + 1}$, which proves that for all $n \in \N$ it holds that $\mbox{PDL}_{n + 1}$ has more expressive power than $\mbox{PDL}_n$.
+    The \curlyquotes{?} operator seems a bit \tit{off} and rather different from the other operators: is it even needed in PDL? Let $\mbox{PDL}_0$ be the restriction of PDL to test-free regular programs, i.e. programs which do not contain tests. Is $\mbox{PDL}_0$ as expressive as PDL? In 1981 \textcite{Berman} proved that the following PDL formula $$\abk{(P?; A)^*; \lnot P ? ; A; P ?}\top$$ has no $\mbox{PDL}_0$ equivalent formula, proving that test-free PDL has indeed \tit{less expressive power}.
+
+    In the following section, we are going to present the most important details of their proof. Let $z$ be the formula $\abk{(P?; A)^*; \lnot P ? ; A; P ?}\top$. First, we need to introduce the definition of \tit{equivalence}.
+
+    \tbf{Definition.} (Equivalence) Let $\mathfrak M = (W, R, V)$ be a model, and let $p$ and $q$ be two formulas. We say that $p$ and $q$ are \tit{equivalent} in $\mathfrak M$ if for all $w \in W$ it holds that $$\mathfrak M, w \models p \iff \mathfrak M, w \models q$$ In addition, $p$ and $q$ are \tit{equivalent} if they are equivalent in all models.
+
+    Now, we are going to construct a \tit{family of structures}: for any $m \ge 2$ let $\mathfrak A_m = (W_m, R_m, V_m)$ be a model such that
+
+    \begin{itemize}
+        \item $W_m = \{w_0, \ldots, w_{2m}\}$
+        \item $R_m(A) = \{(w_i, w_{i + 1}) \mid i \in [0, 2m - 1]\} \cup \{(w_{2m}, w_0)\}$
+        \item $R_m(B) = \varnothing$ for any other atomic program $B \in \Pi_0 - \{A\}$
+        \item $V(P) = W_m - \{w_{m - 1}, w_{2m - 1}, w_{2m}\}$
+        \item $V(Q) = W_m$ for any other atomic formula $Q \in \Phi_0 - \{P\}$
+    \end{itemize}
+
+    TODO \todo{add image}
+
+    % Given an atomic program $\pi \in \Pi_0$ and a formula $\phi$, if the only atomic prorgam occuring in $\phi$ is $\pi$ we say that $\phi$ is \tbf{$\pi$-based}.
+    %
+    % \tbf{Lemma 1.} For any test-free formula $p$, there is a test-free $A$-based formula $p'$ equivalent to $p$ in $\mathfrak A_m$ for all $m \ge 2$.
+
+    \tbf{Definition.} ($\alpha$-unary formulas) Given an atomic program $\alpha \in \Pi_0$ and a formula $\phi$, if the only subformulas $\abk \beta \psi$ occuring in $\phi$ have either $\beta = \alpha$ or $\beta = (\alpha^n)^*$ for some $n \ge 1$ we say that $\phi$ is \tbf{$\alpha$-unary}.
+
+    Let $L_A$ be the set of test-free $A$-unary formulas, and for each $p \in L_A$ let $n_A(p)$ be the number of occurrences of \curlyquotes{$\abk A$} in $p$.
+
+    % \tbf{Lemma 2.} For any test-free $A$-based formula $p$, there is an equivalent test-free $A$-unary formula $p'$.
+
+    \tbf{Lemma.} For any test-free $p$ formula, there is a $p' \in L_A$ equivalent to $p$ in $\mathfrak A_m$ for all $m \ge 2$.
+
+    We observe that this lemma follows from the fact that a unary language is regular if and only if it is \tit{ultimately periodic}.
+
+    \tbf{Theorem.} There is no formula in $\mbox{PDL}_0$ equivalent to $z$.
+
+    \begin{proof}
+        First, consider the following claim.
+
+        \claim{
+            For any $p \in L_A$, any $m \ge 2$ such that $2m + 1 \in \Primes$, and any $0 \le k \le m - n_A(p) - 1$ it holds that $\mathfrak A_m, w_k \models p \iff \mathfrak A_m, w_{k + m} \models p$.
+        }{
+            We proceed by structural induction on $p$. If $p$ is a propositional variable, or $\top$, or $\bot$, then $n_A(p) = 0$ therefore for any $0 \le k \le m$ it holds that $$\mathfrak A_m, w_k \models p \iff \mathfrak A_m, w_{k + m} \models p$$ because $V(Q) = W_m$ for any $Q \in \Phi_0 - \{P\}$ by construction of $\mathfrak A_m$. Now, consider a formula $p$ different from the base cases, and let $m, k \in \N$ two integers satisfying the claim.
+
+            If $p = \lnot q$ then $n_A(p) = n_A(q)$, thus by induction on $q$ we have that $$\mathfrak A_m, w_k \models q \iff \mathfrak A_m, w_{k + m} \models q$$ therefore $$\mathfrak A_m, w_k \models \lnot q \iff \mathfrak A_m, w_{k + m} \models \lnot q$$
+
+            If $p = q \lor r$ then $n_A(q), n_A(r) \le n_A(p)$, hence by induction $$\mathfrak A_m, w_k \models q \iff \mathfrak A_m, w_{k + m} \models r$$ $$\mathfrak A_m, w_k \models r \iff \mathfrak A_m, w_{k + m} \models r$$ from which it immediately follows that $$\mathfrak A_m, w_k \models q \lor r \iff \mathfrak A_m, w_{k + m} \models q \lor r$$
+
+            If $p = \abk A q$ then $n_A(q) = n_A(p) - 1 < m - k - 1 = m - (k + 1)$, hence by induction we get that $$\mathfrak A_m, w_{k + 1} \models q \iff \mathfrak A_m, w_{k + 1 + m} \models q$$ however, by construction of $\mathfrak A_m$ we observe that
+            \begin{equation*}
+                \begin{split}
+                    \mathfrak A_m, w_k \models \abk A q &\iff \mathfrak A_m, w_{k + 1} \models q \\
+                                                        &\iff \mathfrak A_m, w_{k + 1 + m} \models q \\
+                                                        &\iff \mathfrak A_m w_{k + m} \models \abk A q
+                \end{split}
+            \end{equation*}
+            
+            Thus, since $p \in L_A$ the only case left to prove is if $p = \abk {(A^n)^*}q$, and we have only two options depending on $n$:
+
+            \begin{itemize}
+                \item TODO \todo{da finire}
+            \end{itemize}
+        }
+
+        By way of contradiction, suppose that there exists a test-free formula $p$ equivalent to $z$. Let $p' \in L_A$ be a formula that satisfies the previous lemma, and fix $m \ge 2$ and $k \ge 0$ to satisfy the conditions of the previous claim. Then, by the claim it holds that $$\mathfrak A_m, w_k \models p' \iff \mathfrak A_m, w_{k + m} \models p'$$ However, by definition of $\mathfrak A_m$ it holds that $\mathfrak A_m, w_0 \models z$ but $\mathfrak A_m, w_m \not\models z$, contradicting the fact that $z$ and $p$ were equivalent $\lightning$.
+    \end{proof}
+
+    % This formula can be rewritten as follows $$\abk{\mbox{while} \ \phi \ \mbox{do} \ \pi} \abk{\pi} \phi$$ Furthermore, their argument can be actually generalized: for all $n \in \N$ let $\mathrm{PDL}_{n + 1}$ be the subset of PDL in which programs can contain tests $\phi?$ only if $\phi$ is a $\mbox{PDL}_n$ formula. Now, consider $\phi$ and $p$ of the previous formula, and define the following formula $$\hat \phi_{n + 1} := \abk{\mbox{while} \ \hat \phi_n \ \mbox{do} \ \pi_n} \abk{\pi_n} \hat \phi_n$$ where $\hat \phi_0 = \phi$ and $\pi_0 = \pi$. Berman and Paterson were able to show that there is no $\mbox{PDL}_n$ formula equivalent to $\hat \phi_{n + 1}$, which proves that for all $n \in \N$ it holds that $\mbox{PDL}_{n + 1}$ has more expressive power than $\mbox{PDL}_n$.
 
     \subsection{CPDL}
 

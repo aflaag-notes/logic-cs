@@ -13,6 +13,6 @@
 \contentsline {section}{\numberline {2.4}Completeness}{30}{section.2.4}%
 \contentsline {section}{\numberline {2.5}Complexity}{31}{section.2.5}%
 \contentsline {section}{\numberline {2.6}Variants}{32}{section.2.6}%
-\contentsline {subsection}{\numberline {2.6.1}Test-less PDL}{32}{subsection.2.6.1}%
-\contentsline {subsection}{\numberline {2.6.2}CPDL}{32}{subsection.2.6.2}%
-\contentsline {subsection}{\numberline {2.6.3}IPDL}{33}{subsection.2.6.3}%
+\contentsline {subsection}{\numberline {2.6.1}Test-free PDL}{32}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}CPDL}{34}{subsection.2.6.2}%
+\contentsline {subsection}{\numberline {2.6.3}IPDL}{35}{subsection.2.6.3}%
