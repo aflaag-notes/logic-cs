@@ -1087,7 +1087,7 @@
 
     The first DL system was developed in 1976 by \href{https://en.wikipedia.org/wiki/Vaughan_Pratt}{Vaughan Pratt}, an early pioneer in the field of computer science who has made several contributions to foundational areas such as search algorithms, sorting algorithms, and primality testing. Pratt's original dynamic logic of programs was a \tit{first-order} modal logic, and \tbf{Propositional Dynamic Logic} (PDL) is the propositional counterpart of it. Being propositional, it makes no use of terms, predicates or functions, and its only two syntactic categories are \tit{propositions} and \tit{programs}.
 
-    In particular, \tit{possibility} and \tit{necessity} are expressed through modal operators that also indicate the programs they are referring to. For instance, the formula $\abk \pi \phi$ indicates that, starting from the \curlyquotes{current} state, there is a possible execution of the program $\pi$ that ends in a state in which $\phi$ is true. Analogously, the formula $\sbk \pi \phi$ means that, starting from the \curlyquotes{current} state, \tit{all} the possible executions of the program $\pi$ end in states in which $\phi$ is true.
+    In particular, \tit{possibility} and \tit{necessity} are expressed through modal operators that also indicate the programs they are referring to. For instance, the formula $\abk \pi \phi$ indicates that, starting from the \curlyquotes{current} state, there is a possible execution of the program $\pi$ that ends in a state in which $\phi$ is true. Analogously, the formula $\sbk \pi \psi$ means that, starting from the \curlyquotes{current} state, \tit{all} the possible executions of the program $\pi$ end in states in which $\psi$ is true.
 
     \section{Syntax}
 
@@ -1251,9 +1251,9 @@
 
     A set $S \subseteq \N$ is said to be \tbf{ultimately periodic} if there are integers $X \in \N$ and $Y > 0$ such that $$\forall k \ge X \quad k \in S \iff k + Y \in S$$ In other words, after $N$ values --- starting from 0 --- the membership in $S$ repeats every $p$ numbers. A well-known fact in the theory of context-free languages is that a \tit{unary language} $L = \{1^n \mid n \in \N\}$ is regular if and only if the set $\{n \in \N \mid 1^n \in L\}$ is \tit{ultimately periodic}. In other words, any regular unary language is represented by a regular expression of the form $$1^X \rbk{1^Y}^*$$
 
-    This property is leveraged by Berman and Paterson as follows: the idea is to construct a family of models $\mathfrak A_m$ in which test-free PDL formulas \tit{cannot} distinguish the worlds in which we are performing the evaluation. To achieve this, they construct models $\mathfrak A_m$ for each $m \ge 2$ in which the only program present is $A$, hence the languages defined from the programs over $\mathfrak A_m$ are both regular and unary, therefore they must be ultimately periodic as well, i.e. they can be rewritten as $A^h(A^n)^*$.
+    This property is leveraged by Berman and Paterson as follows: the idea is to construct a family of models $\mathfrak A_m$ in which test-free PDL formulas \tit{cannot} distinguish the worlds in which we are performing the evaluation. To achieve this, they construct models $\mathfrak A_m$ for each $m \ge 2$ in which the only program present is $A$, hence the languages defined from the programs over $\mathfrak A_m$ are both regular and unary, therefore the set of the lengths of their strings must be ultimately periodic, i.e. the languages can be rewritten as a regular expression $A^h(A^n)^*$.
 
-    Thus, they proceed to define each $\mathfrak A_m$ over a \tit{cyclical structure} made of $2m + 1$ worlds, where $2m + 1$ is a \tit{prime number}. This is a crucial detail, because it implies that the periodic part $(A^n)^*$ will generate \tit{all} the possible residues modulo $2m + 1$, meaning that each state is reachable starting from any possible state on the cycle, ensuring that no test-less PDL formula can distinguish the starting point of evaluation. This happens because ultimate periodicity forces the behaviour of formulas to eventually repeat regularly, hence test-free PDL formulas cannot \curlyquotes{count} beyond a bounded region.
+    Thus, they proceed to define each $\mathfrak A_m$ over a \tit{cyclical structure} made of $2m + 1$ worlds, where $2m + 1$ is a \tit{prime number}. This is a crucial detail, because it implies that the periodic part $(A^n)^*$ will generate \tit{all} the possible residues modulo $2m + 1$, meaning that each state is reachable starting from any possible state on the cycle, ensuring that no test-free PDL formula can distinguish the starting point of evaluation. This happens because ultimate periodicity forces the behaviour of formulas to eventually repeat regularly, hence test-free PDL formulas cannot \curlyquotes{count} beyond a bounded region.
 
     However, PDL with test \tit{can} distinguish the worlds, because it possible to build programs which \tit{depend on the truthness of propositions itself}. For instance, the program $(P?; A)^*; \lnot P?$ proceeds through $A$-edges as long as $P$ is true in the current state, and stops as soon as it becomes false. Thus, because test operators can observe the truth of propositions \tit{mid-program}, it is possible to express properties that depend on non-periodic features of the model, something that test-free PDL cannot capture.
 
@@ -1271,7 +1271,7 @@
         \item $V_m(Q) = W_m$ for any other atomic formula $Q \in \Phi_0 - \{P\}$
     \end{itemize}
 
-    \centeredimage[The structure $\mathfrak A_m$ as depicted in the original paper.]{0.35}{../assets/Am.png}
+    \centeredimage[The structure $\mathfrak A_m$ as depicted in the original paper.]{0.3}{../assets/Am.png}
 
     % Given an atomic program $\pi \in \Pi_0$ and a formula $\phi$, if the only atomic prorgam occuring in $\phi$ is $\pi$ we say that $\phi$ is \tbf{$\pi$-based}.
     %

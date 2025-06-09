@@ -1,22 +1,39 @@
 ---
-theme: gaia
+theme: beam
 _class: lead
 paginate: true
 backgroundColor: #fff
 backgroundImage: url('https://marp.app/assets/hero-background.svg')
 ---
 
-![bg left:40% 80%](https://marp.app/assets/marp.svg)
+<!-- _class: title -->
 
-# **Marp**
+# Propositional Dynamic Logic
 
-Markdown Presentation Ecosystem
+Mathematical Logic for Computer Science
+Alessio Bandiera
+1985878
 
-https://marp.app/
+---
+
+# PDL
+
+# Dynamic Logics
+
+**Dynamic Logics** are modal logics for representing the states and the events of dynamic systems. The first DL system was developed in 1976 by Vaughan Pratt, an early pioneer of computer science
+
+His original DL was a _first-order_ modal logic, and **Propositional Dynamic Logic** (PDL) is the propositional counterpart of it
+
+Its only two syntactic categories are **propositions** and **programs**, and _possibility_ and _necessity_ are expressed through modal operators that also indicate the programs they are referring to
+
+- $\langle \pi \rangle \phi$ is read "there is an execution of $\pi$ that ends in a state in which $\phi$ is true"
+- $[\pi] \psi$ is read "all executions of the program $\pi$ end in states in which $\psi$ is true"
 
 --- 
 
-# Syntax - Formulas
+# Syntax
+
+# Formulas
 
 Given $\Phi_0$ the set of _atomic formulas_, for any $\phi, \psi \in \Phi_0$
 - $\phi \in \mathrm{Form}(\Phi_0)$
@@ -28,7 +45,9 @@ where $\alpha \in \mathrm{Prog}(\Pi_0)$
 
 ---
 
-# Syntax - Programs
+# Syntax
+
+# Programs
 
 Given $\Pi_0$ the set of _atomic programs_, for any $\alpha, \beta \in \Pi_0$
 
@@ -42,7 +61,9 @@ where $\phi \in \mathrm{Form}(\Phi_0)$
 
 ---
 
-# Syntax - Relations
+# Syntax
+
+# Relations
 
 $$(x, y) \in R(\pi) \iff x \stackrel{\pi}{\to} y$$
 
@@ -53,7 +74,9 @@ $$(x, y) \in R(\pi) \iff x \stackrel{\pi}{\to} y$$
 
 ---
 
-# Syntax - Valuations
+# Syntax
+
+# Valuations
 
 $$x \in V(p) \iff p \ \mbox{is true at} \ x$$
 
@@ -108,7 +131,9 @@ img.left-center {
 
 ---
 
-# Axiomatization - Validity
+# Axiomatization
+
+# Validity
 
 We write $\mathfrak M, w \models \phi$ if and only if $w \in V(\phi)$
 
@@ -122,7 +147,9 @@ $$\models \phi \iff \forall \mathfrak M \quad \mathfrak M \models \phi$$
 
 ---
 
-# Axiomatization - Goal
+# Axiomatization
+
+# Goal
 
 The goal is to define a **decudibility predicate** $\vdash$ such that
 $\vdash$-deductions are both _sound_ and _complete_ in terms of validity, i.e. for any $\phi$ it holds that
@@ -131,7 +158,9 @@ $$\vdash \phi \iff \models \phi$$
 
 ---
 
-# Axiomatization - K and N axioms
+# Axiomatization
+
+# K and N axioms
 
 $$
     \begin{equation*}
@@ -146,7 +175,9 @@ A modal logic is **normal** if it obeys $(\mbox K)$ and $(\mbox N)$
 
 ---
 
-# Axiomatization - PDL axioms
+# Axiomatization
+
+# PDL axioms
 
 PDL is the _least normal_ modal logic containing every instance of
 
@@ -167,7 +198,9 @@ $$(\mbox I) \quad \quad \dfrac{\phi \to [\alpha] \phi}{\phi \to [\alpha^*] \phi}
 
 ---
 
-# Axiomatization - $\vdash$-deducibility
+# Axiomatization
+
+# $\vdash$-deducibility
 
 A formula $\phi$ is $\vdash$-_deducible_ from $\Sigma \subseteq \mathrm{Form}(\Phi_0)$ if there exists a sequence $\phi_0, \ldots, \phi_n$ such that $\phi_n = \phi$, and for all $i \in [n]$
 
@@ -179,7 +212,9 @@ Are $\vdash$-deductions sound and complete?
 
 ---
 
-# Completeness - Segerberg's axioms
+# Completeness
+
+# Segerberg's axioms
 
 In 1977 Segerberg proposed to replace
 
@@ -193,7 +228,9 @@ in order to prove that such axiomatization was sound and complete
 
 ---
 
-# Completeness - Segerberg's axioms
+# Completeness
+
+# Segerberg's axioms
 
 Indeed, it is easy to prove that $(\mbox I)$ can be replaced with $(\mbox A 5)$
 
@@ -213,6 +250,8 @@ $$
 
 # Completeness
 
+# Soundness
+
 To prove that $\vdash$ is sound w.r.t. $\models$, i.e. that
 
 $$\vdash \phi \implies \models \phi$$
@@ -227,24 +266,28 @@ $$\models \phi \implies \vdash \phi$$
 
 # Completeness
 
-Segerberg's work was the first attempt to prove the completeness of $\vdash$, however in 1978 he found a flaw in his argument.
+# Parikh's proof
 
-Then in the same year Parikh published what is now considered the first proof of the completeness of $\vdash$.
+Segerberg's work was the first attempt to prove the completeness of $\vdash$, however in 1978 he found a flaw in his argument
+
+Then in the same year Parikh published what is now considered the first proof of the completeness of $\vdash$
+
+<!-- --- -->
+<!---->
+<!-- # Completeness - Goldblatt -->
+<!---->
+<!-- Since then, different alternative proof theories of PDL have also been sought after. For example, in 1992 Goldblatt proposed the -->
+<!-- $\vdash'$-deducibility predicate, which is based on the same first four axiom schemas along with this _infinitary_ rule of inference -->
+<!---->
+<!-- $$(\mbox I') \quad \quad \dfrac{ \{[\beta] [\alpha^n] \phi \mid n \in \mathbb N \}}{[\beta] [\alpha^*] \phi}$$ -->
+<!---->
+<!-- Goldblatt was able to prove that $\vdash'$ is both sound and complete. -->
 
 ---
 
-# Completeness - Goldblatt
+# Complexity
 
-Since then, different alternative proof theories of PDL have also been sought after. For example, in 1992 Goldblatt proposed the
-$\vdash'$-deducibility predicate, which is based on the same first four axiom schemas along with this _infinitary_ rule of inference
-
-$$(\mbox I') \quad \quad \dfrac{ \{[\beta] [\alpha^n] \phi \mid n \in \mathbb N \}}{[\beta] [\alpha^*] \phi}$$
-
-Goldblatt was able to prove that $\vdash'$ is both sound and complete.
-
----
-
-# Complexity - PDL satisfiability
+# PDL satisfiability
 
 $\phi$ is _satisfiable_ in $\mathfrak M$ if there is a world $w \in W$ such that $\mathfrak M , w \models \phi$
 
@@ -254,7 +297,9 @@ $$\mbox{PDL-SAT} := \{\langle \phi \rangle \mid \phi \ \mbox{is a satisfiable PD
 
 ---
 
-# Complexity - Unsatisfiable formulas
+# Complexity
+
+# Unsatisfiable formulas
 
 $\phi$ is _unsatisfiable_ if and only if $\lnot \phi$ is _valid_
 
@@ -266,7 +311,9 @@ This proves that $\mbox{PDL-SAT} \in \textsf{coREC}$
 
 ---
 
-# Complexity - Satisfiable formulas
+# Complexity 
+
+# Satisfiable formulas
 
 However, if $\phi$ is satisfiable $P$ never terminates.
 
@@ -274,7 +321,7 @@ Nonetheless, we can leverage the **finite model property** of PDL
 
 $$\forall \phi \in \mathrm{Form}(\Phi_0) \quad \langle \phi \rangle \in \mbox{PDL-SAT} \implies \exists \mathfrak M_{fin} \ \mbox{finite} \quad \phi \ \mbox{satisfiable in} \ \mathfrak M_{fin}$$
 
-Therefore, there is a procedure $P'$ that enumerates all the finite models $\mathfrak M_{fin}$ and checks for each model if $\phi$ is satisfiable in $\mathfrak M_{fin}$.
+Therefore, there is a procedure $P'$ that enumerates all the finite models $\mathfrak M_{fin}$ and checks for each model if $\phi$ is satisfiable in $\mathfrak M_{fin}$
 
 Thus, $P$ and $P'$ can be run in parallel to decide $\mbox{PDL-SAT}$. However, this is _very_ inefficient, can we do any better?
 
@@ -282,17 +329,21 @@ Thus, $P$ and $P'$ can be run in parallel to decide $\mbox{PDL-SAT}$. However, t
 
 # Complexity
 
+# Small model property
+
 Kozen and Parikh proved that PDL has also the **small model property**
 
 $$\forall \phi \in \mathrm{Form}(\Phi_0) \quad \langle \phi \rangle \in \mbox{PDL-SAT} \implies \exists \mathfrak M_{fin} \ \mbox{finite} \quad \left \{ \begin{array}{l} |\mathfrak M_{fin}| < \mathrm{exp}(|\phi|) \\ \phi \ \mbox{satisfiable in} \ \mathfrak M_{fin} \end{array} \right.$$
 
-This property implies that we can stop $P'$ as soon as all the "small" models have been exhausted, to conclude that $\phi$ is not satisfiable.
+This property implies that we can stop $P'$ as soon as all the "small" models have been exhausted, to conclude that $\phi$ is not satisfiable
 
-This concludes that $\mbox{PDL-SAT} \in \textsf{NEXP}$. In 1980 Pratt was able to prove that $\mbox{PDL-SAT} \in \textsf{EXP}\mbox{-complete}$.
+This concludes that $\mbox{PDL-SAT} \in \textsf{NEXP}$. In 1980 Pratt was able to prove that $\mbox{PDL-SAT} \in \textsf{EXP}\mbox{-complete}$
 
 ---
 
 # Variants
+
+# Variations of PDL
 
 Over the years multiple versions of PDL have been studied
 
@@ -300,11 +351,12 @@ We will discuss the following
 
 - Test-free PDL
 - CPDL
-- IPDL
 
 ---
 
-# Variants - Test-free PDL
+# Test-free PDL
+
+# Expressive power
 
 The "$?$" operator seems _different_ with respect to the other programs, can we remove this operator from PDL?
 
@@ -312,9 +364,9 @@ Let $\mbox{PDL}_0$ be the test-free version of PDL. In 1981 Berman and Paterson 
 
 <!-- $$\left \langle (\phi?; \pi)^*; \lnot \phi ? ; \pi; \phi ? \right \rangle \top$$ -->
 
-$$\abk{(P?; A)^*; \lnot P ? ; A; P ?}\top$$
+$$\langle (P?; A)^* ; \lnot P ? ; A; P ? \rangle \top$$
 
-has no $\mbox{PDL}_0$ equivalent formula. This formula can be rewritten as
+has no $\mbox{PDL}_0$ equivalent formula
 
 <!-- has no $\mbox{PDL}_0$ equivalent formula. This formula can be rewritten as -->
 
@@ -322,7 +374,69 @@ has no $\mbox{PDL}_0$ equivalent formula. This formula can be rewritten as
 
 ---
 
-# Variants - CPDL
+# Test-free PDL
+
+# Ultimate periodicity
+
+The idea of their counterexample is based on the following result in the theory of context-free languages:
+
+A _unary language_ $L = \{1^n \mid n \in \mathbb N\}$ is _regular_ if and only if the set $\{n \in \mathbb N \mid 1^n \in L\}$ is _ultimately periodic_
+
+A set $S \subseteq \mathbb N$ is **ultimately periodic** if there are integers $X \in \mathbb N$ and $Y > 0$ such that
+
+$$\forall k \ge X \quad k \in S \iff k + Y \in S$$
+
+---
+
+# Test-free PDL
+
+# Ultimate periodicity
+
+By removing tests from PDL formulas, programs are restricted to regular expressions
+
+Hence, Berman and Paterson built a family of models $\mathfrak A_m$ for $m \ge 2$ in which the only program present is $A$
+
+Therefore, by ultimate periodicity each program over $\mathfrak A_m$ can be rewritten as a regex
+
+$$A^h(A^n)^*$$
+
+---
+
+# Test-free PDL
+
+# The counterexample
+
+<div style="text-align: center;">
+    <img src="./assets/Am.svg" style="height: 175px;"/>
+</div>
+
+Each $\mathfrak A_m$ consists of $2m + 1$ worlds, where $2m + 1$ is _prime_
+
+This forces $(A^n)^*$ to generate all the possible residues modulo $2m + 1$, i.e. each world will be able to reach any other world
+
+Hence, test-free PDL formulas _cannot distinguish_ the worlds in which we are performing the evaluation
+
+---
+
+# Test-free PDL
+
+# The counterexample
+
+<div style="text-align: center;">
+    <img src="./assets/Am.svg" style="height: 175px;"/>
+</div>
+
+However, tests _can_ distinguish the worlds by building programs which **depend on the truthness of propositions**
+
+$$\langle (P?; A)^* ; \lnot P ? ; A; P ? \rangle \top$$
+
+In fact, this formula is satisfied at $w_0$ but not satisfied at $w_m$
+
+---
+
+# CPDL
+
+# The converse operator
 
 CPDL is a variant which adds the **converse** operator to PDL programs
 
@@ -339,24 +453,27 @@ $$
     \end{equation*}
 $$
 
-As for PDL, CPDL has the **small model property**, hence it holds that $\mbox{CPDL-SAT} \in \textsf{EXP}\mbox{-complete}$
+As for PDL, CPDL has the **small model property** too, and $\mbox{CPDL-SAT} \in \textsf{EXP}\mbox{-complete}$ as well
 
 ---
 
 <style>
 table {
     margin: 0 auto;
-    background-color: none;
 }
 </style>
 
-# Variants - CPDL
+# CPDL
 
-What about the expressive power? Consider these two models:
+# Expressive power
+
+What about the expressive power? Consider these two models
+
+$$\mathfrak M = (M, R, V) \quad \quad \quad \mathfrak M' = (W', R', V')$$
 
 <div style="height: 50px;"></div>
 
-| $\mathfrak M = (M, R, V)$   | $\mathfrak M' = (W', R', V')$ |
+| $\mathfrak M$               | $\mathfrak M'$                |
 |-----------------------------|-------------------------------|
 | $W = \{x, y\}$              | $W' = \{y'\}$                 |
 | $R(\pi) = \{(x, y)\}$       | $R'(\pi) = \varnothing$       |
@@ -367,19 +484,22 @@ What about the expressive power? Consider these two models:
 <style>
 table {
     margin: 0 auto;
-    background-color: none;
 }
 </style>
 
-# Variants - CPDL
+# CPDL
 
-<div style="height: 40px;"></div>
+# Expressive power
 
-| $\mathfrak M = (M, R, V)$   | $\mathfrak M' = (W', R', V')$ |
+<div style="height: 30px;"></div>
+
+| $\mathfrak M$               | $\mathfrak M'$                |
 |-----------------------------|-------------------------------|
 | $W = \{x, y\}$              | $W' = \{y'\}$                 |
 | $R(\pi) = \{(x, y)\}$       | $R'(\pi) = \varnothing$       |
 | $V(x) = V(y) = \varnothing$ | $V'(y') = \varnothing$        |
+
+<div style="height: 40px;"></div>
 
 From the perspective of PDL $y$ and $y'$ are _indistinguishable_, in fact
 
@@ -390,22 +510,35 @@ $$\mathfrak M, y \models \phi \iff \mathfrak M', y' \models \phi$$
 <style>
 table {
     margin: 0 auto;
-    background-color: none;
 }
 </style>
 
-# Variants - CPDL
+# CPDL
 
-<div style="height: 40px;"></div>
+# Expressive power
 
-| $\mathfrak M = (M, R, V)$   | $\mathfrak M' = (W', R', V')$ |
+<!-- <div style="height: 15px;"></div> -->
+
+| $\mathfrak M$               | $\mathfrak M'$                |
 |-----------------------------|-------------------------------|
 | $W = \{x, y\}$              | $W' = \{y'\}$                 |
 | $R(\pi) = \{(x, y)\}$       | $R'(\pi) = \varnothing$       |
 | $V(x) = V(y) = \varnothing$ | $V'(y') = \varnothing$        |
+
+<div style="height: 40px;"></div>
 
 However CPDL _can_ distinguish $y$ and $y'$ because
 
 $$\mathfrak M, y \models \left \langle \pi^{-1} \right \rangle \top \quad \quad \quad \mathfrak M', y' \not\models \left \langle \pi^{-1} \right \rangle \top$$
 
 meaning that CPDL has **more expressive power** than PDL
+
+---
+
+<!-- _class: title -->
+
+# Thanks for your attention
+
+Mathematical Logic for Computer Science
+Alessio Bandiera
+1985878
