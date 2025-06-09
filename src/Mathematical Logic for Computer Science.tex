@@ -1245,9 +1245,19 @@
 
     \subsection{Test-free PDL}
 
-    The \curlyquotes{?} operator seems a bit \tit{off} and rather different from the other operators: is it even needed in PDL? Let $\mbox{PDL}_0$ be the restriction of PDL to test-free regular programs, i.e. programs which do not contain tests. Is $\mbox{PDL}_0$ as expressive as PDL? In 1981 \textcite{Berman} proved that the following PDL formula $$\abk{(P?; A)^*; \lnot P ? ; A; P ?}\top$$ has no $\mbox{PDL}_0$ equivalent formula, proving that test-free PDL has indeed \tit{less expressive power}.
+    The \curlyquotes{?} operator seems a bit \tit{off} and rather different from the other operators: is it even needed in PDL? Let $\mbox{PDL}_0$ be the restriction of PDL to test-free programs, i.e. programs which do not contain tests. Is $\mbox{PDL}_0$ as expressive as PDL? In 1981 \textcite{Berman} proved that the following PDL formula $$\abk{(P?; A)^*; \lnot P ? ; A; P ?}\top$$ has no $\mbox{PDL}_0$ equivalent formula, proving that test-free PDL has indeed \tit{less expressive power}.
 
-    In the following section, we are going to present the most important details of their proof. Let $z$ be the formula $\abk{(P?; A)^*; \lnot P ? ; A; P ?}\top$. First, we need to introduce the definition of \tit{equivalence}.
+    In the following section, we are going to present the most important details of their proof, but before going into the technical parts we will discuss the general idea. First, we observe that by removing tests, programs are restricted to \tit{regular expressions}, therefore each program defines a regular language.
+
+    A set $S \subseteq \N$ is said to be \tbf{ultimately periodic} if there are integers $X \in \N$ and $Y > 0$ such that $$\forall k \ge X \quad k \in S \iff k + Y \in S$$ In other words, after $N$ values --- starting from 0 --- the membership in $S$ repeats every $p$ numbers. A well-known fact in the theory of context-free languages is that a \tit{unary language} $L = \{1^n \mid n \in \N\}$ is regular if and only if the set $\{n \in \N \mid 1^n \in L\}$ is \tit{ultimately periodic}. In other words, any regular unary language is represented by a regular expression of the form $$1^X \rbk{1^Y}^*$$
+
+    This property is leveraged by Berman and Paterson as follows: the idea is to construct a family of models $\mathfrak A_m$ in which test-free PDL formulas \tit{cannot} distinguish the worlds in which we are performing the evaluation. To achieve this, they construct models $\mathfrak A_m$ for each $m \ge 2$ in which the only program present is $A$, hence the languages defined from the programs over $\mathfrak A_m$ are both regular and unary, therefore they must be ultimately periodic as well, i.e. they can be rewritten as $A^h(A^n)^*$.
+
+    Thus, they proceed to define each $\mathfrak A_m$ over a \tit{cyclical structure} made of $2m + 1$ worlds, where $2m + 1$ is a \tit{prime number}. This is a crucial detail, because it implies that the periodic part $(A^n)^*$ will generate \tit{all} the possible residues modulo $2m + 1$, meaning that each state is reachable starting from any possible state on the cycle, ensuring that no test-less PDL formula can distinguish the starting point of evaluation. This happens because ultimate periodicity forces the behaviour of formulas to eventually repeat regularly, hence test-free PDL formulas cannot \curlyquotes{count} beyond a bounded region.
+
+    However, PDL with test \tit{can} distinguish the worlds, because it possible to build programs which \tit{depend on the truthness of propositions itself}. For instance, the program $(P?; A)^*; \lnot P?$ proceeds through $A$-edges as long as $P$ is true in the current state, and stops as soon as it becomes false. Thus, because test operators can observe the truth of propositions \tit{mid-program}, it is possible to express properties that depend on non-periodic features of the model, something that test-free PDL cannot capture.
+
+    Now that we presented the general idea of their counterexample, we are going to provide some technical details of their proof. Let $z$ be the formula $\abk{(P?; A)^*; \lnot P ? ; A; P ?}\top$. First, we need to introduce the definition of \tit{equivalence}.
 
     \tbf{Definition.} (Equivalence) Let $\mathfrak M = (W, R, V)$ be a model, and let $p$ and $q$ be two formulas. We say that $p$ and $q$ are \tit{equivalent} in $\mathfrak M$ if for all $w \in W$ it holds that $$\mathfrak M, w \models p \iff \mathfrak M, w \models q$$ In addition, $p$ and $q$ are \tit{equivalent} if they are equivalent in all models.
 
@@ -1261,7 +1271,7 @@
         \item $V_m(Q) = W_m$ for any other atomic formula $Q \in \Phi_0 - \{P\}$
     \end{itemize}
 
-    TODO \todo{add image}
+    \centeredimage[The structure $\mathfrak A_m$ as depicted in the original paper.]{0.35}{../assets/Am.png}
 
     % Given an atomic program $\pi \in \Pi_0$ and a formula $\phi$, if the only atomic prorgam occuring in $\phi$ is $\pi$ we say that $\phi$ is \tbf{$\pi$-based}.
     %
@@ -1274,8 +1284,6 @@
     % \tbf{Lemma 2.} For any test-free $A$-based formula $p$, there is an equivalent test-free $A$-unary formula $p'$.
 
     \tbf{Lemma.} For any test-free $p$ formula, there is a $p' \in L_A$ equivalent to $p$ in $\mathfrak A_m$ for all $m \ge 2$.
-
-    We observe that this lemma follows from the fact that a unary language $L = \{a^n \mid n \in \N\}$ is regular if and only if the set $\{n \in \N \mid a^n \in L\}$ is \tit{ultimately periodic}. A set $S \subseteq \N$ is \tbf{ultimately periodic} if there are integers $N \in \N$ and $p > 0$ such that $$\forall n \ge N \quad n \in S \iff n + p \in S$$ which means that after $N$ values --- starting from 0 --- the membership in $S$ repeats every $p$ numbers.
 
     \tbf{Theorem.} There is no formula in $\mbox{PDL}_0$ equivalent to $z$.
 
@@ -1296,7 +1304,7 @@
                 \begin{split}
                     \mathfrak A_m, w_k \models \abk A q &\iff \mathfrak A_m, w_{k + 1} \models q \\
                                                         &\iff \mathfrak A_m, w_{k + 1 + m} \models q \\
-                                                        &\iff \mathfrak A_m w_{k + m} \models \abk A q
+                                                        &\iff \mathfrak A_m, w_{k + m} \models \abk A q
                 \end{split}
             \end{equation*}
             
@@ -1306,9 +1314,9 @@
                 \item if $(2m + 1) \mid n$ then $(w_i, w_j) \in A^n \iff i = j$, therefore $$\mathfrak A_m, w_i \models \abk{(A^n)^*}q \iff \mathfrak A_m w_i \models q$$ and by applying this observation to $i = k$ and $i = k + m$ we get that
                     \begin{equation*}
                         \begin{alignedat}{2}
-                            \mathfrak A_m, w_k \models \abk{(A^n)^*}q &\iff \mathfrak A_m w_k \models q && \\
-                                                                      &\iff \mathfrak A_m w_{k + m} \models q && \quad \quad (\mbox{by inductive hypothesis on $q$})\\
-                                                                      &\iff \mathfrak A_m w_{k + m} \models \abk{(A^n)^*}q &&
+                            \mathfrak A_m, w_k \models \abk{(A^n)^*}q &\iff \mathfrak A_m, w_k \models q && \\
+                                                                      &\iff \mathfrak A_m, w_{k + m} \models q && \quad \quad (\mbox{by inductive hypothesis on $q$})\\
+                                                                      &\iff \mathfrak A_m, w_{k + m} \models \abk{(A^n)^*}q &&
                         \end{alignedat}
                     \end{equation*}
                 \item otherwise, if $(2m + 1) \nmid n$, since $2m + 1 \in \Primes$ we get that $$0n, 1n, 2n, \ldots, (2m - 1)n, (2m)n$$ have all the $(2m + 1)$ possible residues modulo $2m + 1$. This implies that $(w_i, w_j) \in (A^n)^*$ for all $w_i, w_j \in W_m$, meaning that $$\mathfrak A_m, w_i \models \abk{(A^n)^*}q \iff \exists w_j \in W \quad \mathfrak A_m, w_j \models q$$ and by applying this observation to $i = k$ and $j = k + m$ we get that $$\mathfrak A_m, w_k \models \abk{(A^n)^*}q \iff \exists w_j \in W \quad \mathfrak A_m, w_j \models q \iff \mathfrak A_m, w_{k + m} \models \abk{(A^n)^*}q$$
