@@ -1275,7 +1275,7 @@
 
     \tbf{Lemma.} For any test-free $p$ formula, there is a $p' \in L_A$ equivalent to $p$ in $\mathfrak A_m$ for all $m \ge 2$.
 
-    We observe that this lemma follows from the fact that a unary language is regular if and only if it is \tit{ultimately periodic}.
+    We observe that this lemma follows from the fact that a unary language $L = \{a^n \mid n \in \N\}$ is regular if and only if the set $\{n \in \N \mid a^n \in L\}$ is \tit{ultimately periodic}. A set $S \subseteq \N$ is \tbf{ultimately periodic} if there are integers $N \in \N$ and $p > 0$ such that $$\forall n \ge N \quad n \in S \iff n + p \in S$$ which means that after $N$ values --- starting from 0 --- the membership in $S$ repeats every $p$ numbers.
 
     \tbf{Theorem.} There is no formula in $\mbox{PDL}_0$ equivalent to $z$.
 
