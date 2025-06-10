@@ -16,20 +16,42 @@ Alessio Bandiera
 
 ---
 
+# Contents
+
+- **PDL**
+- Syntax
+- Axiomatization
+- Soundness and Completeness
+- Complexity
+- Variants
+
+---
+
 # PDL
 
 # Dynamic Logics
 
-**Dynamic Logics** are modal logics for representing the states and the events of dynamic systems. The first DL system was developed in 1976 by Vaughan Pratt, an early pioneer of computer science
+**Dynamic Logics** are modal logics for representing states and events of dynamic systems
 
-His original DL was a _first-order_ modal logic, and **Propositional Dynamic Logic** (PDL) is the propositional counterpart of it
+The first DL system was developed in 1976 by Vaughan Pratt, early pioneer of CS. His original DL was a _first-order_ modal logic, and **Propositional Dynamic Logic** (PDL) is the propositional counterpart of it
 
-Its only two syntactic categories are **propositions** and **programs**, and _possibility_ and _necessity_ are expressed through modal operators that also indicate the programs they are referring to
+Being propositional, its only two syntactic categories are **propositions** and **programs**, and _possibility_ and _necessity_ are expressed through modal operators that also indicate the programs they are referring to
 
 - $\langle \pi \rangle \phi$ is read "there is an execution of $\pi$ that ends in a state in which $\phi$ is true"
 - $[\pi] \psi$ is read "all executions of the program $\pi$ end in states in which $\psi$ is true"
 
---- 
+---
+
+# Contents
+
+- PDL
+- **Syntax**
+- Axiomatization
+- Soundness and Completeness
+- Complexity
+- Variants
+
+---
 
 # Syntax
 
@@ -100,7 +122,7 @@ img.left-center {
 
 # LTS
 
- <img src="./assets/model.svg" class="left-center"/> 
+ <img src="../assets/model.svg" class="left-center"/> 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; • $W = \{y_1, y_2, y_3, y_4\}$
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; • $R(\pi_1) = \{(y_1, y_2), (y_2, y_2)\}$
@@ -122,12 +144,36 @@ img.left-center {
 
 # LTS
 
- <img src="./assets/model.svg" class="left-center"/> 
+ <img src="../assets/model.svg" class="left-center"/> 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; • $\mathfrak M, y_1 \models \left\langle\pi_1^*; \pi_2 \right \rangle q$
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; • $\mathfrak M, y_2 \models \left[\pi_1^*\right]p$
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; • $\mathfrak M, y_1 \models \left [ \pi_1 \cup \pi_2 \right ] (p \lor q)$
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; • $\mathfrak M, y_3 \models \left [ \pi_1 \cup \pi_2 \right ] \bot$
+
+---
+
+# Contents
+
+- PDL
+- Syntax
+- **Axiomatization**
+- Soundness and Completeness
+- Complexity
+- Variants
+
+---
+
+# Axiomatization
+
+# Goal
+
+The goal is to define a **decudibility predicate** $\vdash$ such that
+$\vdash$-deductions are both _sound_ and _complete_ in terms of _validity_, i.e. for any $\phi$ it holds that
+
+$$\vdash \phi \iff \models \phi$$
+
+where $\models \phi$ means that $\phi$ is **valid**
 
 ---
 
@@ -144,17 +190,6 @@ $$\mathfrak M \models \phi \iff \forall w \in W \quad \mathfrak M, w \models \ph
 $\phi$ is **valid**, written as $\models \phi$, if and only if
 
 $$\models \phi \iff \forall \mathfrak M \quad \mathfrak M \models \phi$$
-
----
-
-# Axiomatization
-
-# Goal
-
-The goal is to define a **decudibility predicate** $\vdash$ such that
-$\vdash$-deductions are both _sound_ and _complete_ in terms of validity, i.e. for any $\phi$ it holds that
-
-$$\vdash \phi \iff \models \phi$$
 
 ---
 
@@ -212,7 +247,18 @@ Are $\vdash$-deductions sound and complete?
 
 ---
 
-# Completeness
+# Contents
+
+- PDL
+- Syntax
+- Axiomatization
+- **Soundness and Completeness**
+- Complexity
+- Variants
+
+---
+
+# Soundness and Completeness
 
 # Segerberg's axioms
 
@@ -228,7 +274,7 @@ in order to prove that such axiomatization was sound and complete
 
 ---
 
-# Completeness
+# Soundness and Completeness
 
 # Segerberg's axioms
 
@@ -248,7 +294,7 @@ $$
 
 ---
 
-# Completeness
+# Soundness and Completeness
 
 # Soundness
 
@@ -256,7 +302,7 @@ To prove that $\vdash$ is sound w.r.t. $\models$, i.e. that
 
 $$\vdash \phi \implies \models \phi$$
 
-a proof by induction on the length of $\phi$'s deduction in $\vdash$ suffices.
+a proof by induction on the length of $\phi$'s deduction in $\vdash$ suffices
 
 So, what about completeness? It requires to prove that
 
@@ -264,9 +310,9 @@ $$\models \phi \implies \vdash \phi$$
 
 ---
 
-# Completeness
+# Soundness and Completeness
 
-# Parikh's proof
+# Completeness
 
 Segerberg's work was the first attempt to prove the completeness of $\vdash$, however in 1978 he found a flaw in his argument
 
@@ -274,7 +320,7 @@ Then in the same year Parikh published what is now considered the first proof of
 
 <!-- --- -->
 <!---->
-<!-- # Completeness - Goldblatt -->
+<!-- # Soundness and Completeness - Goldblatt -->
 <!---->
 <!-- Since then, different alternative proof theories of PDL have also been sought after. For example, in 1992 Goldblatt proposed the -->
 <!-- $\vdash'$-deducibility predicate, which is based on the same first four axiom schemas along with this _infinitary_ rule of inference -->
@@ -282,6 +328,17 @@ Then in the same year Parikh published what is now considered the first proof of
 <!-- $$(\mbox I') \quad \quad \dfrac{ \{[\beta] [\alpha^n] \phi \mid n \in \mathbb N \}}{[\beta] [\alpha^*] \phi}$$ -->
 <!---->
 <!-- Goldblatt was able to prove that $\vdash'$ is both sound and complete. -->
+
+---
+
+# Contents
+
+- PDL
+- Syntax
+- Axiomatization
+- Soundness and Completeness
+- **Complexity**
+- Variants
 
 ---
 
@@ -341,16 +398,22 @@ This concludes that $\mbox{PDL-SAT} \in \textsf{NEXP}$. In 1980 Pratt was able t
 
 ---
 
+# Contents
+
+- PDL
+- Syntax
+- Axiomatization
+- Soundness and Completeness
+- Complexity
+- **Variants**
+
+---
+
 # Variants
 
-# Variations of PDL
-
-Over the years multiple versions of PDL have been studied
-
-We will discuss the following
-
-- Test-free PDL
-- CPDL
+- Variants
+    - **Test-free PDL**
+    - CPDL
 
 ---
 
@@ -378,13 +441,19 @@ has no $\mbox{PDL}_0$ equivalent formula
 
 # Ultimate periodicity
 
-The idea of their counterexample is based on the following result in the theory of context-free languages:
+The idea of their counterexample is based on this result in the theory of context-free languages:
 
 A _unary language_ $L = \{1^n \mid n \in \mathbb N\}$ is _regular_ if and only if the set $\{n \in \mathbb N \mid 1^n \in L\}$ is _ultimately periodic_
 
 A set $S \subseteq \mathbb N$ is **ultimately periodic** if there are integers $X \in \mathbb N$ and $Y > 0$ such that
 
 $$\forall k \ge X \quad k \in S \iff k + Y \in S$$
+
+For instance, this set $S$ is ultimately periodic
+
+$$S = \{0, 1, 2, 4, 6, 7, 9, 11, 13, 15, \ldots \}$$
+
+since it holds that $\forall k \ge 7 \quad k \in S \iff k + 2 \in S$
 
 ---
 
@@ -398,7 +467,7 @@ Hence, Berman and Paterson built a family of models $\mathfrak A_m$ for $m \ge 2
 
 Therefore, by ultimate periodicity each program over $\mathfrak A_m$ can be rewritten as a regex
 
-$$A^h(A^n)^*$$
+$$A^X(A^Y)^*$$
 
 ---
 
@@ -407,12 +476,12 @@ $$A^h(A^n)^*$$
 # The counterexample
 
 <div style="text-align: center;">
-    <img src="./assets/Am.svg" style="height: 175px;"/>
+    <img src="../assets/Am.svg" style="height: 175px;"/>
 </div>
 
 Each $\mathfrak A_m$ consists of $2m + 1$ worlds, where $2m + 1$ is _prime_
 
-This forces $(A^n)^*$ to generate all the possible residues modulo $2m + 1$, i.e. each world will be able to reach any other world
+This forces $(A^Y)^*$ to generate all the possible residues modulo $2m + 1$, i.e. each world will be able to reach any other world
 
 Hence, test-free PDL formulas _cannot distinguish_ the worlds in which we are performing the evaluation
 
@@ -423,7 +492,7 @@ Hence, test-free PDL formulas _cannot distinguish_ the worlds in which we are pe
 # The counterexample
 
 <div style="text-align: center;">
-    <img src="./assets/Am.svg" style="height: 175px;"/>
+    <img src="../assets/Am.svg" style="height: 175px;"/>
 </div>
 
 However, tests _can_ distinguish the worlds by building programs which **depend on the truthness of propositions**
@@ -434,13 +503,21 @@ In fact, this formula is satisfied at $w_0$ but not satisfied at $w_m$
 
 ---
 
+# Variants
+
+- Variants
+    - Test-free PDL
+    - **CPDL**
+
+---
+
 # CPDL
 
 # The converse operator
 
 CPDL is a variant which adds the **converse** operator to PDL programs
 
-$$(x, y) \in R(\alpha^{-1}) \iff (y, x) \in R(\alpha)$$
+$$(x, y) \in R \left(\alpha^{-1} \right) \iff (y, x) \in R(\alpha)$$
 
 To get a sound a complete system, two additional axioms are needed
 
