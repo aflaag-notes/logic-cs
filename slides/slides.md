@@ -467,7 +467,7 @@ Hence, Berman and Paterson built a family of models $\mathfrak A_m$ for $m \ge 2
 
 Therefore, by ultimate periodicity each program over $\mathfrak A_m$ can be rewritten as a regex
 
-$$A^X(A^Y)^*$$
+$$A^X \left(A^Y \right)^*$$
 
 ---
 
@@ -481,7 +481,7 @@ $$A^X(A^Y)^*$$
 
 Each $\mathfrak A_m$ consists of $2m + 1$ worlds, where $2m + 1$ is _prime_
 
-This forces $(A^Y)^*$ to generate all the possible residues modulo $2m + 1$, i.e. each world will be able to reach any other world
+This forces $\left (A^Y \right)^*$ to generate all the possible residues modulo $2m + 1$, i.e. each world will be able to reach any other world
 
 Hence, test-free PDL formulas _cannot distinguish_ the worlds in which we are performing the evaluation
 
