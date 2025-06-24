@@ -90,7 +90,7 @@ where $\phi \in \mathrm{Form}(\Phi_0)$
 $$(x, y) \in R(\pi) \iff x \stackrel{\pi}{\to} y$$
 
 - $(x, y) \in R(\alpha; \beta) \iff \exists z \in W \quad (x, z) \in R(\alpha) \land (z, y) \in R(\beta)$
-- $(x, y) \in R(\alpha \cup \beta) \iff (x, y) \in R(\alpha) \lor (x, y) \in R(\beta)$
+- $(x, y) \in R(\alpha \cup \beta) \iff (x, y) \in R(\alpha) \cup R(\beta)$
 - $(x, y) \in R(\alpha^*) \iff \exists z_0, \ldots, z_n \in W \quad \left \{\begin{array}{l}z_0 = x \\ z_n = y \\ (z_{k - 1}, z_k) \in R(\alpha) \end{array}\right.$
 - $(x, y) \in R(\phi?) \iff x = y \land y \in V(\phi)$
 
@@ -168,7 +168,7 @@ img.left-center {
 
 # Goal
 
-The goal is to define a **decudibility predicate** $\vdash$ such that
+The goal is to define a **deducibility predicate** $\vdash$ such that
 $\vdash$-deductions are both _sound_ and _complete_ in terms of _validity_, i.e. for any $\phi$ it holds that
 
 $$\vdash \phi \iff \models \phi$$
@@ -414,6 +414,7 @@ This concludes that $\mbox{PDL-SAT} \in \textsf{NEXP}$. In 1980 Pratt was able t
 - Variants
     - **Test-free PDL**
     - CPDL
+    - IPDL
 
 ---
 
@@ -443,7 +444,7 @@ has no $\mbox{PDL}_0$ equivalent formula
 
 The idea of their counterexample is based on this result in the theory of context-free languages:
 
-A _unary language_ $L = \{1^n \mid n \in \mathbb N\}$ is _regular_ if and only if the set $\{n \in \mathbb N \mid 1^n \in L\}$ is _ultimately periodic_
+A _unary language_ $L = \{1^n \mid n \in \mathbb N\}$ is _regular_ if and only if the set $S = \{n \in \mathbb N \mid 1^n \in L\}$ is _ultimately periodic_
 
 A set $S \subseteq \mathbb N$ is **ultimately periodic** if there are integers $X \in \mathbb N$ and $Y > 0$ such that
 
@@ -451,9 +452,54 @@ $$\forall k \ge X \quad k \in S \iff k + Y \in S$$
 
 For instance, this set $S$ is ultimately periodic
 
-$$S = \{0, 1, 2, 4, 6, 7, 9, 11, 13, 15, \ldots \}$$
+$$S = \{0, 1, 2, 4, 6\} \cup \{k \ge 8 \mid k \equiv 0, 2 \; (\mbox{mod} \; 3)\} = \{0, 1, 2, 4, 6, 8, 9, 11, 12, 14, 15, \ldots\}$$
 
-since it holds that $\forall k \ge 7 \quad k \in S \iff k + 2 \in S$
+since it holds that $\forall k \ge 7 \quad k \in S \iff k + 3 \in S$
+
+---
+
+# Test-free PDL
+
+# Ultimate periodicity
+
+A _unary language_ $L = \{1^n \mid n \in \mathbb N\}$ is _regular_ if and only if the set $S = \{n \in \mathbb N \mid 1^n \in L\}$ is _ultimately periodic_
+
+- $\Longrightarrow )$:
+  - if $L$ is regular, there is a DFA $D = (Q, \{1\}, \delta, q_0, F)$ that recognizes $L$
+  - consider any string $w = 1^n \in L$
+  - if $n > |Q|$ then when $D$ reads $w$ some states must repeat by the **pigeonhole principle**
+  - hence the set $S = \{n \in \mathbb N \mid 1^n \in L\}$ of the lengths of the strings of $L$ must be _ultimately periodic_
+
+---
+
+# Test-free PDL
+
+# Ultimate periodicity
+
+A _unary language_ $L = \{1^n \mid n \in \mathbb N\}$ is _regular_ if and only if the set $S = \{n \in \mathbb N \mid 1^n \in L\}$ is _ultimately periodic_
+
+- $\Longleftarrow )$: Construct the following DFA $D = (Q, \{1\}, \delta, q_0, F)$
+  - $Q = \{q_0, \ldots, q_{X + Y - 1}\}$
+  - $\forall i \in [0, X + Y - 1] \quad \delta(q_i, 1) = \left \{\begin{array}{ll}q_{i + 1} & i < X + Y - 2 \\ q_X & i = X + Y - 1\end{array}\right .$
+  - $F = \{q_i \mid i < X \land i \in S\} \cup \{q_{X + r} \mid r \in [0, Y - 1] \land X + r \in S\}$
+
+---
+
+# Test-free PDL
+
+# Ultimate periodicity
+
+A _unary language_ $L = \{1^n \mid n \in \mathbb N\}$ is _regular_ if and only if the set $S = \{n \in \mathbb N \mid 1^n \in L\}$ is _ultimately periodic_
+
+- $\Longleftarrow )$: For instance, when
+
+$$S = \{0, 1, 2, 4, 6, 8, 9, 11, 12, 14, 15, \ldots\}$$
+
+we construct the following DFA
+
+<div style="text-align: center;">
+    <img src="../assets/up.svg" style="height: 100px;"/>
+</div>
 
 ---
 
@@ -465,9 +511,7 @@ By removing tests from PDL formulas, programs are restricted to regular expressi
 
 Hence, Berman and Paterson built a family of models $\mathfrak A_m$ for $m \ge 2$ in which the only program present is $A$
 
-Therefore, by ultimate periodicity each program over $\mathfrak A_m$ can be rewritten as a regex
-
-$$A^X \left(A^Y \right)^*$$
+Therefore, by ultimate periodicity each program over $\mathfrak A_m$ can be rewritten as a regex ending in $\left (A^Y \right)^*$ for some $Y > 0$
 
 ---
 
@@ -508,6 +552,7 @@ In fact, this formula is satisfied at $w_0$ but not satisfied at $w_m$
 - Variants
     - Test-free PDL
     - **CPDL**
+    - IPDL
 
 ---
 
@@ -546,7 +591,7 @@ table {
 
 What about the expressive power? Consider these two models
 
-$$\mathfrak M = (M, R, V) \quad \quad \quad \mathfrak M' = (W', R', V')$$
+$$\mathfrak M = (W, R, V) \quad \quad \quad \mathfrak M' = (W', R', V')$$
 
 <div style="height: 50px;"></div>
 
@@ -609,6 +654,46 @@ However CPDL _can_ distinguish $y$ and $y'$ because
 $$\mathfrak M, y \models \left \langle \pi^{-1} \right \rangle \top \quad \quad \quad \mathfrak M', y' \not\models \left \langle \pi^{-1} \right \rangle \top$$
 
 meaning that CPDL has **more expressive power** than PDL
+
+---
+
+# Variants
+
+- Variants
+    - Test-free PDL
+    - CPDL
+    - **IPDL**
+
+---
+
+# IPDL
+
+# The intersection operator
+
+IPDL is a variant which adds the **intersection** operator to PDL programs
+
+$$(x, y) \in R(\alpha \cap \beta) \iff (x, y) \in R(\alpha) \cap R(\beta)$$
+
+We observe that
+
+$$\models \left \langle \alpha \cap \beta \right \rangle \phi \to \langle \alpha \rangle \phi \land \langle \beta \rangle \phi$$
+
+but the opposite is not true in general, for instance if $\mathfrak M = (W, R, V)$ is such that
+
+- $W = \{s, t_1, t_2\}$
+- $R(\alpha) = \{(s, t_1)\}$
+- $R(\beta) = \{(s, t_2)\}$
+- $V(\phi) = \{t_1, t_2\}$
+
+---
+
+# IPDL
+
+# Axiomatization and Complexity
+
+Differently from PDL and CPDL, the **axiomatization** of IDPL is *much harder* and has been an open problem until 2003, when Balbiani and Vakarelov presented a *sound* and *complete* proof system of IPDL
+
+Finally, in 2005 Lange and Lutz proved that $\mbox{IPDL-SAT} \in \textsf{2EXP-complete}$
 
 ---
 

@@ -1119,7 +1119,7 @@
         \item \tit{sequence}: $(\alpha ; \beta)$ is interpreted as \curlyquotes{do $\alpha$ followed by $\beta$}
         \item \tit{non-deterministic choice}: $(\alpha \cup \beta)$ is interpreted as \curlyquotes{do $\alpha$ or $\beta$, non-deterministically}
         \item \tit{unbounded iteration}: $\alpha^*$ is interpreted as \curlyquotes{repeat $\alpha$ a finite, but non-deterministically determined, number of times}
-        \item \tit{test}: $\phi?$ is interpreted as \curlyquotes{proceed is $\phi$ is true, else fail}
+        \item \tit{test}: $\phi?$ is interpreted as \curlyquotes{proceed if $\phi$ is true, else fail}
     \end{itemize}
 
     The other boolean connectives $\land$, $\to$ and $\leftrightarrow$ are defined through $\lnot$ and $\lor$, and $\abk \alpha$ is defined to be the dual of $\sbk \alpha$, i.e. $\abk \alpha \phi \leftrightarrow \lnot \sbk \alpha \lnot \phi$. Some examples of formulas in PDL are
@@ -1131,7 +1131,7 @@
 
     \subsection{LTSs}
 
-    To give meaning to statements in PDL we typically work with an abstract semantics in terms of \tbf{Labeled Transition Systems} (LTS), in which we label the transitions between the \tit{worlds} (i.e. the \tit{states} of the LTS) by names of \tit{atomic programs}. For instance, a transition labeled $\pi$ from one state $x$ to a state $y$ indicates that starting in $x$ there is a possible execution of the program $\pi$ that finishes in $y$. Formally, consider an LTS $\mathfrak M = (W, R, V)$ where
+    To give meaning to statements in PDL we typically work with abstract semantics in terms of \tbf{Labeled Transition Systems} (LTS), in which we label the transitions between the \tit{worlds} (i.e. the \tit{states} of the LTS) by names of \tit{atomic programs}. For instance, a transition labeled $\pi$ from one state $x$ to a state $y$ indicates that starting in $x$ there is a possible execution of the program $\pi$ that finishes in $y$. Formally, consider an LTS $\mathfrak M = (W, R, V)$ where
     
     \begin{itemize}
         \item $W$ is a non-empty set of states
@@ -1143,7 +1143,7 @@
 
     \begin{itemize}
         \item $(x, y) \in R(\alpha; \beta) \iff \exists z \in W \quad (x, z) \in R(\alpha) \land (z, y) \in R(\beta)$
-        \item $(x, y) \in R(\alpha \cup \beta) \iff (x, y) \in R(\alpha) \lor (x, y) \in R(\beta)$
+        \item $(x, y) \in R(\alpha \cup \beta) \iff (x, y) \in R(\alpha) \cup R(\beta)$
         \item $(x, y) \in R(\alpha^*) \iff \exists z_0, \ldots, z_n \in W \quad z_0 = x \land z_n = y \land (\forall k \in [n] \quad (z_{k - 1}, z_k) \in R(\alpha))$
         \item $(x, y) \in R(\phi?) \iff x = y \land y \in V(\phi)$
         \item $V(\bot) = \varnothing$
@@ -1175,13 +1175,11 @@
         \item $\mathfrak M, y_3 \models \sbk{\pi_1 \cup \pi_2} \bot$
     \end{itemize}
 
-    TODO \todo{bisimulation? idk}
-
     \section{Axiomatization}
 
     Given a model $\mathfrak M = (W, R, V)$, and a formula $\phi$, we write that $\mathfrak M, w \models \phi$ if and only if $w \in V(\phi)$. If this is true for all worlds $w \in W$, we say that $\phi$ is \tit{valid in $\mathfrak M$}, denoted as $\mathfrak M \models \phi$ $$\mathfrak M \models \phi \iff \forall w \in W \quad \mathfrak M, w \models \phi$$ Lastly, we say that $\phi$ is \tbf{valid} if it is valid in any model, written as $\models \phi$ $$\models \phi \iff \forall \mathfrak M \quad \mathfrak M \models \phi$$
 
-    The purpose of the proof theory is to provide a \tit{characterization of validity} in terms of axioms and rules of inference. To derive valid formulas, we are going to define a \tbf{deducibility predicate} $\vdash$ inductively, by operations on formulas that depend only on their syntactic structure. For the axioms, we assert that PDL contains every instance of the \tbf{distribution} axiom schema --- namely (K) --- and it is closed under the \tbf{necessitation} rule of inference --- or \tit{generalization} (N).
+    The purpose of a proof theory is to provide a \tit{characterization of validity} in terms of axioms and rules of inference. To derive valid formulas, we are going to define a \tbf{deducibility predicate} $\vdash$ inductively, by operations on formulas that depend only on their syntactic structure. For the axioms, we assert that PDL contains every instance of the \tbf{distribution} axiom schema --- namely (K) --- and it is closed under the \tbf{necessitation} rule of inference --- or \tit{generalization} (N).
     \begin{equation*}
         \begin{alignedat}{2}
             (\mbox K) & \quad \quad && \sbk \alpha (\phi \to \psi) \to (\sbk \alpha \phi \to \sbk \alpha \psi) \\
@@ -1225,7 +1223,7 @@
     \end{equation*}
     Moreover, \tit{soundness} of $\vdash$ w.r.t. $\models$ can be proved by induction on the length of $\phi$'s deduction in $\vdash$. So, what about completeness?
     
-    \tit{Completeness} was pursued by several logicians. Segerberg's work was the first attempt to prove the completeness of $\vdash$, however in 1978 he found a flaw in his argument. Then, in the same year \textcite{parikh} published what is now considered the first proof of the completeness of $\vdash$, and since then various proofs have been published over the years, most notably the work by \textcite{kozen} of 1981. \todo{expand somehow on completeness}
+    \tit{Completeness} was pursued by several logicians. Segerberg's work was the first attempt to prove the completeness of $\vdash$, however in 1978 he found a flaw in his argument. Then, in the same year \textcite{parikh} published what is now considered the first proof of the completeness of $\vdash$, and since then various proofs have been published over the years, most notably the work by \textcite{kozen} of 1981.
     
     Different alternative proof theories of PDL have also been sought after, and various alternative formulations of deducibility predicates were defined even shortly after Parikh's work. For example, in 1992 \textcite{goldblatt} proposed a deducibility predicate that exploits an \tit{infinitary rule} of inference (i.e. a rule that takes an \tit{infinite} number of premises). Let $\vdash'$ be the deducibility predicate corresponding in the language of PDL to the \tit{least normal} modal logic containing every instance of the axiom schemas (A1), (A2), (A3) and (A4), and closed under the following \tit{infinitary} rule of inference $$(\mbox I') \quad \quad \dfrac{\{\sbk \beta \sbk{\alpha^n} \phi \mid n \in \N\}}{\sbk{\beta} \sbk{\alpha^*} \phi}$$ Goldblatt was able to prove that $\vdash'$ is both sound and complete w.r.t. $\models$.
 
@@ -1239,7 +1237,7 @@
 
     Thus, together $P$ and $P'$ offer a way of deciding whether a PDL formula $\phi$ is satisfiable or not, which implies that by running $P$ and $P'$ in parallel we can decide PDL-SAT. However, this algorithm is \tit{very} inefficient. Can we do any better?
 
-    A result by \textcite{kozen} proves that PDL has another useful property, namely the \tbf{small model property}: $$\forall \phi \in \mathrm{Form}(\Phi_0) \quad \abk{\phi} \in \mbox{PDL-SAT} \implies \exists \mathfrak M_{fin} \ \mbox{finite} \quad \soe{l}{\abs{\mathfrak M_{fin}} < \mathrm{exp}(\abs \phi) \\ \phi \ \mbox{satisfiable in} \ \mathfrak M_{fin}}$$ Hence again, by contrapositive this result implies that we can use $P'$ to test whether a formula is satisfiable, but once we have exhausted all \curlyquotes{small} models, we can conclude that the formula is not satisfiable. Such a procedure concludes that $\mbox{PDL-SAT} \in \NEXP$. Then, in 1980 \textcite{pratt} proved that PDL-SAT is actually \EXP-complete. \todo{info about exp compl?}
+    A result by \textcite{kozen} proves that PDL has another useful property, namely the \tbf{small model property}: $$\forall \phi \in \mathrm{Form}(\Phi_0) \quad \abk{\phi} \in \mbox{PDL-SAT} \implies \exists \mathfrak M_{fin} \ \mbox{finite} \quad \soe{l}{\abs{\mathfrak M_{fin}} < \mathrm{exp}(\abs \phi) \\ \phi \ \mbox{satisfiable in} \ \mathfrak M_{fin}}$$ Hence again, by contrapositive this result implies that we can use $P'$ to test whether a formula is satisfiable, but once we have exhausted all \curlyquotes{small} models, we can conclude that the formula is not satisfiable. Such a procedure concludes that $\mbox{PDL-SAT} \in \NEXP$. Then, in 1980 \textcite{pratt} proved that PDL-SAT is actually \EXP-complete.
 
     \section{Variants}
 
@@ -1249,13 +1247,33 @@
 
     In the following section, we are going to present the most important details of their proof, but before going into the technical parts we will discuss the general idea. First, we observe that by removing tests, programs are restricted to \tit{regular expressions}, therefore each program defines a regular language.
 
-    A set $S \subseteq \N$ is said to be \tbf{ultimately periodic} if there are integers $X \in \N$ and $Y > 0$ such that $$\forall k \ge X \quad k \in S \iff k + Y \in S$$ In other words, after $N$ values --- starting from 0 --- the membership in $S$ repeats every $p$ numbers. A well-known fact in the theory of context-free languages is that a \tit{unary language} $L = \{1^n \mid n \in \N\}$ is regular if and only if the set $\{n \in \N \mid 1^n \in L\}$ is \tit{ultimately periodic}. In other words, any regular unary language is represented by a regular expression of the form $$1^X \rbk{1^Y}^*$$
+    A set $S \subseteq \N$ is said to be \tbf{ultimately periodic} if there are integers $X \in \N$ and $Y > 0$ such that $$\forall k \ge X \quad k \in S \iff k + Y \in S$$ For instance, the following set is ultimately periodic $$S = \{0, 1, 2, 4, 6\} \cup \{k \ge 8 \mid \congmod{k}{0, 2}{3}\} = \{0, 1, 2, 4, 6, 8, 9, 11, 12, 14, 15, \ldots\}$$ in fact it holds that $$\forall k \ge 7 \quad k \in S \iff k + 3 \in S$$ hence $X = 7$ and $Y = 3$. Now, consider the following result of the theory of context-free languages.
 
-    This property is leveraged by Berman and Paterson as follows: the idea is to construct a family of models $\mathfrak A_m$ in which test-free PDL formulas \tit{cannot} distinguish the worlds in which we are performing the evaluation. To achieve this, they construct models $\mathfrak A_m$ for each $m \ge 2$ in which the only program present is $A$, hence the languages defined from the programs over $\mathfrak A_m$ are both regular and unary, therefore the set of the lengths of their strings must be ultimately periodic, i.e. the languages can be rewritten as a regular expression $A^h(A^n)^*$.
+    \tbf{Theorem.} A \tit{unary language} $L = \{1^n \mid n \in \N\}$ is regular if and only if the set $\{n \in \N \mid 1^n \in L\}$ is \tit{ultimately periodic}.
+
+    \proofiff{
+        Let $L = \{1^n \mid n \in \N\}$ be a regular unary language. In particular, since it is regular there exists a DFA $D = (Q, \{1\}, \delta, q_0, F)$ that recognizes $L$. Let $k = \abs Q$ be the number of states of $D$, and consider an input $1^n$ given as input to $D$: as the DFA reads the string, it follows a sequence of $n$ transitions over the $k$ states. Hence, by the pigeonhole principle, if $n > k$ the DFA \tit{must repeat} states when reading strings longer than $k$.
+
+        This means that there is some value $X \ge 0$ and period $Y > 0$ such that the behaviour of $D$ on input $1^n$ for $n \ge X$ repeats with period $Y$, implying that $S = \{n \in \N \mid 1^n \in L \}$ must be ultimately periodic.
+    }{
+        Consider a unary language $L = \{1^n \in \N \mid n \in \N\}$, and suppose that the set $S= \{n \in \N \mid 1^n \in L\}$ is ultimately periodic. By definition, this implies that there are some $X \ge 0$ and $Y > 0$ such that $$\forall n \ge X \quad n \in S \iff n + Y \in S$$ We construct the following DFA $D = (Q, \{1\}, \delta, q_0, F)$:
+
+        \begin{itemize}
+            \item $Q = \{q_0, \ldots, q_{X + Y - 1}\}$
+            \item $\forall i \in [0, X + Y - 1] \quad \delta(q_i, 1) = \soe{ll}{q_{i + 1} & i < X + Y - 2 \\ q_X & i = X + Y - 1}$
+            \item $F = \{q_i \mid i < X \land i \in S\} \cup \{q_{X + r} \mid r \in [0, Y - 1] \land X + r \in S\}$
+        \end{itemize}
+
+        By construction, it is clear that $D$ recognizes $L$.
+    }
+
+    In other words, this result implies that any regular unary language is represented by a regular expression which ends in $$\rbk{1^Y}^*$$ for some $Y > 0$.
+
+    This property is leveraged by Berman and Paterson as follows: the idea is to construct a family of models $\mathfrak A_m$ in which test-free PDL formulas \tit{cannot} distinguish the worlds in which we are performing the evaluation. To achieve this, they construct models $\mathfrak A_m$ for each $m \ge 2$ in which the only program present is $A$, hence the languages defined from the programs over $\mathfrak A_m$ are both regular and unary, therefore the set of the lengths of their strings must be ultimately periodic, i.e. the languages can be rewritten as a regular expression ending in $(A^n)^*$.
 
     Thus, they proceed to define each $\mathfrak A_m$ over a \tit{cyclical structure} made of $2m + 1$ worlds, where $2m + 1$ is a \tit{prime number}. This is a crucial detail, because it implies that the periodic part $(A^n)^*$ will generate \tit{all} the possible residues modulo $2m + 1$, meaning that each state is reachable starting from any possible state on the cycle, ensuring that no test-free PDL formula can distinguish the starting point of evaluation. This happens because ultimate periodicity forces the behaviour of formulas to eventually repeat regularly, hence test-free PDL formulas cannot \curlyquotes{count} beyond a bounded region.
 
-    However, PDL with test \tit{can} distinguish the worlds, because it possible to build programs which \tit{depend on the truthness of propositions itself}. For instance, the program $(P?; A)^*; \lnot P?$ proceeds through $A$-edges as long as $P$ is true in the current state, and stops as soon as it becomes false. Thus, because test operators can observe the truth of propositions \tit{mid-program}, it is possible to express properties that depend on non-periodic features of the model, something that test-free PDL cannot capture.
+    However, PDL with tests \tit{can} distinguish the worlds, because it is possible to build programs which \tit{depend on the truthness of propositions themselves}. For instance, the program $(P?; A)^*; \lnot P?$ proceeds through $A$-edges as long as $P$ is true in the current state, and stops as soon as it becomes false. Thus, because test operators can observe the truth of propositions \tit{mid-program}, it is possible to express properties that depend on non-periodic features of the model, something that test-free PDL cannot capture.
 
     Now that we presented the general idea of their counterexample, we are going to provide some technical details of their proof. Let $z$ be the formula $\abk{(P?; A)^*; \lnot P ? ; A; P ?}\top$. First, we need to introduce the definition of \tit{equivalence}.
 
@@ -1358,7 +1376,7 @@
 
     \subsection{IPDL}
 
-    The operators defined over programs on standard PDL do not include \tbf{intersection}, but what happens when we add such operator? We obtain IPDL, in which for all programs $\alpha, \beta \in \mathrm{Prog}(\Pi_0)$ the expression $\alpha \cap \beta$ stands for a new programs that has the following semantics $$(x, y) \in R(\alpha \cap y) \iff (x, y) \in R(\alpha) \land (x, y) \in R(\beta)$$ For instance, the intended reading of $\abk{\alpha \cap \beta} \phi$ is that if we execute $\alpha$ and $\beta$ in the \curlyquotes{current} state, there exists a state reachable by both programs which satisfies $\phi$. Thus, we have the following valid formula $$\models \abk{\alpha \cap \beta} \phi \to \abk \alpha \phi \land \abk \beta \phi$$ even though, in general, the converse is \tit{not} true.
+    The operators defined over programs on standard PDL do not include \tbf{intersection}, but what happens when we add such operator? We obtain IPDL, in which for all programs $\alpha, \beta \in \mathrm{Prog}(\Pi_0)$ the expression $\alpha \cap \beta$ stands for a new program that has the following semantics $$(x, y) \in R(\alpha \cap \beta) \iff (x, y) \in R(\alpha) \cap R(\beta)$$ For instance, the intended reading of $\abk{\alpha \cap \beta} \phi$ is that if we execute $\alpha$ and $\beta$ in the \curlyquotes{current} state, there exists a state reachable by both programs which satisfies $\phi$. Thus, we have the following valid formula $$\models \abk{\alpha \cap \beta} \phi \to \abk \alpha \phi \land \abk \beta \phi$$ even though, in general, the converse is \tit{not} true.
 
     Differntly from PDL and CPDL, the axiomatization of IDPL has been an open problem until 2003, when \textcite{balbiani} presented a \tit{complete} proof system of IPDL. In terms of complexity, \textcite{ipdl} proved that IPDL-SAT is \textsf{2EXP}-complete.
 
